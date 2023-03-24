@@ -2,6 +2,7 @@ include: package:very_good_analysis/analysis_options.yaml
 
 analyzer:
   exclude:
+    - "/test_local/**"
     - "**/*.g.dart"
     - "bin/cache/**"
     - "lib/generated_plugin_registrant.dart"
