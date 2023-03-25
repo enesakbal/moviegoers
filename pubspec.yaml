@@ -64,4 +64,30 @@ flutter:
     - languages/
     - assets/colors/
     - assets/icons/
+    - assets/fonts/
+
+
+
+  fonts:
+    - family: Apercu
+      fonts:
+        - asset: assets/fonts/Apercu Pro Bold.otf
+        - asset: assets/fonts/Apercu Pro Bold Italic.otf
+          style: italic
+        
+        - asset: assets/fonts/Apercu Pro Regular.otf
+        - asset: assets/fonts/Apercu Pro Italic.otf
+          style: italic
+
+        - asset: assets/fonts/Apercu Pro Light.otf
+        - asset: assets/fonts/Apercu Pro Light Italic.otf
+          style: italic
+
+        - asset: assets/fonts/Apercu Pro Medium.otf
+        - asset: assets/fonts/Apercu Pro Medium Italic.otf
+          style: italic
+
+        - asset: assets/fonts/Apercu Pro Mono.otf
+
+
 

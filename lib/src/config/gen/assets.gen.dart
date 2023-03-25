@@ -9,6 +9,25 @@
 
 import 'package:flutter/widgets.dart';
 
+class $LanguagesGen {
+  const $LanguagesGen();
+
+  /// File path: languages/de-DE.json
+  String get deDE => 'languages/de-DE.json';
+
+  /// File path: languages/en-US.json
+  String get enUS => 'languages/en-US.json';
+
+  /// File path: languages/fr-FR.json
+  String get frFR => 'languages/fr-FR.json';
+
+  /// File path: languages/tr-TR.json
+  String get trTR => 'languages/tr-TR.json';
+
+  /// List of all assets
+  List<String> get values => [deDE, enUS, frFR, trTR];
+}
+
 class $AssetsColorsGen {
   const $AssetsColorsGen();
 
@@ -19,10 +38,57 @@ class $AssetsColorsGen {
   List<String> get values => [colors];
 }
 
+class $AssetsFontsGen {
+  const $AssetsFontsGen();
+
+  /// File path: assets/fonts/Apercu Pro Bold Italic.otf
+  String get apercuProBoldItalic => 'assets/fonts/Apercu Pro Bold Italic.otf';
+
+  /// File path: assets/fonts/Apercu Pro Bold.otf
+  String get apercuProBold => 'assets/fonts/Apercu Pro Bold.otf';
+
+  /// File path: assets/fonts/Apercu Pro Italic.otf
+  String get apercuProItalic => 'assets/fonts/Apercu Pro Italic.otf';
+
+  /// File path: assets/fonts/Apercu Pro Light Italic.otf
+  String get apercuProLightItalic => 'assets/fonts/Apercu Pro Light Italic.otf';
+
+  /// File path: assets/fonts/Apercu Pro Light.otf
+  String get apercuProLight => 'assets/fonts/Apercu Pro Light.otf';
+
+  /// File path: assets/fonts/Apercu Pro Medium Italic.otf
+  String get apercuProMediumItalic =>
+      'assets/fonts/Apercu Pro Medium Italic.otf';
+
+  /// File path: assets/fonts/Apercu Pro Medium.otf
+  String get apercuProMedium => 'assets/fonts/Apercu Pro Medium.otf';
+
+  /// File path: assets/fonts/Apercu Pro Mono.otf
+  String get apercuProMono => 'assets/fonts/Apercu Pro Mono.otf';
+
+  /// File path: assets/fonts/Apercu Pro Regular.otf
+  String get apercuProRegular => 'assets/fonts/Apercu Pro Regular.otf';
+
+  /// List of all assets
+  List<String> get values => [
+        apercuProBoldItalic,
+        apercuProBold,
+        apercuProItalic,
+        apercuProLightItalic,
+        apercuProLight,
+        apercuProMediumItalic,
+        apercuProMedium,
+        apercuProMono,
+        apercuProRegular
+      ];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsColorsGen colors = $AssetsColorsGen();
+  static const $AssetsFontsGen fonts = $AssetsFontsGen();
+  static const $LanguagesGen languages = $LanguagesGen();
 }
 
 class AssetGenImage {
