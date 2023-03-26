@@ -477,6 +477,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.13.5"
+  http_mock_adapter:
+    dependency: "direct dev"
+    description:
+      name: http_mock_adapter
+      sha256: "0e7eaa5d77a273af1c2b5ec5066578faaa73039b63ccda5263c200756f24441a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.2"
   http_multi_server:
     dependency: transitive
     description:
@@ -581,14 +589,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
-  mocktail:
-    dependency: transitive
+  mockito:
+    dependency: "direct dev"
     description:
-      name: mocktail
-      sha256: "80a996cd9a69284b3dc521ce185ffe9150cde69767c2d3a0720147d93c0cef53"
+      name: mockito
+      sha256: "2a8a17b82b1bde04d514e75d90d634a0ac23f6cb4991f6098009dd56836aeafe"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.0"
+    version: "5.3.2"
+  mocktail:
+    dependency: "direct dev"
+    description:
+      name: mocktail
+      sha256: dd85ca5229cf677079fd9ac740aebfc34d9287cdf294e6b2ba9fae25c39e4dc2
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
   nested:
     dependency: transitive
     description:
