@@ -20,8 +20,7 @@ abstract class MovieRepository {
   Future<void> getMovieVideos({required String movieID});
   //* /movie/{movie_id}/videos {trail, clip...}
 
-  Future<void> getMovieRecommendations(
-      {required String movieID, required int page});
+  Future<void> getMovieRecommendations({required String movieID, required int page});
   //* /movie/{movie_id}/recommendations (Get a list of recommended movies for a movie.)
 
   Future<void> getMovieSimilar({required String movieID, required int page});

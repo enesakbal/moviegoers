@@ -1,15 +1,18 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:moviegoers/src/config/router/app_router.dart';
 import 'package:moviegoers/src/config/router/navigator_observers.dart';
+import 'package:moviegoers/src/core/init/language/language_manager.dart';
 import 'package:moviegoers/src/core/theme/app_theme.dart';
 import 'package:moviegoers/src/injector.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await dotenv.load(fileName: '.env.development');
 
@@ -30,10 +33,9 @@ class MainApp extends StatelessWidget {
       ),
       routeInformationParser: router.defaultRouteParser(),
       debugShowCheckedModeBanner: false,
-      // localizationsDelegates: context.localizationDelegates,
-      // locale: context.locale,
-      // localeResolutionCallback: LanguageManager.localeResolutionCallback,
-      //todo
+      localizationsDelegates: context.localizationDelegates,
+      locale: context.locale,
+      localeResolutionCallback: LanguageManager.localeResolutionCallback,
       builder: (context, child) {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
@@ -55,17 +57,16 @@ class MainApp extends StatelessWidget {
     // );
     // return _localization(context);
     //todo
-    return _screenUtil(context);
+    return _localization(context);
   }
 
-  // EasyLocalization _localization(BuildContext context) {
-  //   return EasyLocalization(
-  //     path: 'languages/',
-  //     supportedLocales: LanguageManager().supportedLocales,
-  //     child: _screenUtil(context),
-  //   );
-  // }
-  //todo
+  EasyLocalization _localization(BuildContext context) {
+    return EasyLocalization(
+      path: 'languages/',
+      supportedLocales: LanguageManager().supportedLocales,
+      child: _screenUtil(context),
+    );
+  }
 
   ScreenUtilInit _screenUtil(BuildContext context) {
     return ScreenUtilInit(

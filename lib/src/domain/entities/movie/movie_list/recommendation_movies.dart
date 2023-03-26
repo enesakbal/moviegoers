@@ -38,7 +38,7 @@ class RecommendationMovies extends Equatable {
   /// Parses the string and returns the resulting Json object as [RecommendationMovies].
   factory RecommendationMovies.fromJson(String data) {
     return RecommendationMovies.fromMap(
-        json.decode(data) as Map<String, dynamic>);
+        json.decode(data) as Map<String, dynamic>,);
   }
 
   /// `dart:convert`
