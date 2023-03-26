@@ -1,11 +1,11 @@
 class UrlContants {
   //* movie lists
-  static const popularMovies = '/movies/popular';
+  static const popularMovies = '/movie/popular';
   static const nowPlayingMovies = '/movie/now_playing';
-  static const upcomingMovies = '/movies/upcoming';
+  static const upcomingMovies = '/movie/upcoming';
 
   //* movie info
-  static const movieDetail = '/movies/{movie_id}';
+  static const movieDetail = '/movie/{movie_id}';
   static const movieCredits = '/movie/{movie_id}/credits';
   static const movieExternalIDs = '/movie/{movie_id}/external_ids';
   static const movieVideos = '/movie/{movie_id}/videos';
