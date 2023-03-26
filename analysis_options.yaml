@@ -15,3 +15,5 @@ linter:
     public_member_api_docs: false
     use_decorated_box: false
     type_annotate_public_apis: false
+    always_use_package_imports: false
+    sort_constructors_first: false
