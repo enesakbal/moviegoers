@@ -8,7 +8,7 @@ part of 'movie_credit_model.dart';
 
 MovieCreditModel _$MovieCreditModelFromJson(Map<String, dynamic> json) =>
     MovieCreditModel(
-      id: json['id'] as String?,
+      id: json['id'] as int?,
       cast: (json['cast'] as List<dynamic>?)
           ?.map((e) => CastModel.fromJson(e as Map<String, dynamic>))
           .toList(),

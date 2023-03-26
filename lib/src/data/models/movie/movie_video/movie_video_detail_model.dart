@@ -19,6 +19,7 @@ class MovieVideoDetailModel extends Equatable {
   final bool? official;
   @JsonKey(name: 'published_at')
   final DateTime? publishedAt;
+  @JsonKey(name: 'id')
   final String? id;
 
   const MovieVideoDetailModel({

@@ -5,13 +5,13 @@ import 'package:equatable/equatable.dart';
 import 'cast.dart';
 
 class MovieCredit extends Equatable {
-  final String? id;
+  final int? id;
   final List<Cast>? cast;
 
   const MovieCredit({this.id, this.cast});
 
   factory MovieCredit.fromMap(Map<String, dynamic> data) => MovieCredit(
-        id: data['id'] as String?,
+        id: data['id'] as int?,
         cast: (data['cast'] as List<dynamic>?)
             ?.map((e) => Cast.fromMap(e as Map<String, dynamic>))
             .toList(),

@@ -9,6 +9,7 @@ part 'movie_video_model.g.dart';
 @JsonSerializable()
 class MovieVideoModel extends Equatable {
   final int? id;
+  @JsonKey(name: 'results')
   final List<MovieVideoDetailModel>? movieVideoDetailList;
 
   const MovieVideoModel({this.id, this.movieVideoDetailList});

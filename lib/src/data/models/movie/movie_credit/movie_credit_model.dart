@@ -8,7 +8,7 @@ part 'movie_credit_model.g.dart';
 
 @JsonSerializable()
 class MovieCreditModel extends Equatable {
-  final String? id;
+  final int? id;
   final List<CastModel>? cast;
 
   const MovieCreditModel({this.id, this.cast});
