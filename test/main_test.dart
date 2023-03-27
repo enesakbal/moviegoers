@@ -17,8 +17,6 @@ void main() {
     final manager = DioClient(dio);
     final response = await manager.get('/movie/top_rated');
 
-    print(response);
-
     expect(response, isNotNull);
   });
 }
