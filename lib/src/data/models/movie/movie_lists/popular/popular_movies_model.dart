@@ -9,6 +9,7 @@ part 'popular_movies_model.g.dart';
 @JsonSerializable()
 class PopularMoviesModel extends Equatable {
   final int? page;
+  @JsonKey(name: 'results')
   final List<MovieModel>? movies;
   @JsonKey(name: 'total_pages')
   final int? totalPages;
