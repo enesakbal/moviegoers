@@ -102,7 +102,7 @@ void main() {
     });
 
     test('getMovieSimilar should return SimiliarMoviesModel', () async {
-      final response = await dataSource.getMovieSimilar(movieID: tMovieID, page: 1);
+      final response = await dataSource.getMovieSimilars(movieID: tMovieID, page: 1);
       expect(response, isA<SimiliarMoviesModel>());
     });
   });

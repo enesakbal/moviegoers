@@ -9,10 +9,12 @@ import 'package:moviegoers/src/data/models/movie/movie_lists/similiar/similiar_m
 import 'package:moviegoers/src/data/models/movie/movie_lists/upcoming/upcoming_movies_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_video/movie_video_model.dart';
 
+import '../../../../core/init/network/dio_client.dart';
 import '../../../models/movie/movie_credit/movie_credit_model.dart';
 
 class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
-  MovieRemoteDataSourceImpl({required super.dioClient});
+  final DioClient dioClient;
+  MovieRemoteDataSourceImpl({required this.dioClient});
 
   @override
   Future<PopularMoviesModel> getPopularMovies({required int page}) async {
@@ -114,7 +116,7 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
   }
 
   @override
-  Future<SimiliarMoviesModel> getMovieSimilar({required String movieID, required int page}) async {
+  Future<SimiliarMoviesModel> getMovieSimilars({required String movieID, required int page}) async {
     try {
       final response = await dioClient.get(
         UrlContants.movieSimilar.replaceAll('{movie_id}', movieID),
