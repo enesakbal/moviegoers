@@ -45,10 +45,15 @@ dev_dependencies:
   very_good_analysis: ^4.0.0+1
 
 
+
 flutter_gen:
   output: lib/src/config/gen/
   inputs:
     - assets/icons/
+
+  integrations:
+    flutter_svg: true
+    lottie: true
 
   colors:
       enabled: true
