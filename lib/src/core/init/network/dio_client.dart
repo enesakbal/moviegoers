@@ -5,8 +5,9 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:logging/logging.dart' as logging;
-import 'package:moviegoers/src/core/constants/app_constants.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
+import '../../constants/app_constants.dart';
 
 // receiveTimeout
 const int receiveTimeout = 15000;

@@ -36,8 +36,7 @@ class MovieVideoDetail extends Equatable {
         size: data['size'] as int?,
         type: data['type'] as String?,
         official: data['official'] as bool?,
-        publishedAt:
-            data['published_at'] == null ? null : DateTime.parse(data['published_at'] as String),
+        publishedAt: data['published_at'] == null ? null : DateTime.parse(data['published_at'] as String),
         id: data['id'] as String?,
       );
 

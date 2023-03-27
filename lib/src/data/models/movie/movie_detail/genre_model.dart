@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:moviegoers/src/domain/entities/movie/movie_detail/genre.dart';
+
+import '../../../../domain/entities/movie/movie_detail/genre.dart';
 
 part 'genre_model.g.dart';
 
@@ -11,8 +12,7 @@ class GenreModel extends Equatable {
 
   const GenreModel({this.id, this.name});
 
-  factory GenreModel.fromJson(Map<String, dynamic> json) =>
-      _$GenreModelFromJson(json);
+  factory GenreModel.fromJson(Map<String, dynamic> json) => _$GenreModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$GenreModelToJson(this);
 

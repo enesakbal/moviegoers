@@ -19,8 +19,7 @@ class ProductionCountryModel extends Equatable {
 
   Map<String, dynamic> toJson() => _$ProductionCountryModelToJson(this);
 
-  ProductionCountry toEntity() =>
-      ProductionCountry(iso31661: iso31661, name: name);
+  ProductionCountry toEntity() => ProductionCountry(iso31661: iso31661, name: name);
 
   @override
   List<Object?> get props => [iso31661, name];

@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-import 'package:moviegoers/src/domain/entities/movie/movie/movie.dart';
+
+import '../movie/movie.dart';
 
 class RecommendationMovies extends Equatable {
   final int? page;
@@ -16,12 +17,9 @@ class RecommendationMovies extends Equatable {
     this.totalResults,
   });
 
-  factory RecommendationMovies.fromMap(Map<String, dynamic> data) =>
-      RecommendationMovies(
+  factory RecommendationMovies.fromMap(Map<String, dynamic> data) => RecommendationMovies(
         page: data['page'] as int?,
-        movies: (data['movies'] as List<dynamic>?)
-            ?.map((e) => Movie.fromMap(e as Map<String, dynamic>))
-            .toList(),
+        movies: (data['movies'] as List<dynamic>?)?.map((e) => Movie.fromMap(e as Map<String, dynamic>)).toList(),
         totalPages: data['total_pages'] as int?,
         totalResults: data['total_results'] as int?,
       );
@@ -38,7 +36,8 @@ class RecommendationMovies extends Equatable {
   /// Parses the string and returns the resulting Json object as [RecommendationMovies].
   factory RecommendationMovies.fromJson(String data) {
     return RecommendationMovies.fromMap(
-        json.decode(data) as Map<String, dynamic>,);
+      json.decode(data) as Map<String, dynamic>,
+    );
   }
 
   /// `dart:convert`

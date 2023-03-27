@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:moviegoers/src/config/router/app_router.dart';
-import 'package:moviegoers/src/config/router/navigator_observers.dart';
-import 'package:moviegoers/src/core/init/language/language_manager.dart';
-import 'package:moviegoers/src/core/theme/app_theme.dart';
-import 'package:moviegoers/src/injector.dart' as di;
+
+import 'src/config/router/app_router.dart';
+import 'src/config/router/navigator_observers.dart';
+import 'src/core/init/language/language_manager.dart';
+import 'src/core/theme/app_theme.dart';
+import 'src/injector.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

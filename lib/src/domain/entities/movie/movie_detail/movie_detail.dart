@@ -67,9 +67,7 @@ class MovieDetail extends Equatable {
         backdropPath: data['backdrop_path'] as String?,
         belongsToCollection: data['belongs_to_collection'] as dynamic,
         budget: data['budget'] as int?,
-        genres: (data['genres'] as List<dynamic>?)
-            ?.map((e) => Genre.fromMap(e as Map<String, dynamic>))
-            .toList(),
+        genres: (data['genres'] as List<dynamic>?)?.map((e) => Genre.fromMap(e as Map<String, dynamic>)).toList(),
         homepage: data['homepage'] as String?,
         id: data['id'] as int?,
         imdbId: data['imdb_id'] as String?,
@@ -112,10 +110,8 @@ class MovieDetail extends Equatable {
         'overview': overview,
         'popularity': popularity,
         'poster_path': posterPath,
-        'production_companies':
-            productionCompanies?.map((e) => e.toMap()).toList(),
-        'production_countries':
-            productionCountries?.map((e) => e.toMap()).toList(),
+        'production_companies': productionCompanies?.map((e) => e.toMap()).toList(),
+        'production_countries': productionCountries?.map((e) => e.toMap()).toList(),
         'release_date': releaseDate,
         'revenue': revenue,
         'runtime': runtime,

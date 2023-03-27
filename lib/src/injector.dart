@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
-import 'package:moviegoers/src/core/init/language/language_manager.dart';
-import 'package:moviegoers/src/core/init/network/dio_client.dart';
+import 'core/init/language/language_manager.dart';
+import 'core/init/network/dio_client.dart';
 
 final injector = GetIt.instance;
 

@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-import 'package:moviegoers/src/domain/entities/movie/movie/movie.dart';
+
+import '../movie/movie.dart';
 
 class PopularMovies extends Equatable {
   final int? page;
@@ -18,9 +19,7 @@ class PopularMovies extends Equatable {
 
   factory PopularMovies.fromMap(Map<String, dynamic> data) => PopularMovies(
         page: data['page'] as int?,
-        movies: (data['movies'] as List<dynamic>?)
-            ?.map((e) => Movie.fromMap(e as Map<String, dynamic>))
-            .toList(),
+        movies: (data['movies'] as List<dynamic>?)?.map((e) => Movie.fromMap(e as Map<String, dynamic>)).toList(),
         totalPages: data['total_pages'] as int?,
         totalResults: data['total_results'] as int?,
       );

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:moviegoers/src/config/gen/colors.gen.dart';
-import 'package:moviegoers/src/config/gen/fonts.gen.dart';
+
+import '../../config/gen/colors.gen.dart';
+import '../../config/gen/fonts.gen.dart';
 
 class MGAppTheme {
   ThemeData get theme => ThemeData(

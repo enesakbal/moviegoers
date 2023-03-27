@@ -97,10 +97,8 @@ class MovieDetailModel extends Equatable {
         overview: overview,
         popularity: popularity,
         posterPath: posterPath,
-        productionCompanies:
-            productionCompanies!.map((e) => e.toEntity()).toList(),
-        productionCountries:
-            productionCountries!.map((e) => e.toEntity()).toList(),
+        productionCompanies: productionCompanies!.map((e) => e.toEntity()).toList(),
+        productionCountries: productionCountries!.map((e) => e.toEntity()).toList(),
         releaseDate: releaseDate,
         revenue: revenue,
         runtime: runtime,

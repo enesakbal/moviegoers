@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:moviegoers/src/domain/entities/movie/movie/movie.dart';
 
+import '../movie/movie.dart';
 import 'dates.dart';
 
 class UpcomingMovies extends Equatable {

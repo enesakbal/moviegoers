@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:moviegoers/src/domain/entities/movie/movie_list/dates.dart';
+
+import '../../../../domain/entities/movie/movie_list/dates.dart';
 
 class DatesModel extends Equatable {
   const DatesModel({

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:moviegoers/src/domain/entities/movie/movie_credit/cast.dart';
+
+import '../../../../domain/entities/movie/movie_credit/cast.dart';
 
 part 'cast_model.g.dart';
 

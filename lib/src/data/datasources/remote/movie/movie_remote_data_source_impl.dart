@@ -1,16 +1,15 @@
-import 'package:moviegoers/src/core/constants/url_constants.dart';
-import 'package:moviegoers/src/data/datasources/remote/movie/movie_remote_data_source.dart';
-import 'package:moviegoers/src/data/models/movie/movie_detail/movie_detail_model.dart';
-import 'package:moviegoers/src/data/models/movie/movie_external_id/movie_external_id_model.dart';
-import 'package:moviegoers/src/data/models/movie/movie_lists/now_playing/now_playing_movies_model.dart';
-import 'package:moviegoers/src/data/models/movie/movie_lists/popular/popular_movies_model.dart';
-import 'package:moviegoers/src/data/models/movie/movie_lists/recommendation/recommendation_movies_model.dart';
-import 'package:moviegoers/src/data/models/movie/movie_lists/similiar/similiar_movies_model.dart';
-import 'package:moviegoers/src/data/models/movie/movie_lists/upcoming/upcoming_movies_model.dart';
-import 'package:moviegoers/src/data/models/movie/movie_video/movie_video_model.dart';
-
+import '../../../../core/constants/url_constants.dart';
 import '../../../../core/init/network/dio_client.dart';
 import '../../../models/movie/movie_credit/movie_credit_model.dart';
+import '../../../models/movie/movie_detail/movie_detail_model.dart';
+import '../../../models/movie/movie_external_id/movie_external_id_model.dart';
+import '../../../models/movie/movie_lists/now_playing/now_playing_movies_model.dart';
+import '../../../models/movie/movie_lists/popular/popular_movies_model.dart';
+import '../../../models/movie/movie_lists/recommendation/recommendation_movies_model.dart';
+import '../../../models/movie/movie_lists/similiar/similiar_movies_model.dart';
+import '../../../models/movie/movie_lists/upcoming/upcoming_movies_model.dart';
+import '../../../models/movie/movie_video/movie_video_model.dart';
+import 'movie_remote_data_source.dart';
 
 class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
   final DioClient dioClient;

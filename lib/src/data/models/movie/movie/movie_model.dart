@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:moviegoers/src/domain/entities/movie/movie/movie.dart';
+
+import '../../../../domain/entities/movie/movie/movie.dart';
 
 part 'movie_model.g.dart';
 
@@ -46,8 +47,7 @@ class MovieModel extends Equatable {
     this.voteCount,
   });
 
-  factory MovieModel.fromJson(Map<String, dynamic> json) =>
-      _$MovieModelFromJson(json);
+  factory MovieModel.fromJson(Map<String, dynamic> json) => _$MovieModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$MovieModelToJson(this);
 

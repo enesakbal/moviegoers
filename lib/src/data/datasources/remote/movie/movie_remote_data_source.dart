@@ -1,14 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:moviegoers/src/data/models/movie/movie_external_id/movie_external_id_model.dart';
-import 'package:moviegoers/src/data/models/movie/movie_lists/now_playing/now_playing_movies_model.dart';
-import 'package:moviegoers/src/data/models/movie/movie_lists/popular/popular_movies_model.dart';
-import 'package:moviegoers/src/data/models/movie/movie_lists/recommendation/recommendation_movies_model.dart';
-import 'package:moviegoers/src/data/models/movie/movie_video/movie_video_model.dart';
-
 import '../../../models/movie/movie_credit/movie_credit_model.dart';
 import '../../../models/movie/movie_detail/movie_detail_model.dart';
+import '../../../models/movie/movie_external_id/movie_external_id_model.dart';
+import '../../../models/movie/movie_lists/now_playing/now_playing_movies_model.dart';
+import '../../../models/movie/movie_lists/popular/popular_movies_model.dart';
+import '../../../models/movie/movie_lists/recommendation/recommendation_movies_model.dart';
 import '../../../models/movie/movie_lists/similiar/similiar_movies_model.dart';
 import '../../../models/movie/movie_lists/upcoming/upcoming_movies_model.dart';
+import '../../../models/movie/movie_video/movie_video_model.dart';
 
 abstract class MovieRemoteDataSource {
   Future<PopularMoviesModel> getPopularMovies({required int page});

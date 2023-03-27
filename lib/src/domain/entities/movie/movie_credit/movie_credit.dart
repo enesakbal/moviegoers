@@ -12,9 +12,7 @@ class MovieCredit extends Equatable {
 
   factory MovieCredit.fromMap(Map<String, dynamic> data) => MovieCredit(
         id: data['id'] as int?,
-        cast: (data['cast'] as List<dynamic>?)
-            ?.map((e) => Cast.fromMap(e as Map<String, dynamic>))
-            .toList(),
+        cast: (data['cast'] as List<dynamic>?)?.map((e) => Cast.fromMap(e as Map<String, dynamic>)).toList(),
       );
 
   Map<String, dynamic> toMap() => {
