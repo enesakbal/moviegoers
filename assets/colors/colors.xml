@@ -3,4 +3,5 @@
     <color name="dark" type="material">#0C1117</color>
     <color name="blue" type="material">#3456FF</color>
     <color name="green" type="material">#0FA226</color>
+    <color name="grey" type="material">#4a4f54</color>
 </resources>

@@ -94,6 +94,13 @@ class $AssetsIconsGen {
   /// File path: assets/icons/close.svg
   SvgGenImage get close => const SvgGenImage('assets/icons/close.svg');
 
+  /// File path: assets/icons/empty_heart.svg
+  SvgGenImage get emptyHeart =>
+      const SvgGenImage('assets/icons/empty_heart.svg');
+
+  /// File path: assets/icons/fill_heart.svg
+  SvgGenImage get fillHeart => const SvgGenImage('assets/icons/fill_heart.svg');
+
   /// File path: assets/icons/left_arrow.svg
   SvgGenImage get leftArrow => const SvgGenImage('assets/icons/left_arrow.svg');
 
@@ -114,8 +121,18 @@ class $AssetsIconsGen {
   SvgGenImage get star => const SvgGenImage('assets/icons/star.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [alert, close, leftArrow, menu, rightArrow, settings, share, star];
+  List<SvgGenImage> get values => [
+        alert,
+        close,
+        emptyHeart,
+        fillHeart,
+        leftArrow,
+        menu,
+        rightArrow,
+        settings,
+        share,
+        star
+      ];
 }
 
 class Assets {
@@ -235,7 +252,6 @@ class SvgGenImage {
       colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
-      clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );
   }

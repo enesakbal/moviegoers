@@ -93,4 +93,31 @@ class MGColors {
       900: Color(0xFF04750D),
     },
   );
+
+  /// MaterialColor:
+  ///   50: #FFE9EAEA
+  ///   100: #FFC9CACC
+  ///   200: #FFA5A7AA
+  ///   300: #FF808487
+  ///   400: #FF65696E
+  ///   500: #FF4A4F54
+  ///   600: #FF43484D
+  ///   700: #FF3A3F43
+  ///   800: #FF32363A
+  ///   900: #FF222629
+  static const MaterialColor grey = MaterialColor(
+    0xFF4A4F54,
+    <int, Color>{
+      50: Color(0xFFE9EAEA),
+      100: Color(0xFFC9CACC),
+      200: Color(0xFFA5A7AA),
+      300: Color(0xFF808487),
+      400: Color(0xFF65696E),
+      500: Color(0xFF4A4F54),
+      600: Color(0xFF43484D),
+      700: Color(0xFF3A3F43),
+      800: Color(0xFF32363A),
+      900: Color(0xFF222629),
+    },
+  );
 }
