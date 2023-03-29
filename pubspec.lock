@@ -37,18 +37,18 @@ packages:
     dependency: "direct main"
     description:
       name: auto_route
-      sha256: "70b2461cc58d6a46c20859f23148b370165da183d21a82b783156f9a91d9c38b"
+      sha256: "89a5fcc4ea1bb13a13e3c0cf965a6600c2879c6c0719b57075bb5e9039559998"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.1"
+    version: "6.0.3"
   auto_route_generator:
     dependency: "direct dev"
     description:
       name: auto_route_generator
-      sha256: a3f11c3b1e6e884d1592924f3b7212855f1c7c8791c12d3b41b87ab81fb9d3b8
+      sha256: "0c97f3c413924216a5f290811e78742ef45924d28ffa7fa3ac41af5e3a9e4fa2"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.0"
+    version: "6.0.1"
   auto_size_text:
     dependency: "direct main"
     description:
@@ -285,10 +285,10 @@ packages:
     dependency: "direct main"
     description:
       name: dio
-      sha256: "3e5c4a94d112540d0c9a6b7f3969832e1604eb8cde0f88d0808382f9f632100b"
+      sha256: f7c26ddb3a10ff033cf1bfbf2c668feb3472327f48385775f7cf25b104f8bfce
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.3"
+    version: "5.1.0"
   dio_smart_retry:
     dependency: "direct main"
     description:
@@ -593,18 +593,18 @@ packages:
     dependency: "direct dev"
     description:
       name: mockito
-      sha256: "2a8a17b82b1bde04d514e75d90d634a0ac23f6cb4991f6098009dd56836aeafe"
+      sha256: dd61809f04da1838a680926de50a9e87385c1de91c6579629c3d1723946e8059
       url: "https://pub.dev"
     source: hosted
-    version: "5.3.2"
+    version: "5.4.0"
   mocktail:
     dependency: "direct dev"
     description:
       name: mocktail
-      sha256: dd85ca5229cf677079fd9ac740aebfc34d9287cdf294e6b2ba9fae25c39e4dc2
+      sha256: "80a996cd9a69284b3dc521ce185ffe9150cde69767c2d3a0720147d93c0cef53"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.0"
+    version: "0.3.0"
   nested:
     dependency: transitive
     description:

@@ -41,7 +41,7 @@ dev_dependencies:
   http_mock_adapter: ^0.4.2
   json_annotation: ^4.8.0 
   mockito: ^5.0.15
-  mocktail: ^0.2.0
+  mocktail: ^0.3.0
   very_good_analysis: ^4.0.0+1
 
 
