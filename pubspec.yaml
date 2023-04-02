@@ -9,6 +9,8 @@ environment:
 dependencies:
   auto_route: ^6.0.0+1
   auto_size_text: ^3.0.0
+  cached_network_image: ^3.2.3
+  carousel_slider: ^4.2.1
   connectivity_plus: ^3.0.3
   dartz: ^0.10.1
   dio: ^5.0.3
