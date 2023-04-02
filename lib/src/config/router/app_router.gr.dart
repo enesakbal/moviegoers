@@ -20,6 +20,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const HomeView(),
       );
     },
+    ProjectComponentsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ProjectComponentsView(),
+      );
+    },
     SplashRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -39,6 +45,20 @@ class HomeRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'HomeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ProjectComponentsView]
+class ProjectComponentsRoute extends PageRouteInfo<void> {
+  const ProjectComponentsRoute({List<PageRouteInfo>? children})
+      : super(
+          ProjectComponentsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProjectComponentsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
