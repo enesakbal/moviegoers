@@ -3,5 +3,8 @@
 abstract class  LocaleKeys {
   static const splash_welcome = 'splash.welcome';
   static const splash = 'splash';
+  static const home_popular = 'home.popular';
+  static const home_view_all = 'home.view_all';
+  static const home = 'home';
 
 }

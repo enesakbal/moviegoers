@@ -14,20 +14,11 @@ import 'package:flutter/services.dart';
 class $LanguagesGen {
   const $LanguagesGen();
 
-  /// File path: languages/de-DE.json
-  String get deDE => 'languages/de-DE.json';
-
   /// File path: languages/en-US.json
   String get enUS => 'languages/en-US.json';
 
-  /// File path: languages/fr-FR.json
-  String get frFR => 'languages/fr-FR.json';
-
-  /// File path: languages/tr-TR.json
-  String get trTR => 'languages/tr-TR.json';
-
   /// List of all assets
-  List<String> get values => [deDE, enUS, frFR, trTR];
+  List<String> get values => [enUS];
 }
 
 class $AssetsColorsGen {
@@ -98,9 +89,6 @@ class $AssetsIconsGen {
   SvgGenImage get emptyHeart =>
       const SvgGenImage('assets/icons/empty_heart.svg');
 
-  /// File path: assets/icons/fill_heart.svg
-  SvgGenImage get fillHeart => const SvgGenImage('assets/icons/fill_heart.svg');
-
   /// File path: assets/icons/left_arrow.svg
   SvgGenImage get leftArrow => const SvgGenImage('assets/icons/left_arrow.svg');
 
@@ -125,7 +113,6 @@ class $AssetsIconsGen {
         alert,
         close,
         emptyHeart,
-        fillHeart,
         leftArrow,
         menu,
         rightArrow,
@@ -231,7 +218,7 @@ class SvgGenImage {
     ColorFilter? colorFilter,
     @deprecated Color? color,
     @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
-    @deprecated Clip? clipBehavior,
+    // @deprecated Clip? clipBehavior,
     @deprecated bool cacheColorFilter = false,
   }) {
     return SvgPicture.asset(
@@ -252,6 +239,7 @@ class SvgGenImage {
       colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
+      // clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );
   }

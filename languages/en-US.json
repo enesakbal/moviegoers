@@ -1,5 +1,10 @@
 {
     "splash":{
         "welcome" : "Welcome to Moviegoers"
+    },
+
+    "home":{
+        "popular" : "Popular",
+        "view_all": "View All"
     }
 }
