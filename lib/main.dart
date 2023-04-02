@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -10,6 +11,7 @@ import 'src/config/router/navigator_observers.dart';
 import 'src/core/init/language/language_manager.dart';
 import 'src/core/theme/app_theme.dart';
 import 'src/injector.dart' as di;
+import 'src/presentation/bloc/popular_movies/popular_movies_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,13 +54,9 @@ class MainApp extends StatelessWidget {
   }
 
   Widget _blocProvider(BuildContext context) {
-    // return MultiBlocProvider(
-    //   providers: const [],
-    //   child:
-    // );
-    // return _localization(context);
-    //todo
-    return _localization(context);
+    return MultiBlocProvider(providers: [
+      BlocProvider(create: (_) => di.injector<PopularMoviesBloc>()),
+    ], child: _localization(context));
   }
 
   EasyLocalization _localization(BuildContext context) {
