@@ -1,21 +1,15 @@
-import 'package:equatable/equatable.dart';
-
-import '../movie/movie.dart';
+import 'base/movie_interface.dart';
 import 'dates.dart';
 
-class UpcomingMovies extends Equatable {
-  final int? page;
-  final List<Movie>? movies;
+class UpcomingMovies extends MovieI {
   final Dates? dates;
-  final int? totalPages;
-  final int? totalResults;
 
   const UpcomingMovies({
-    this.page,
-    this.movies,
     this.dates,
-    this.totalPages,
-    this.totalResults,
+    super.movies,
+    super.page,
+    super.totalPages,
+    super.totalResults,
   });
 
   @override
