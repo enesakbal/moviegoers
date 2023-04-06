@@ -4,11 +4,11 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../core/constants/enum/movie_enum.dart';
-import '../../../core/init/network/network_exception.dart';
-import '../../../domain/entities/movie/movie/movie.dart';
-import '../../../domain/entities/movie/movie_list/base/movie_interface.dart';
-import '../../../domain/usecases/movie_usecase.dart';
+import '../../../../core/constants/enum/movie_enum.dart';
+import '../../../../core/init/network/network_exception.dart';
+import '../../../../domain/entities/movie/movie/movie.dart';
+import '../../../../domain/entities/movie/movie_list/base/movie_interface.dart';
+import '../../../../domain/usecases/movie_usecase.dart';
 
 part 'base_movies_event.dart';
 part 'base_movies_state.dart';
