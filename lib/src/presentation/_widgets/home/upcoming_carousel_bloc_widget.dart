@@ -11,12 +11,12 @@ import '../../../core/init/language/locale_keys.g.dart';
 import '../../bloc/movies/base_movie_bloc/base_movies_bloc.dart';
 import '../../bloc/movies/blocs.dart';
 
-class PopularCarouselBlocWidget extends StatelessWidget {
-  const PopularCarouselBlocWidget({super.key});
+class UpcomingCarouselBlocWidget extends StatelessWidget {
+  const UpcomingCarouselBlocWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PopularMoviesBloc, BaseMoviesState>(
+    return BlocBuilder<UpcomingMoviesBloc, BaseMoviesState>(
       builder: (context, state) {
         return SliverToBoxAdapter(
           child: Column(
@@ -61,7 +61,7 @@ class PopularCarouselBlocWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    // const PopularCarouselBlocWidget(),
+                    // const UpcomingCarouselBlocWidget(),
                     if (state is BaseMoviesHasData) ...[
                       CarouselSlider.builder(
                         itemCount: 10,

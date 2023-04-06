@@ -1,15 +1,13 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../config/gen/assets.gen.dart';
-import '../../config/gen/colors.gen.dart';
-import '../../core/init/language/locale_keys.g.dart';
+import '../../core/constants/enum/movie_enum.dart';
 import '../_widgets/home/home_carousel_bloc_widget.dart';
-import '../bloc/popular_movies/popular_movies_bloc.dart';
+import '../_widgets/home/upcoming_carousel_bloc_widget.dart';
+import '../bloc/movies/base_movie_bloc/base_movies_bloc.dart';
+import '../bloc/movies/blocs.dart';
 
 @RoutePage()
 class HomeView extends HookWidget {
@@ -18,89 +16,18 @@ class HomeView extends HookWidget {
   @override
   Widget build(BuildContext context) {
     useEffect(() {
-      context.read<PopularMoviesBloc>().add(const FetchPopularMovies());
+      context.read<PopularMoviesBloc>().add(const FetchMovies(MovieTypes.POPULAR, page: 1));
+      context.read<UpcomingMoviesBloc>().add(const FetchMovies(MovieTypes.UPCOMING, page: 1));
 
       return null;
     }, []);
 
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
           child: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 12.w),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            LocaleKeys.home_popular.tr(),
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: Assets.fonts.apercuProBold,
-                              fontSize: 24.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            LocaleKeys.home_view_all.tr(),
-                            style: TextStyle(
-                              color: MGColors.grey,
-                              fontFamily: Assets.fonts.apercuProBold,
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const HomeCarouselBlocWidget(),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 12.w),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            LocaleKeys.home_popular.tr(),
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: Assets.fonts.apercuProBold,
-                              fontSize: 24.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            LocaleKeys.home_view_all.tr(),
-                            style: TextStyle(
-                              color: MGColors.grey,
-                              fontFamily: Assets.fonts.apercuProBold,
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const HomeCarouselBlocWidget(),
-                  ],
-                ),
-              ],
-            ),
-          )
+          PopularCarouselBlocWidget(),
+          UpcomingCarouselBlocWidget(),
         ],
       )),
     );

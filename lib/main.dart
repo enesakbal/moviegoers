@@ -11,7 +11,7 @@ import 'src/config/router/navigator_observers.dart';
 import 'src/core/init/language/language_manager.dart';
 import 'src/core/theme/app_theme.dart';
 import 'src/injector.dart' as di;
-import 'src/presentation/bloc/popular_movies/popular_movies_bloc.dart';
+import 'src/presentation/bloc/movies/blocs.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,6 +56,7 @@ class MainApp extends StatelessWidget {
   Widget _blocProvider(BuildContext context) {
     return MultiBlocProvider(providers: [
       BlocProvider(create: (_) => di.injector<PopularMoviesBloc>()),
+      BlocProvider(create: (_) => di.injector<UpcomingMoviesBloc>()),
     ], child: _localization(context));
   }
 
