@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../../config/gen/colors.gen.dart';
@@ -9,15 +11,20 @@ class TagContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 24,
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: MGColors.blue,
-        borderRadius: BorderRadius.circular(12),
+    return GestureDetector(
+      onTap: () {
+        log('clicked tag contanier');
+      },
+      child: Container(
+        height: 24,
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: MGColors.blue,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text(tag, style: const TextStyle(fontWeight: FontWeight.w400, color: Colors.white)),
       ),
-      child: Text(tag, style: const TextStyle(fontWeight: FontWeight.w400, color: Colors.white)),
     );
   }
 }

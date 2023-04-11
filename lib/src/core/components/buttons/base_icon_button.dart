@@ -8,23 +8,28 @@ class BaseIconButton extends HookWidget {
   const BaseIconButton({
     super.key,
     required this.icon,
+    required this.onPressed,
   });
 
   final Widget icon;
-
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 35.h,
-      height: 35.h,
+      width: 32.5.h,
+      height: 32.5.h,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           padding: EdgeInsets.all(6.r),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
           backgroundColor: MGColors.dark.shade300.withOpacity(0.9),
           foregroundColor: Colors.transparent,
+          shadowColor: MGColors.dark,
+          elevation: 6,
         ),
-        onPressed: () {},
+        onPressed: onPressed,
         child: icon,
       ),
     );
