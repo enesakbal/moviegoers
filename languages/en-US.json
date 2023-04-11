@@ -5,6 +5,8 @@
 
     "home":{
         "popular" : "Popular",
+        "upcoming" : "Upcoming",
+        "now_playing" :"Now Playing",
         "view_all": "View All"
     }
 }
