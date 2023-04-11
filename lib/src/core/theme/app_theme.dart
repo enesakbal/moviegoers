@@ -33,17 +33,19 @@ class MGAppTheme {
 
   AppBarTheme _appbarTheme() {
     return AppBarTheme(
-      backgroundColor: Colors.white,
-      centerTitle: false,
+      backgroundColor: MGColors.dark,
+      centerTitle: true,
       elevation: 0,
       titleTextStyle: TextStyle(
-        fontWeight: FontWeight.w700,
-        fontSize: 16.sp,
+        fontWeight: FontWeight.w400,
+        fontSize: 24.sp,
       ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.elliptical(600.h, 100.w))),
       systemOverlayStyle: const SystemUiOverlayStyle(
-        statusBarIconBrightness: Brightness.dark,
-        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark, //<-- For Android SEE HERE (dark icons)
+        statusBarBrightness: Brightness.light, //
         statusBarColor: Colors.transparent,
+        systemNavigationBarColor: Colors.white,
       ),
     );
   }

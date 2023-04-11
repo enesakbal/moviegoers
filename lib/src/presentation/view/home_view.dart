@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/components/appbar/custom_app_bar.dart';
 import '../_widgets/home/home_carousel_bloc_widget.dart';
 import '../_widgets/home/movie_category_bloc_widget.dart';
 import '../bloc/movies/blocs.dart';
@@ -14,6 +15,9 @@ class HomeView extends StatelessWidget {
     return const Scaffold(
       body: CustomScrollView(
         slivers: [
+          //* Appbar
+          BaseAppBar(),
+
           //* POPULAR CAROUSEL
           PopularCarouselBlocWidget(),
 

@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'src/config/gen/colors.gen.dart';
 import 'src/config/router/app_router.dart';
 import 'src/config/router/navigator_observers.dart';
 import 'src/core/init/language/language_manager.dart';
@@ -42,7 +43,18 @@ class MainApp extends StatelessWidget {
       builder: (context, child) {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
-          child: child!,
+          child: AnnotatedRegion<SystemUiOverlayStyle>(
+            value: SystemUiOverlayStyle.light,
+            child: ColoredBox(
+              color: MGColors.dark,
+              child: SafeArea(
+                bottom: false,
+                // right: false,
+                // left: false,
+                child: child!,
+              ),
+            ),
+          ),
         );
       },
     );
@@ -76,3 +88,5 @@ class MainApp extends StatelessWidget {
     );
   }
 }
+
+// TODO(enesakbl): film detail sayfasına başla. 
