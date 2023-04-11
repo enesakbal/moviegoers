@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../config/gen/assets.gen.dart';
-import '../../../config/gen/colors.gen.dart';
 import '../../../core/components/card/movie_card.dart';
 import '../../../core/init/language/locale_keys.g.dart';
 import '../../bloc/movies/base_movie_bloc/base_movies_bloc.dart';
@@ -40,31 +39,15 @@ class PopularCarouselBlocWidget extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            LocaleKeys.home_popular.tr(),
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: Assets.fonts.apercuProBold,
-                              fontSize: 24.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            LocaleKeys.home_view_all.tr(),
-                            style: TextStyle(
-                              color: MGColors.grey,
-                              fontFamily: Assets.fonts.apercuProBold,
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
+                          Text(LocaleKeys.home_popular.tr(), style: Theme.of(context).textTheme.titleMedium),
+                          Text(LocaleKeys.home_view_all.tr(), style: Theme.of(context).textTheme.titleSmall),
                         ],
                       ),
                     ),
                     // const PopularCarouselBlocWidget(),
                     if (state is BaseMoviesHasData) ...[
                       CarouselSlider.builder(
-                        itemCount: 10,
+                        itemCount: state.movieList.length,
                         itemBuilder: (_, index, ___) => MovieCard(movie: state.movieList[index]),
                         options: CarouselOptions(
                           autoPlay: true,
