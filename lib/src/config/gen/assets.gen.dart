@@ -89,6 +89,10 @@ class $AssetsIconsGen {
   SvgGenImage get emptyHeart =>
       const SvgGenImage('assets/icons/empty_heart.svg');
 
+  /// File path: assets/icons/filled_heart.svg
+  SvgGenImage get filledHeart =>
+      const SvgGenImage('assets/icons/filled_heart.svg');
+
   /// File path: assets/icons/left_arrow.svg
   SvgGenImage get leftArrow => const SvgGenImage('assets/icons/left_arrow.svg');
 
@@ -113,6 +117,7 @@ class $AssetsIconsGen {
         alert,
         close,
         emptyHeart,
+        filledHeart,
         leftArrow,
         menu,
         rightArrow,
