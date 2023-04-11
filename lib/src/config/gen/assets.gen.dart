@@ -50,8 +50,7 @@ class $AssetsFontsGen {
   String get apercuProLight => 'assets/fonts/Apercu Pro Light.otf';
 
   /// File path: assets/fonts/Apercu Pro Medium Italic.otf
-  String get apercuProMediumItalic =>
-      'assets/fonts/Apercu Pro Medium Italic.otf';
+  String get apercuProMediumItalic => 'assets/fonts/Apercu Pro Medium Italic.otf';
 
   /// File path: assets/fonts/Apercu Pro Medium.otf
   String get apercuProMedium => 'assets/fonts/Apercu Pro Medium.otf';
@@ -86,12 +85,10 @@ class $AssetsIconsGen {
   SvgGenImage get close => const SvgGenImage('assets/icons/close.svg');
 
   /// File path: assets/icons/empty_heart.svg
-  SvgGenImage get emptyHeart =>
-      const SvgGenImage('assets/icons/empty_heart.svg');
+  SvgGenImage get emptyHeart => const SvgGenImage('assets/icons/empty_heart.svg');
 
   /// File path: assets/icons/filled_heart.svg
-  SvgGenImage get filledHeart =>
-      const SvgGenImage('assets/icons/filled_heart.svg');
+  SvgGenImage get filledHeart => const SvgGenImage('assets/icons/filled_heart.svg');
 
   /// File path: assets/icons/left_arrow.svg
   SvgGenImage get leftArrow => const SvgGenImage('assets/icons/left_arrow.svg');
@@ -100,8 +97,7 @@ class $AssetsIconsGen {
   SvgGenImage get menu => const SvgGenImage('assets/icons/menu.svg');
 
   /// File path: assets/icons/right_arrow.svg
-  SvgGenImage get rightArrow =>
-      const SvgGenImage('assets/icons/right_arrow.svg');
+  SvgGenImage get rightArrow => const SvgGenImage('assets/icons/right_arrow.svg');
 
   /// File path: assets/icons/settings.svg
   SvgGenImage get settings => const SvgGenImage('assets/icons/settings.svg');
@@ -113,18 +109,8 @@ class $AssetsIconsGen {
   SvgGenImage get star => const SvgGenImage('assets/icons/star.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [
-        alert,
-        close,
-        emptyHeart,
-        filledHeart,
-        leftArrow,
-        menu,
-        rightArrow,
-        settings,
-        share,
-        star
-      ];
+  List<SvgGenImage> get values =>
+      [alert, close, emptyHeart, filledHeart, leftArrow, menu, rightArrow, settings, share, star];
 }
 
 class Assets {
