@@ -8,3 +8,6 @@ class PopularMoviesBloc extends BaseMoviesBloc {
 class UpcomingMoviesBloc extends BaseMoviesBloc {
   UpcomingMoviesBloc(super.usecase);
 }
+class NowPlayingMoviesBloc extends BaseMoviesBloc {
+  NowPlayingMoviesBloc(super.usecase);
+}
