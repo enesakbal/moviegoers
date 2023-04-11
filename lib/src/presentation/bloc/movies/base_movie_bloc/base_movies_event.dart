@@ -8,8 +8,7 @@ abstract class BaseMoviesEvent extends Equatable {
 }
 
 class FetchMovies extends BaseMoviesEvent {
-  final MovieTypes type;
   final int page;
 
-  const FetchMovies(this.type, {required this.page});
+  const FetchMovies({required this.page});
 }

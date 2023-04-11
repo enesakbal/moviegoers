@@ -57,6 +57,7 @@ class MainApp extends StatelessWidget {
     return MultiBlocProvider(providers: [
       BlocProvider(create: (_) => di.injector<PopularMoviesBloc>()),
       BlocProvider(create: (_) => di.injector<UpcomingMoviesBloc>()),
+      BlocProvider(create: (_) => di.injector<NowPlayingMoviesBloc>()),
     ], child: _localization(context));
   }
 
