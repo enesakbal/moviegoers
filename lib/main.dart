@@ -12,6 +12,8 @@ import 'src/config/router/navigator_observers.dart';
 import 'src/core/init/language/language_manager.dart';
 import 'src/core/theme/app_theme.dart';
 import 'src/injector.dart' as di;
+import 'src/presentation/bloc/movie_credit/movie_credit_bloc.dart';
+import 'src/presentation/bloc/movie_detail/movie_detail_bloc.dart';
 import 'src/presentation/bloc/movies/blocs.dart';
 
 void main() async {
@@ -70,12 +72,14 @@ class MainApp extends StatelessWidget {
       BlocProvider(create: (_) => di.injector<PopularMoviesBloc>()),
       BlocProvider(create: (_) => di.injector<UpcomingMoviesBloc>()),
       BlocProvider(create: (_) => di.injector<NowPlayingMoviesBloc>()),
+      BlocProvider(create: (_) => di.injector<MovieDetailBloc>()),
+      BlocProvider(create: (_) => di.injector<MovieCreditBloc>()),
     ], child: _localization(context));
   }
 
   EasyLocalization _localization(BuildContext context) {
     return EasyLocalization(
-      path: 'languages/',
+      path: 'languages',
       supportedLocales: LanguageManager().supportedLocales,
       child: _screenUtil(context),
     );
@@ -88,5 +92,3 @@ class MainApp extends StatelessWidget {
     );
   }
 }
-
-// TODO(enesakbl): film detail sayfasına başla. 

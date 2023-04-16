@@ -8,6 +8,8 @@ import 'data/datasources/remote/movie/movie_remote_data_source_impl.dart';
 import 'data/repositories/movie_repository_impl.dart';
 import 'domain/repositories/movie_repository.dart';
 import 'domain/usecases/movie_usecase.dart';
+import 'presentation/bloc/movie_credit/movie_credit_bloc.dart';
+import 'presentation/bloc/movie_detail/movie_detail_bloc.dart';
 import 'presentation/bloc/movies/blocs.dart';
 
 final injector = GetIt.instance;
@@ -34,5 +36,7 @@ Future<void> init() async {
 
     ..registerFactory<UpcomingMoviesBloc>(() => UpcomingMoviesBloc(injector()))
     ..registerFactory<PopularMoviesBloc>(() => PopularMoviesBloc(injector()))
-    ..registerFactory<NowPlayingMoviesBloc>(() => NowPlayingMoviesBloc(injector()));
+    ..registerFactory<NowPlayingMoviesBloc>(() => NowPlayingMoviesBloc(injector()))
+    ..registerFactory<MovieDetailBloc>(() => MovieDetailBloc(injector()))
+    ..registerFactory<MovieCreditBloc>(() => MovieCreditBloc(injector()));
 }
