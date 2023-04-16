@@ -97,14 +97,15 @@ class BaseButton extends HookWidget {
                 height: 24,
                 width: 24,
                 child: CircularProgressIndicator(
-                  strokeWidth: 3,
+                  strokeWidth: 2,
                   color: foregroundColor,
+                  valueColor: const AlwaysStoppedAnimation<Color>(MGColors.grey),
                 ),
               ),
             )
           : Text(
               title,
-              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18.sp),
+              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18.sp),
             ),
     );
   }
