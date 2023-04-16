@@ -15,4 +15,3 @@ class FetchMovieDetail extends MovieDetailEvent {
   @override
   List<Object> get props => [movieID];
 }
-

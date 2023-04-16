@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../config/gen/colors.gen.dart';
@@ -23,7 +24,7 @@ class TagContainer extends StatelessWidget {
           color: MGColors.blue,
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Text(tag, style: const TextStyle(fontWeight: FontWeight.w400, color: Colors.white)),
+        child: AutoSizeText(tag, maxLines: 1, style: const TextStyle(fontWeight: FontWeight.w400, color: Colors.white)),
       ),
     );
   }

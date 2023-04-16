@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/components/card/movie_card.dart';
+import '../../../core/components/indicator/base_indicator.dart';
 import '../../../core/init/language/locale_keys.g.dart';
 import '../../bloc/movies/base_movie_bloc/base_movies_bloc.dart';
 import '../../bloc/movies/blocs.dart';
@@ -25,9 +26,6 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
           break;
         case UpcomingMoviesBloc:
           newTitle = LocaleKeys.home_upcoming.tr();
-          break;
-        case PopularMoviesBloc:
-          newTitle = LocaleKeys.home_popular.tr();
           break;
         default:
       }
@@ -68,7 +66,10 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
                 shrinkWrap: true,
                 padding: EdgeInsets.symmetric(horizontal: 5.w),
                 itemCount: state.movieList.length,
-                itemBuilder: (context, index) => MovieCard(movie: state.movieList[index]),
+                itemBuilder: (context, index) => MovieCard(
+                  movie: state.movieList[index],
+                  onTap: () {},
+                ),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 20,
@@ -85,12 +86,10 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
         }
 
         return SliverToBoxAdapter(
-          child: Center(
-            child: SizedBox(
-              height: 325.h,
-              child: const CircularProgressIndicator.adaptive(
-                backgroundColor: Colors.white,
-              ),
+          child: SizedBox(
+            height: 325.h,
+            child: const Center(
+              child: BaseIndicator(),
             ),
           ),
         );

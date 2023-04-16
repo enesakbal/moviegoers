@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -7,27 +6,31 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../config/gen/assets.gen.dart';
+import '../../../config/router/app_router.dart';
 import '../../../domain/entities/movie/movie/movie.dart';
 import '../../../presentation/_widgets/tag_container.dart';
 import '../../constants/imdb_image_constants.dart';
 import '../../extensions/int_extensions.dart';
 import '../buttons/base_icon_button.dart';
+import '../indicator/base_indicator.dart';
 
 class MovieCard extends HookWidget {
   const MovieCard({
     super.key,
     required this.movie,
+    required this.onTap,
   });
 
   final Movie movie;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     final isLiked = useState<bool>(false);
 
     return GestureDetector(
-      onTap: () {
-        log('clicked movie card');
+      onTap: () async {
+        await router.push(MovieDetailRoute(movieID: movie.id!.toString()));
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24),
@@ -37,9 +40,10 @@ class MovieCard extends HookWidget {
               height: 325.h,
               width: 200.w,
               useOldImageOnUrlChange: true,
-              imageUrl: '${IMDBImageConstants.Original}${movie.posterPath!}',
-              progressIndicatorBuilder: (_, __, ___) => const CircularProgressIndicator.adaptive(),
-              errorWidget: (_, __, ___) => const CircularProgressIndicator.adaptive(),
+              imageUrl: '${IMDBImageConstants.original}${movie.posterPath!}',
+              progressIndicatorBuilder: (_, __, ___) =>
+                  SizedBox(height: 325.h, child: const Center(child: BaseIndicator())),
+              errorWidget: (_, __, ___) => SizedBox(height: 325.h, child: const Center(child: BaseIndicator())),
               fit: BoxFit.cover,
             ),
             SizedBox(
@@ -56,7 +60,7 @@ class MovieCard extends HookWidget {
                         child: BaseIconButton(
                           onPressed: () => isLiked.value = !isLiked.value,
                           icon: isLiked.value
-                              ? Assets.icons.filledHeart.svg(color: Colors.white, width: 18)
+                              ? Assets.icons.filledHeart.svg(color: Colors.white, width: 20)
                               : Assets.icons.emptyHeart.svg(color: Colors.white, width: 20),
                         ),
                       ),

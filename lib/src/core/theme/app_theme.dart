@@ -28,6 +28,13 @@ class MGAppTheme {
         fontSize: 12.sp,
         fontWeight: FontWeight.w500,
       ),
+      bodyMedium: TextStyle(
+        color: MGColors.grey.shade300,
+        fontFamily: Assets.fonts.apercuProRegular,
+        fontSize: 14.sp,
+        wordSpacing: 4,
+        fontWeight: FontWeight.w400,
+      ),
     );
   }
 

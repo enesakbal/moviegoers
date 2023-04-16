@@ -30,6 +30,9 @@ abstract class BaseMoviesBloc extends Bloc<BaseMoviesEvent, BaseMoviesState> {
       result = await _usecase.getUpcomingMovies(page: event.page);
     } else if (this is NowPlayingMoviesBloc) {
       result = await _usecase.getNowPlayingMovies(page: event.page);
+    } else {
+      emit(const BaseMoviesError(message: 'Something went wrong'));
+      return;
     }
 
     result.fold(
