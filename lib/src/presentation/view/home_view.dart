@@ -16,7 +16,7 @@ class HomeView extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           //* Appbar
-          BaseAppBar(),
+          SliverBaseAppBar(),
 
           //* POPULAR CAROUSEL
           PopularCarouselBlocWidget(),
@@ -26,9 +26,6 @@ class HomeView extends StatelessWidget {
 
           //* UPCOMING
           MovieCategoryBlocWidget<UpcomingMoviesBloc>(),
-
-          //* POPULAR
-          MovieCategoryBlocWidget<PopularMoviesBloc>(),
         ],
       ),
     );
