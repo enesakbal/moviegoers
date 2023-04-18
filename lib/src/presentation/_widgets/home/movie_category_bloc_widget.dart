@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../config/router/app_router.dart';
 import '../../../core/components/card/movie_card.dart';
 import '../../../core/components/indicator/base_indicator.dart';
 import '../../../core/init/language/locale_keys.g.dart';
@@ -40,60 +41,70 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
 
     return BlocBuilder<T, BaseMoviesState>(
       builder: (context, state) {
-        if (state is BaseMoviesHasData) {
-          return SliverList(
-            delegate: SliverChildListDelegate([
-              50.verticalSpace,
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 0.h, horizontal: 15.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      title.value,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Text(
-                      LocaleKeys.home_view_all.tr(),
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                  ],
-                ),
-              ),
-              20.verticalSpace,
-              GridView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                padding: EdgeInsets.symmetric(horizontal: 5.w),
-                itemCount: state.movieList.length,
-                itemBuilder: (context, index) => MovieCard(
-                  movie: state.movieList[index],
-                  onTap: () {},
-                ),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 20,
-                  childAspectRatio: 9 / 16,
-                  mainAxisSpacing: 30,
-                ),
-              ),
-            ]),
+        if (state is BaseMoviesError) {
+          return SliverToBoxAdapter(
+            child: SizedBox(height: 325.h, child: Center(child: Text(state.message))),
           );
-        } else if (state is BaseMoviesError) {
-          return Center(
-            child: Text(state.message),
+        } else if (state is BaseMoviesHasData) {
+          return _hasDataBody(title, context, state);
+        } else {
+          return SliverToBoxAdapter(
+            child: SizedBox(height: 325.h, child: const Center(child: BaseIndicator())),
           );
         }
-
-        return SliverToBoxAdapter(
-          child: SizedBox(
-            height: 325.h,
-            child: const Center(
-              child: BaseIndicator(),
-            ),
-          ),
-        );
       },
+    );
+  }
+
+  Widget _hasDataBody(ValueNotifier<String> title, BuildContext context, BaseMoviesHasData state) {
+    return SliverList(
+      delegate: SliverChildListDelegate(
+        [
+          25.verticalSpace,
+          _title(title, context),
+          20.verticalSpace,
+          _movies(state),
+          25.verticalSpace,
+        ],
+      ),
+    );
+  }
+
+  Padding _title(ValueNotifier<String> title, BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 0.h, horizontal: 15.w),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title.value,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          Text(
+            LocaleKeys.home_view_all.tr(),
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+        ],
+      ),
+    );
+  }
+
+  GridView _movies(BaseMoviesHasData state) {
+    return GridView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      padding: EdgeInsets.symmetric(horizontal: 5.w),
+      itemCount: state.movieList.length,
+      itemBuilder: (context, index) => MovieCard(
+        movie: state.movieList[index],
+        onTap: () async => router.push(MovieDetailRoute(movieID: state.movieList[index].id!.toString())),
+      ),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 20,
+        childAspectRatio: 9 / 16,
+        mainAxisSpacing: 30,
+      ),
     );
   }
 }

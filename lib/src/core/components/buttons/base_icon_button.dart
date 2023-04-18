@@ -7,13 +7,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../config/gen/colors.gen.dart';
 
 class BaseIconButton extends HookWidget {
-  const BaseIconButton(
-      {super.key, required this.icon, required this.onPressed, this.outline = false, this.isDark = false});
+  const BaseIconButton({
+    super.key,
+    required this.icon,
+    required this.onPressed,
+    this.outline = false,
+    this.isDark = false,
+    this.foregroundColor = Colors.transparent,
+  });
 
   final Widget icon;
   final void Function()? onPressed;
   final bool outline;
   final bool isDark;
+
+  final Color foregroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +37,7 @@ class BaseIconButton extends HookWidget {
               padding: EdgeInsets.all(6.r),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               backgroundColor: isDark ? MGColors.dark : MGColors.grey.withOpacity(0.8),
-              foregroundColor: Colors.transparent,
+              foregroundColor: foregroundColor,
               shadowColor: MGColors.dark,
               elevation: 6,
               side: outline

@@ -14,25 +14,25 @@ import '../../domain/entities/movie/movie/movie.dart';
 class ProjectComponentsView extends StatelessWidget {
   const ProjectComponentsView({super.key});
 
-  final modelll = const Movie(
-      posterPath: '/dm06L9pxDOL9jNSK4Cb6y139rrG.jpg',
-      adult: false,
-      backdropPath: '/ovM06PdF3M8wvKb06i4sjW3xoww.jpg',
-      id: 76600,
-      genreIds: [878, 12, 28],
-      originalLanguage: 'en',
-      originalTitle: 'Avatar: The Way of Water',
-      overview:
-          'Set more than a decade after the events of the first film, learn the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure.',
-      popularity: 9505.705,
-      releaseDate: '2022-12-14',
-      title: 'Avatar: The Way of Water',
-      video: false,
-      voteAverage: 7.7,
-      voteCount: 6167);
-
   @override
   Widget build(BuildContext context) {
+    const modelll = Movie(
+        posterPath: '/dm06L9pxDOL9jNSK4Cb6y139rrG.jpg',
+        adult: false,
+        backdropPath: '/ovM06PdF3M8wvKb06i4sjW3xoww.jpg',
+        id: 76600,
+        genreIds: [878, 12, 28],
+        originalLanguage: 'en',
+        originalTitle: 'Avatar: The Way of Water',
+        overview:
+            'Set more than a decade after the events of the first film, learn the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure.',
+        popularity: 9505.705,
+        releaseDate: '2022-12-14',
+        title: 'Avatar: The Way of Water',
+        video: false,
+        voteAverage: 7.7,
+        voteCount: 6167);
+
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -45,15 +45,22 @@ class ProjectComponentsView extends StatelessWidget {
                 children: [
                   BaseIconButton(
                     icon: Assets.icons.close.svg(),
+                    onPressed: () {},
                   )
                 ],
               ),
               15.verticalSpace,
-              MovieCard(movie: modelll),
+              MovieCard(
+                movie: modelll,
+                onTap: () async => router.push(MovieDetailRoute(movieID: modelll.id!.toString())),
+              ),
               50.verticalSpace,
               CarouselSlider.builder(
                 itemCount: 10,
-                itemBuilder: (context, index, realIndex) => MovieCard(movie: modelll),
+                itemBuilder: (context, index, realIndex) => MovieCard(
+                  movie: modelll,
+                  onTap: () {},
+                ),
                 options: CarouselOptions(
                   autoPlay: true,
                   height: 325.h,
@@ -67,7 +74,7 @@ class ProjectComponentsView extends StatelessWidget {
                   title: 'title',
                   foregroundColor: Colors.red,
                   backgroundColor: Colors.red,
-                  onPressed: () {
+                  onPressed: () async {
                     router.push(const HomeRoute());
                   }),
               50.verticalSpace,

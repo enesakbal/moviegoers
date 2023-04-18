@@ -6,7 +6,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../config/gen/assets.gen.dart';
-import '../../../config/router/app_router.dart';
 import '../../../domain/entities/movie/movie/movie.dart';
 import '../../../presentation/_widgets/tag_container.dart';
 import '../../constants/imdb_image_constants.dart';
@@ -29,9 +28,7 @@ class MovieCard extends HookWidget {
     final isLiked = useState<bool>(false);
 
     return GestureDetector(
-      onTap: () async {
-        await router.push(MovieDetailRoute(movieID: movie.id!.toString()));
-      },
+      onTap: onTap,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24),
         child: Stack(

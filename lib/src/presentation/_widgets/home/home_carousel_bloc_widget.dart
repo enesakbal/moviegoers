@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../config/gen/assets.gen.dart';
+import '../../../config/router/app_router.dart';
 import '../../../core/components/card/movie_card.dart';
 import '../../../core/components/indicator/base_indicator.dart';
 import '../../../core/init/language/locale_keys.g.dart';
@@ -20,7 +20,7 @@ class PopularCarouselBlocWidget extends HookWidget {
     useEffect(() {
       context.read<PopularMoviesBloc>().add(const FetchMovies(page: 1));
       return () {};
-    });
+    }, []);
 
     return BlocBuilder<PopularMoviesBloc, BaseMoviesState>(
       builder: (context, state) {
@@ -28,16 +28,9 @@ class PopularCarouselBlocWidget extends HookWidget {
           child: Column(
             children: [
               if (state is BaseMoviesError) ...[
-                Center(
-                    child: Text(
-                  state.message,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: Assets.fonts.apercuProBold,
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ))
+                20.verticalSpace,
+                Center(child: Text(state.message, style: Theme.of(context).textTheme.titleSmall)),
+                20.verticalSpace,
               ] else ...[
                 Column(
                   children: [
@@ -53,22 +46,8 @@ class PopularCarouselBlocWidget extends HookWidget {
                     ),
                     // const PopularCarouselBlocWidget(),
                     if (state is BaseMoviesHasData) ...[
-                      CarouselSlider.builder(
-                        itemCount: state.movieList.length,
-                        itemBuilder: (_, index, ___) => MovieCard(
-                          movie: state.movieList[index],
-                          onTap: () async {},
-                        ),
-                        options: CarouselOptions(
-                          autoPlay: true,
-                          height: 325.h,
-                          viewportFraction: 0.6,
-                          enlargeFactor: 0.4,
-                          enlargeCenterPage: true,
-                          enlargeStrategy: CenterPageEnlargeStrategy.zoom,
-                        ),
-                      ),
-                    ] else ...[
+                      _hasDataBody(state),
+                    ] else if (state is BaseMoviesLoading) ...[
                       SizedBox(height: 325.h, child: const Center(child: BaseIndicator())),
                     ]
                   ],
@@ -78,6 +57,26 @@ class PopularCarouselBlocWidget extends HookWidget {
           ),
         );
       },
+    );
+  }
+
+  CarouselSlider _hasDataBody(BaseMoviesHasData state) {
+    return CarouselSlider.builder(
+      itemCount: state.movieList.length,
+      itemBuilder: (_, index, ___) => MovieCard(
+        movie: state.movieList[index],
+        onTap: () async => router.push(MovieDetailRoute(
+          movieID: state.movieList[index].id!.toString(),
+        )),
+      ),
+      options: CarouselOptions(
+        autoPlay: true,
+        height: 325.h,
+        viewportFraction: 0.6,
+        enlargeFactor: 0.4,
+        enlargeCenterPage: true,
+        enlargeStrategy: CenterPageEnlargeStrategy.zoom,
+      ),
     );
   }
 }
