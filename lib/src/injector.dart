@@ -8,9 +8,7 @@ import 'data/datasources/remote/movie/movie_remote_data_source_impl.dart';
 import 'data/repositories/movie_repository_impl.dart';
 import 'domain/repositories/movie_repository.dart';
 import 'domain/usecases/movie_usecase.dart';
-import 'presentation/bloc/movie_credit/movie_credit_bloc.dart';
-import 'presentation/bloc/movie_detail/movie_detail_bloc.dart';
-import 'presentation/bloc/movies/blocs.dart';
+import 'presentation/bloc/blocs.dart';
 
 final injector = GetIt.instance;
 

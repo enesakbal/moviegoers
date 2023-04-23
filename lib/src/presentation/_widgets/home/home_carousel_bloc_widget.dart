@@ -9,8 +9,7 @@ import '../../../config/router/app_router.dart';
 import '../../../core/components/card/movie_card.dart';
 import '../../../core/components/indicator/base_indicator.dart';
 import '../../../core/init/language/locale_keys.g.dart';
-import '../../bloc/movies/base_movie_bloc/base_movies_bloc.dart';
-import '../../bloc/movies/blocs.dart';
+import '../../bloc/blocs.dart';
 
 class PopularCarouselBlocWidget extends HookWidget {
   const PopularCarouselBlocWidget({super.key});

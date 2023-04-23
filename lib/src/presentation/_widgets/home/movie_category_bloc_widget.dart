@@ -9,7 +9,7 @@ import '../../../core/components/card/movie_card.dart';
 import '../../../core/components/indicator/base_indicator.dart';
 import '../../../core/init/language/locale_keys.g.dart';
 import '../../bloc/movies/base_movie_bloc/base_movies_bloc.dart';
-import '../../bloc/movies/blocs.dart';
+import '../../bloc/movies/base_movie_blocs.dart';
 
 class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
   const MovieCategoryBlocWidget({super.key}) : assert(T is! BaseMoviesBloc, 'MUST BE EXTENDS BASEMOVIESBLOC');

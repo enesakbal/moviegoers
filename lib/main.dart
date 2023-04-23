@@ -7,14 +7,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'src/config/gen/colors.gen.dart';
+import 'src/config/observers/bloc_observer.dart';
 import 'src/config/router/app_router.dart';
-import 'src/config/router/navigator_observers.dart';
 import 'src/core/init/language/language_manager.dart';
 import 'src/core/theme/app_theme.dart';
 import 'src/injector.dart' as di;
-import 'src/presentation/bloc/movie_credit/movie_credit_bloc.dart';
-import 'src/presentation/bloc/movie_detail/movie_detail_bloc.dart';
-import 'src/presentation/bloc/movies/blocs.dart';
+import 'src/presentation/bloc/blocs.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

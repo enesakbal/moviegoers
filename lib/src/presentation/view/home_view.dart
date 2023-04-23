@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../core/components/appbar/custom_app_bar.dart';
 import '../_widgets/home/home_carousel_bloc_widget.dart';
 import '../_widgets/home/movie_category_bloc_widget.dart';
-import '../bloc/movies/blocs.dart';
+import '../bloc/movies/base_movie_blocs.dart';
 
 @RoutePage()
 class HomeView extends StatelessWidget {
