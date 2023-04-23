@@ -8,7 +8,7 @@ import '../../../../core/init/network/network_exception.dart';
 import '../../../../domain/entities/movie/movie/movie.dart';
 import '../../../../domain/entities/movie/movie_list/base/movie_interface.dart';
 import '../../../../domain/usecases/movie_usecase.dart';
-import '../blocs.dart';
+import '../../blocs.dart';
 
 part 'base_movies_event.dart';
 part 'base_movies_state.dart';
@@ -30,6 +30,12 @@ abstract class BaseMoviesBloc extends Bloc<BaseMoviesEvent, BaseMoviesState> {
       result = await _usecase.getUpcomingMovies(page: event.page);
     } else if (this is NowPlayingMoviesBloc) {
       result = await _usecase.getNowPlayingMovies(page: event.page);
+    } else if (this is RecommendationMoviesBloc) {
+      assert(event.movieID != null, 'MOVIEID CANT BE NULL');
+      result = await _usecase.getMovieRecommendations(movieID: event.movieID!, page: event.page);
+    } else if (this is SimiliarMoviesBloc) {
+      assert(event.movieID != null, 'MOVIEID CANT BE NULL');
+      result = await _usecase.getMovieSimilars(movieID: event.movieID!, page: event.page);
     } else {
       emit(const BaseMoviesError(message: 'Something went wrong'));
       return;

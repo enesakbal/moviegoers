@@ -9,6 +9,7 @@ abstract class BaseMoviesEvent extends Equatable {
 
 class FetchMovies extends BaseMoviesEvent {
   final int page;
+  final String? movieID;
 
-  const FetchMovies({required this.page});
+  const FetchMovies({required this.page, this.movieID});
 }

@@ -68,7 +68,13 @@ class MovieDetailView extends HookWidget {
           _credits(),
           15.verticalSpace,
           _description(data, context),
-          35.verticalSpace,
+          20.verticalSpace,
+          _divider(),
+          20.verticalSpace,
+          _recommandations(),
+          5.verticalSpace,
+          _similiars(),
+          100.verticalSpace
         ],
       ),
     );
@@ -272,6 +278,116 @@ class MovieDetailView extends HookWidget {
       child: AutoSizeText(
         data.overview!,
         style: Theme.of(context).textTheme.bodyMedium,
+      ),
+    );
+  }
+
+  Widget _recommandations() {
+    return BlocBuilder<RecommendationMoviesBloc, BaseMoviesState>(
+      builder: (context, state) {
+        if (state is BaseMoviesHasData) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Recommended',
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 22.sp),
+                    ),
+                    Text(
+                      LocaleKeys.home_view_all.tr(),
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ],
+                ),
+              ),
+              15.verticalSpace,
+              SizedBox(
+                height: 325.h,
+                width: 10.sw,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                  itemBuilder: (context, index) => MovieCard(
+                    movie: state.movieList[index],
+                    onTap: () async {
+                      return router.push(MovieBlocProviderRoute(movieID: state.movieList[index].id!.toString()));
+                    },
+                  ),
+                  separatorBuilder: (context, index) => const SizedBox(
+                    width: 10,
+                  ),
+                  itemCount: state.movieList.length,
+                ),
+              ),
+              35.verticalSpace,
+            ],
+          );
+        }
+        return Container();
+      },
+    );
+  }
+
+  Widget _similiars() {
+    return BlocBuilder<SimiliarMoviesBloc, BaseMoviesState>(
+      builder: (context, state) {
+        if (state is BaseMoviesHasData) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Similiar',
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 22.sp),
+                    ),
+                    Text(
+                      LocaleKeys.home_view_all.tr(),
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(),
+                    ),
+                  ],
+                ),
+              ),
+              15.verticalSpace,
+              SizedBox(
+                height: 325.h,
+                width: 10.sw,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                  itemBuilder: (context, index) => MovieCard(
+                    movie: state.movieList[index],
+                    onTap: () async =>
+                        router.push(MovieBlocProviderRoute(movieID: state.movieList[index].id!.toString())),
+                  ),
+                  separatorBuilder: (context, index) => const SizedBox(
+                    width: 10,
+                  ),
+                  itemCount: state.movieList.length,
+                ),
+              ),
+            ],
+          );
+        }
+        return Container();
+      },
+    );
+  }
+
+  Widget _divider() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10.w),
+      child: const Divider(
+        color: Colors.white,
+        thickness: 0.1,
       ),
     );
   }
