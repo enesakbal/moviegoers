@@ -25,6 +25,14 @@ class BaseMoviesLoading extends BaseMoviesState {
   const BaseMoviesLoading();
 }
 
+class BaseMoviesEmpty extends BaseMoviesState {
+  const BaseMoviesEmpty({required this.message});
+
+  final String message;
+  @override
+  List<Object> get props => [message];
+}
+
 class BaseMoviesHasData extends BaseMoviesState {
   const BaseMoviesHasData(this.movieList);
 
@@ -32,4 +40,7 @@ class BaseMoviesHasData extends BaseMoviesState {
 
   @override
   List<Object> get props => [movieList];
+
+  @override
+  String toString() => 'BaseMoviesHasData()';
 }

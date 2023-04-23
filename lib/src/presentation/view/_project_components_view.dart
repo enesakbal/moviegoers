@@ -52,7 +52,7 @@ class ProjectComponentsView extends StatelessWidget {
               15.verticalSpace,
               MovieCard(
                 movie: modelll,
-                onTap: () async => router.push(MovieDetailRoute(movieID: modelll.id!.toString())),
+                onTap: () async => router.push(MovieBlocProviderRoute(movieID: modelll.id!.toString())),
               ),
               50.verticalSpace,
               CarouselSlider.builder(

@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -12,53 +11,67 @@ import '../../config/gen/colors.gen.dart';
 import '../../config/router/app_router.dart';
 import '../../core/components/buttons/base_button.dart';
 import '../../core/components/buttons/base_icon_button.dart';
+import '../../core/components/buttons/favorite_icon_button.dart';
 import '../../core/components/card/actor_card.dart';
+import '../../core/components/card/movie_card.dart';
 import '../../core/components/indicator/base_indicator.dart';
 import '../../core/constants/imdb_image_constants.dart';
 import '../../core/extensions/int_extensions.dart';
+import '../../core/init/language/locale_keys.g.dart';
 import '../../domain/entities/movie/movie_detail/movie_detail.dart';
 import '../_widgets/tag_container.dart';
-import '../bloc/movie_credit/movie_credit_bloc.dart';
-import '../bloc/movie_detail/movie_detail_bloc.dart';
+import '../bloc/blocs.dart';
 
-@RoutePage()
 class MovieDetailView extends HookWidget {
-  const MovieDetailView({super.key, required this.movieID});
+  const MovieDetailView({
+    super.key,
+    required this.movieID,
+    required this.movieDetailBloc,
+    required this.recommendationMoviesBloc,
+    required this.similiarMoviesBloc,
+    required this.movieCreditBloc,
+  });
 
   final String movieID;
+  final MovieDetailBloc movieDetailBloc;
+  final RecommendationMoviesBloc recommendationMoviesBloc;
+  final SimiliarMoviesBloc similiarMoviesBloc;
+  final MovieCreditBloc movieCreditBloc;
 
   @override
   Widget build(BuildContext context) {
-    final isLiked = useState<bool>(false);
-
     useEffect(() {
-      context.read<MovieDetailBloc>().add(FetchMovieDetail(movieID));
-      context.read<MovieCreditBloc>().add(FetchMovieCredit(movieID));
+      movieDetailBloc.add(FetchMovieDetail(movieID));
+      recommendationMoviesBloc.add(FetchMovies(page: 1, movieID: movieID));
+      similiarMoviesBloc.add(FetchMovies(page: 1, movieID: movieID));
+      movieCreditBloc.add(FetchMovieCredit(movieID));
 
       return () {};
     }, []);
 
     return Scaffold(
+      key: key,
       body: BlocBuilder<MovieDetailBloc, MovieDetailState>(
+        bloc: movieDetailBloc,
         builder: (context, state) {
           if (state is MovieDetailError) {
             return SizedBox.expand(child: Center(child: Text(state.message)));
           } else if (state is MovieDetailHasData) {
-            return _hasDataBody(state.movieDetail, isLiked, context);
+            return _hasDataBody(state.movieDetail, context);
           } else {
-            return SizedBox(height: 325.h, child: const Center(child: BaseIndicator()));
+            return const SafeArea(child: SizedBox(child: Center(child: BaseIndicator())));
           }
         },
       ),
     );
   }
 
-  Widget _hasDataBody(MovieDetail data, ValueNotifier<bool> isLiked, BuildContext context) {
+  Widget _hasDataBody(MovieDetail data, BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _image(data, isLiked),
+          _image(data, context),
           _titleAndInfos(data, context),
           15.verticalSpace,
           _tags(data),
@@ -68,45 +81,65 @@ class MovieDetailView extends HookWidget {
           _credits(),
           15.verticalSpace,
           _description(data, context),
-          35.verticalSpace,
+          20.verticalSpace,
+          _divider(),
+          20.verticalSpace,
+          _recommandations(),
+          5.verticalSpace,
+          _similiars(),
+          100.verticalSpace
         ],
       ),
     );
   }
 
-  Stack _image(MovieDetail data, ValueNotifier<bool> isLiked) {
+  Stack _image(MovieDetail data, BuildContext context) {
     return Stack(
       children: [
-        if (data.backdropPath != null) ...[
+        if (data.backdropPath != null)
           CachedNetworkImage(
             fit: BoxFit.fitHeight,
             imageUrl: '${IMDBImageConstants.original}${data.backdropPath}',
             height: 325.h,
             errorWidget: (context, url, error) => Container(),
+          )
+        else if (data.posterPath != null)
+          CachedNetworkImage(
+            fit: BoxFit.fitWidth,
+            imageUrl: '${IMDBImageConstants.original}${data.posterPath}',
+            height: 325.h,
+            width: 1.sw,
+            errorWidget: (context, url, error) => Container(),
+          )
+        else
+          Container(
+            height: 325.h,
+            color: MGColors.grey,
+            alignment: Alignment.center,
+            child: const Icon(Icons.photo, color: MGColors.dark, size: 52),
           ),
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  stops: const [
-                    0.2,
-                    0.4,
-                    0.7,
-                    0.8,
-                    0.9,
-                    1,
-                  ],
-                  colors: [
-                    ...List.generate(5, (index) => Colors.transparent.withOpacity(0)),
-                    MGColors.dark.withOpacity(1),
-                  ],
-                ),
+        Positioned.fill(
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: const [
+                  0.2,
+                  0.4,
+                  0.7,
+                  0.8,
+                  0.9,
+                  1,
+                ],
+                colors: [
+                  ...List.generate(5, (index) => Colors.transparent.withOpacity(0)),
+                  MGColors.dark.withOpacity(1),
+                ],
               ),
             ),
           ),
-        ],
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -117,15 +150,7 @@ class MovieDetailView extends HookWidget {
                 icon: Assets.icons.leftArrow.svg(color: Colors.white, width: 20),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(10.r),
-              child: BaseIconButton(
-                onPressed: () => isLiked.value = !isLiked.value,
-                icon: isLiked.value
-                    ? Assets.icons.filledHeart.svg(color: Colors.white, width: 20)
-                    : Assets.icons.emptyHeart.svg(color: Colors.white, width: 20),
-              ),
-            ),
+            FavoriteIconButton(onPressed: () async {}),
           ],
         ),
       ],
@@ -138,7 +163,7 @@ class MovieDetailView extends HookWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(data.originalTitle!, style: Theme.of(context).textTheme.titleMedium),
+          Text(data.title!, style: Theme.of(context).textTheme.titleMedium),
           10.verticalSpace,
           SizedBox(
             width: 0.5.sw,
@@ -158,8 +183,11 @@ class MovieDetailView extends HookWidget {
                 5.horizontalSpace,
                 Text('·', style: Theme.of(context).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w900)),
                 5.horizontalSpace,
-                Text(DateFormat('yyyy').format(DateTime.parse(data.releaseDate!)),
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 16)),
+                if (DateTime.tryParse(data.releaseDate!) != null)
+                  Text(DateFormat('yyyy').format(DateTime.tryParse(data.releaseDate!)!),
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 16))
+                else
+                  Text('?', style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 16)),
               ],
             ),
           ),
@@ -212,11 +240,7 @@ class MovieDetailView extends HookWidget {
               outline: true,
               isDark: true,
               foregroundColor: MGColors.grey,
-              icon: Icon(
-                Icons.download,
-                size: 24,
-                color: MGColors.grey.shade50,
-              ),
+              icon: Assets.icons.filmCamera.svg(color: Colors.white, height: 24),
               onPressed: () {},
             ),
           ),
@@ -243,6 +267,7 @@ class MovieDetailView extends HookWidget {
 
   BlocBuilder<MovieCreditBloc, MovieCreditState> _credits() {
     return BlocBuilder<MovieCreditBloc, MovieCreditState>(
+      bloc: movieCreditBloc,
       builder: (context, state) {
         if (state is MovieCreditHasData) {
           return SizedBox(
@@ -272,6 +297,118 @@ class MovieDetailView extends HookWidget {
       child: AutoSizeText(
         data.overview!,
         style: Theme.of(context).textTheme.bodyMedium,
+      ),
+    );
+  }
+
+  Widget _recommandations() {
+    return BlocBuilder<RecommendationMoviesBloc, BaseMoviesState>(
+      bloc: recommendationMoviesBloc,
+      builder: (context, state) {
+        if (state is BaseMoviesHasData) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Recommended',
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 22.sp),
+                    ),
+                    Text(
+                      LocaleKeys.home_view_all.tr(),
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ],
+                ),
+              ),
+              15.verticalSpace,
+              SizedBox(
+                height: 325.h,
+                width: 10.sw,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                  itemBuilder: (context, index) => MovieCard(
+                    movie: state.movieList[index],
+                    onTap: () async {
+                      return router.push(MovieBlocProviderRoute(movieID: state.movieList[index].id!.toString()));
+                    },
+                  ),
+                  separatorBuilder: (context, index) => const SizedBox(
+                    width: 10,
+                  ),
+                  itemCount: state.movieList.length,
+                ),
+              ),
+              35.verticalSpace,
+            ],
+          );
+        }
+        return Container();
+      },
+    );
+  }
+
+  Widget _similiars() {
+    return BlocBuilder<SimiliarMoviesBloc, BaseMoviesState>(
+      bloc: similiarMoviesBloc,
+      builder: (context, state) {
+        if (state is BaseMoviesHasData) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Similiar',
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 22.sp),
+                    ),
+                    Text(
+                      LocaleKeys.home_view_all.tr(),
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(),
+                    ),
+                  ],
+                ),
+              ),
+              15.verticalSpace,
+              SizedBox(
+                height: 325.h,
+                width: 10.sw,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                  itemBuilder: (context, index) => MovieCard(
+                    movie: state.movieList[index],
+                    onTap: () async =>
+                        router.push(MovieBlocProviderRoute(movieID: state.movieList[index].id!.toString())),
+                  ),
+                  separatorBuilder: (context, index) => const SizedBox(
+                    width: 10,
+                  ),
+                  itemCount: state.movieList.length,
+                ),
+              ),
+            ],
+          );
+        }
+        return Container();
+      },
+    );
+  }
+
+  Widget _divider() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10.w),
+      child: const Divider(
+        color: Colors.white,
+        thickness: 0.1,
       ),
     );
   }

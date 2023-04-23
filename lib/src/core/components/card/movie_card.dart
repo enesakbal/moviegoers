@@ -2,18 +2,18 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../config/gen/assets.gen.dart';
+import '../../../config/gen/colors.gen.dart';
 import '../../../domain/entities/movie/movie/movie.dart';
 import '../../../presentation/_widgets/tag_container.dart';
 import '../../constants/imdb_image_constants.dart';
 import '../../extensions/int_extensions.dart';
-import '../buttons/base_icon_button.dart';
+import '../buttons/favorite_icon_button.dart';
 import '../indicator/base_indicator.dart';
 
-class MovieCard extends HookWidget {
+class MovieCard extends StatelessWidget {
   const MovieCard({
     super.key,
     required this.movie,
@@ -25,7 +25,7 @@ class MovieCard extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isLiked = useState<bool>(false);
+    final imageUrl = movie.posterPath != null ? IMDBImageConstants.original + movie.posterPath! : null;
 
     return GestureDetector(
       onTap: onTap,
@@ -33,16 +33,25 @@ class MovieCard extends HookWidget {
         borderRadius: BorderRadius.circular(24),
         child: Stack(
           children: [
-            CachedNetworkImage(
-              height: 325.h,
-              width: 200.w,
-              useOldImageOnUrlChange: true,
-              imageUrl: '${IMDBImageConstants.original}${movie.posterPath!}',
-              progressIndicatorBuilder: (_, __, ___) =>
-                  SizedBox(height: 325.h, child: const Center(child: BaseIndicator())),
-              errorWidget: (_, __, ___) => SizedBox(height: 325.h, child: const Center(child: BaseIndicator())),
-              fit: BoxFit.cover,
-            ),
+            if (imageUrl == null)
+              Container(
+                height: 325.h,
+                width: 200.w,
+                color: MGColors.grey,
+                alignment: const Alignment(0, -0.125),
+                child: const Icon(Icons.photo, color: MGColors.dark, size: 52),
+              )
+            else
+              CachedNetworkImage(
+                height: 325.h,
+                width: 200.w,
+                useOldImageOnUrlChange: true,
+                imageUrl: imageUrl,
+                progressIndicatorBuilder: (_, __, ___) =>
+                    SizedBox(height: 325.h, child: const Center(child: BaseIndicator())),
+                errorWidget: (_, __, ___) => SizedBox(height: 325.h, child: const Center(child: BaseIndicator())),
+                fit: BoxFit.cover,
+              ),
             SizedBox(
               height: 325.h,
               width: 200.w,
@@ -52,15 +61,7 @@ class MovieCard extends HookWidget {
                     flex: 5,
                     child: Align(
                       alignment: Alignment.topRight,
-                      child: Padding(
-                        padding: EdgeInsets.all(10.r),
-                        child: BaseIconButton(
-                          onPressed: () => isLiked.value = !isLiked.value,
-                          icon: isLiked.value
-                              ? Assets.icons.filledHeart.svg(color: Colors.white, width: 20)
-                              : Assets.icons.emptyHeart.svg(color: Colors.white, width: 20),
-                        ),
-                      ),
+                      child: FavoriteIconButton(onPressed: () async {}),
                     ),
                   ),
                   Expanded(
@@ -99,7 +100,7 @@ class MovieCard extends HookWidget {
                                             padding: EdgeInsets.symmetric(horizontal: 5.w),
                                             child: Row(
                                               children: [
-                                                Text('${movie.voteAverage!}',
+                                                Text(movie.voteAverage!.toString().substring(0, 3),
                                                     style: TextStyle(
                                                       fontWeight: FontWeight.w400,
                                                       color: Colors.white,

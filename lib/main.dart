@@ -7,14 +7,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'src/config/gen/colors.gen.dart';
+import 'src/config/observers/bloc_observer.dart';
 import 'src/config/router/app_router.dart';
-import 'src/config/router/navigator_observers.dart';
 import 'src/core/init/language/language_manager.dart';
 import 'src/core/theme/app_theme.dart';
 import 'src/injector.dart' as di;
-import 'src/presentation/bloc/movie_credit/movie_credit_bloc.dart';
-import 'src/presentation/bloc/movie_detail/movie_detail_bloc.dart';
-import 'src/presentation/bloc/movies/blocs.dart';
+import 'src/presentation/bloc/blocs.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +22,7 @@ void main() async {
 
   await di.init();
 
+  Bloc.observer = GlobalBlocObserver();
   runApp(const MainApp());
 }
 
@@ -35,7 +34,7 @@ class MainApp extends StatelessWidget {
       theme: MGAppTheme().theme,
       routerDelegate: AutoRouterDelegate(
         router,
-        navigatorObservers: () => [observer],
+        navigatorObservers: () => [NavigatorObserver()],
       ),
       routeInformationParser: router.defaultRouteParser(),
       debugShowCheckedModeBanner: false,
@@ -72,7 +71,6 @@ class MainApp extends StatelessWidget {
       BlocProvider(create: (_) => di.injector<PopularMoviesBloc>()),
       BlocProvider(create: (_) => di.injector<UpcomingMoviesBloc>()),
       BlocProvider(create: (_) => di.injector<NowPlayingMoviesBloc>()),
-      BlocProvider(create: (_) => di.injector<MovieDetailBloc>()),
       BlocProvider(create: (_) => di.injector<MovieCreditBloc>()),
     ], child: _localization(context));
   }

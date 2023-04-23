@@ -9,7 +9,7 @@ import '../../../core/components/card/movie_card.dart';
 import '../../../core/components/indicator/base_indicator.dart';
 import '../../../core/init/language/locale_keys.g.dart';
 import '../../bloc/movies/base_movie_bloc/base_movies_bloc.dart';
-import '../../bloc/movies/blocs.dart';
+import '../../bloc/movies/base_movie_blocs.dart';
 
 class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
   const MovieCategoryBlocWidget({super.key}) : assert(T is! BaseMoviesBloc, 'MUST BE EXTENDS BASEMOVIESBLOC');
@@ -42,11 +42,11 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
     return BlocBuilder<T, BaseMoviesState>(
       builder: (context, state) {
         if (state is BaseMoviesError) {
-          return SliverToBoxAdapter(
-            child: SizedBox(height: 325.h, child: Center(child: Text(state.message))),
-          );
+          return SliverToBoxAdapter(child: SizedBox(height: 325.h, child: Center(child: Text(state.message))));
         } else if (state is BaseMoviesHasData) {
           return _hasDataBody(title, context, state);
+        } else if (state is BaseMoviesEmpty) {
+          return SliverToBoxAdapter(child: Container());
         } else {
           return SliverToBoxAdapter(
             child: SizedBox(height: 325.h, child: const Center(child: BaseIndicator())),
@@ -60,7 +60,7 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
     return SliverList(
       delegate: SliverChildListDelegate(
         [
-          25.verticalSpace,
+          30.verticalSpace,
           _title(title, context),
           20.verticalSpace,
           _movies(state),
@@ -97,7 +97,7 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
       itemCount: state.movieList.length,
       itemBuilder: (context, index) => MovieCard(
         movie: state.movieList[index],
-        onTap: () async => router.push(MovieDetailRoute(movieID: state.movieList[index].id!.toString())),
+        onTap: () async => router.push(MovieBlocProviderRoute(movieID: state.movieList[index].id!.toString())),
       ),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
