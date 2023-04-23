@@ -67,7 +67,7 @@ class PopularCarouselBlocWidget extends HookWidget {
       itemCount: state.movieList.length,
       itemBuilder: (_, index, ___) => MovieCard(
         movie: state.movieList[index],
-        onTap: () async => router.push(MovieDetailRoute(
+        onTap: () async => router.push(MovieBlocProviderRoute(
           movieID: state.movieList[index].id!.toString(),
         )),
       ),

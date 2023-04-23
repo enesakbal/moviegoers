@@ -23,23 +23,38 @@ import '../bloc/movie_detail/movie_detail_bloc.dart';
 
 @RoutePage()
 class MovieDetailView extends HookWidget {
-  const MovieDetailView({super.key, required this.movieID});
+  const MovieDetailView({
+    super.key,
+    required this.movieID,
+    required this.movieDetailBloc,
+    required this.recommendationMoviesBloc,
+    required this.similiarMoviesBloc,
+    required this.movieCreditBloc,
+  });
 
   final String movieID;
+  final MovieDetailBloc movieDetailBloc;
+  final RecommendationMoviesBloc recommendationMoviesBloc;
+  final SimiliarMoviesBloc similiarMoviesBloc;
+  final MovieCreditBloc movieCreditBloc;
 
   @override
   Widget build(BuildContext context) {
     final isLiked = useState<bool>(false);
 
     useEffect(() {
-      context.read<MovieDetailBloc>().add(FetchMovieDetail(movieID));
-      context.read<MovieCreditBloc>().add(FetchMovieCredit(movieID));
+      movieDetailBloc.add(FetchMovieDetail(movieID));
+      recommendationMoviesBloc.add(FetchMovies(page: 1, movieID: movieID));
+      similiarMoviesBloc.add(FetchMovies(page: 1, movieID: movieID));
+      movieCreditBloc.add(FetchMovieCredit(movieID));
 
       return () {};
     }, []);
 
     return Scaffold(
+      key: key,
       body: BlocBuilder<MovieDetailBloc, MovieDetailState>(
+        bloc: movieDetailBloc,
         builder: (context, state) {
           if (state is MovieDetailError) {
             return SizedBox.expand(child: Center(child: Text(state.message)));
@@ -249,6 +264,7 @@ class MovieDetailView extends HookWidget {
 
   BlocBuilder<MovieCreditBloc, MovieCreditState> _credits() {
     return BlocBuilder<MovieCreditBloc, MovieCreditState>(
+      bloc: movieCreditBloc,
       builder: (context, state) {
         if (state is MovieCreditHasData) {
           return SizedBox(
@@ -284,6 +300,7 @@ class MovieDetailView extends HookWidget {
 
   Widget _recommandations() {
     return BlocBuilder<RecommendationMoviesBloc, BaseMoviesState>(
+      bloc: recommendationMoviesBloc,
       builder: (context, state) {
         if (state is BaseMoviesHasData) {
           return Column(
@@ -335,6 +352,7 @@ class MovieDetailView extends HookWidget {
 
   Widget _similiars() {
     return BlocBuilder<SimiliarMoviesBloc, BaseMoviesState>(
+      bloc: similiarMoviesBloc,
       builder: (context, state) {
         if (state is BaseMoviesHasData) {
           return Column(

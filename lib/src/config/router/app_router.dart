@@ -1,14 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../presentation/_widgets/movie_detail/movie_bloc_provider_widget.dart';
 import '../../presentation/view/_project_components_view.dart';
 import '../../presentation/view/home_view.dart';
-import '../../presentation/view/movie_detail_view.dart';
 import '../../presentation/view/splash_view.dart';
 
 part 'app_router.gr.dart';
 
-@AutoRouterConfig(replaceInRouteName: 'View,Route')
+@AutoRouterConfig(replaceInRouteName: 'View|Widget,Route')
 class AppRouter extends _$AppRouter {
   @override
   final List<AutoRoute> routes = [
@@ -21,7 +21,7 @@ class AppRouter extends _$AppRouter {
       transitionsBuilder: TransitionsBuilders.zoomIn,
     ),
     CustomRoute(
-      page: MovieDetailRoute.page,
+      page: MovieBlocProviderRoute.page,
       path: '/movie_detail',
       durationInMilliseconds: 500,
       reverseDurationInMilliseconds: 500,

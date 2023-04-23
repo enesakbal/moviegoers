@@ -97,7 +97,7 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
       itemCount: state.movieList.length,
       itemBuilder: (context, index) => MovieCard(
         movie: state.movieList[index],
-        onTap: () async => router.push(MovieDetailRoute(movieID: state.movieList[index].id!.toString())),
+        onTap: () async => router.push(MovieBlocProviderRoute(movieID: state.movieList[index].id!.toString())),
       ),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
