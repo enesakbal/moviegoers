@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class LanguageManager {
   final enLocale = const Locale('en', 'US');
 
-
   static Locale? currentLocale;
 
   static Locale? localeResolutionCallback(
@@ -23,6 +22,5 @@ class LanguageManager {
 
   List<Locale> get supportedLocales => [
         enLocale,
-      
       ];
 }

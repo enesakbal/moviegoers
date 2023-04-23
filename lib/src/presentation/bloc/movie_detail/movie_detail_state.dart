@@ -32,7 +32,6 @@ class MovieDetailHasData extends MovieDetailState {
   @override
   List<Object> get props => [movieDetail];
 
-
   @override
   String toString() => 'MovieDetailHasData()';
 }

@@ -32,6 +32,6 @@ class MovieCreditHasData extends MovieCreditState {
   @override
   List<Object> get props => [movieCredit];
 
-    @override
+  @override
   String toString() => 'MovieCreditHasData()';
 }
