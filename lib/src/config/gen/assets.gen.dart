@@ -90,11 +90,17 @@ class $AssetsIconsGen {
   /// File path: assets/icons/filled_heart.svg
   SvgGenImage get filledHeart => const SvgGenImage('assets/icons/filled_heart.svg');
 
+  /// File path: assets/icons/film_camera.svg
+  SvgGenImage get filmCamera => const SvgGenImage('assets/icons/film_camera.svg');
+
   /// File path: assets/icons/left_arrow.svg
   SvgGenImage get leftArrow => const SvgGenImage('assets/icons/left_arrow.svg');
 
   /// File path: assets/icons/menu.svg
   SvgGenImage get menu => const SvgGenImage('assets/icons/menu.svg');
+
+  /// File path: assets/icons/play.svg
+  SvgGenImage get play => const SvgGenImage('assets/icons/play.svg');
 
   /// File path: assets/icons/right_arrow.svg
   SvgGenImage get rightArrow => const SvgGenImage('assets/icons/right_arrow.svg');
@@ -110,7 +116,7 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<SvgGenImage> get values =>
-      [alert, close, emptyHeart, filledHeart, leftArrow, menu, rightArrow, settings, share, star];
+      [alert, close, emptyHeart, filledHeart, filmCamera, leftArrow, menu, play, rightArrow, settings, share, star];
 }
 
 class Assets {
