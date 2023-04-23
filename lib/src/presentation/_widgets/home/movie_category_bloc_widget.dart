@@ -42,11 +42,11 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
     return BlocBuilder<T, BaseMoviesState>(
       builder: (context, state) {
         if (state is BaseMoviesError) {
-          return SliverToBoxAdapter(
-            child: SizedBox(height: 325.h, child: Center(child: Text(state.message))),
-          );
+          return SliverToBoxAdapter(child: SizedBox(height: 325.h, child: Center(child: Text(state.message))));
         } else if (state is BaseMoviesHasData) {
           return _hasDataBody(title, context, state);
+        } else if (state is BaseMoviesEmpty) {
+          return SliverToBoxAdapter(child: SizedBox(height: 325.h, child: Center(child: Text(state.message))));
         } else {
           return SliverToBoxAdapter(
             child: SizedBox(height: 325.h, child: const Center(child: BaseIndicator())),

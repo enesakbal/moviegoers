@@ -31,6 +31,8 @@ class PopularCarouselBlocWidget extends HookWidget {
                 20.verticalSpace,
                 Center(child: Text(state.message, style: Theme.of(context).textTheme.titleSmall)),
                 20.verticalSpace,
+              ] else if (state is BaseMoviesEmpty) ...[
+                Container()
               ] else ...[
                 Column(
                   children: [
