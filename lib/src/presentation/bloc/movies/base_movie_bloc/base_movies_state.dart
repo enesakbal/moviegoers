@@ -40,4 +40,7 @@ class BaseMoviesHasData extends BaseMoviesState {
 
   @override
   List<Object> get props => [movieList];
+
+  @override
+  String toString() => 'BaseMoviesHasData()';
 }
