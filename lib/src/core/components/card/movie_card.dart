@@ -10,7 +10,7 @@ import '../../../domain/entities/movie/movie/movie.dart';
 import '../../../presentation/_widgets/tag_container.dart';
 import '../../constants/imdb_image_constants.dart';
 import '../../extensions/int_extensions.dart';
-import '../buttons/base_icon_button.dart';
+import '../buttons/favorite_icon_button.dart';
 import '../indicator/base_indicator.dart';
 
 class MovieCard extends HookWidget {
@@ -52,15 +52,7 @@ class MovieCard extends HookWidget {
                     flex: 5,
                     child: Align(
                       alignment: Alignment.topRight,
-                      child: Padding(
-                        padding: EdgeInsets.all(10.r),
-                        child: BaseIconButton(
-                          onPressed: () => isLiked.value = !isLiked.value,
-                          icon: isLiked.value
-                              ? Assets.icons.filledHeart.svg(color: Colors.white, width: 20)
-                              : Assets.icons.emptyHeart.svg(color: Colors.white, width: 20),
-                        ),
-                      ),
+                      child: FavoriteIconButton(onPressed: () async {}),
                     ),
                   ),
                   Expanded(

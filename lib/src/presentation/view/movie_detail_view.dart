@@ -12,6 +12,7 @@ import '../../config/gen/colors.gen.dart';
 import '../../config/router/app_router.dart';
 import '../../core/components/buttons/base_button.dart';
 import '../../core/components/buttons/base_icon_button.dart';
+import '../../core/components/buttons/favorite_icon_button.dart';
 import '../../core/components/card/actor_card.dart';
 import '../../core/components/indicator/base_indicator.dart';
 import '../../core/constants/imdb_image_constants.dart';
@@ -138,15 +139,7 @@ class MovieDetailView extends HookWidget {
                 icon: Assets.icons.leftArrow.svg(color: Colors.white, width: 20),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(10.r),
-              child: BaseIconButton(
-                onPressed: () => isLiked.value = !isLiked.value,
-                icon: isLiked.value
-                    ? Assets.icons.filledHeart.svg(color: Colors.white, width: 20)
-                    : Assets.icons.emptyHeart.svg(color: Colors.white, width: 20),
-              ),
-            ),
+            FavoriteIconButton(onPressed: () async {}),
           ],
         ),
       ],
