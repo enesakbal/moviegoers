@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -14,15 +13,15 @@ import '../../core/components/buttons/base_button.dart';
 import '../../core/components/buttons/base_icon_button.dart';
 import '../../core/components/buttons/favorite_icon_button.dart';
 import '../../core/components/card/actor_card.dart';
+import '../../core/components/card/movie_card.dart';
 import '../../core/components/indicator/base_indicator.dart';
 import '../../core/constants/imdb_image_constants.dart';
 import '../../core/extensions/int_extensions.dart';
+import '../../core/init/language/locale_keys.g.dart';
 import '../../domain/entities/movie/movie_detail/movie_detail.dart';
 import '../_widgets/tag_container.dart';
-import '../bloc/movie_credit/movie_credit_bloc.dart';
-import '../bloc/movie_detail/movie_detail_bloc.dart';
+import '../bloc/blocs.dart';
 
-@RoutePage()
 class MovieDetailView extends HookWidget {
   const MovieDetailView({
     super.key,
@@ -41,8 +40,6 @@ class MovieDetailView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isLiked = useState<bool>(false);
-
     useEffect(() {
       movieDetailBloc.add(FetchMovieDetail(movieID));
       recommendationMoviesBloc.add(FetchMovies(page: 1, movieID: movieID));
@@ -60,21 +57,21 @@ class MovieDetailView extends HookWidget {
           if (state is MovieDetailError) {
             return SizedBox.expand(child: Center(child: Text(state.message)));
           } else if (state is MovieDetailHasData) {
-            return _hasDataBody(state.movieDetail, isLiked, context);
+            return _hasDataBody(state.movieDetail, context);
           } else {
-            return SizedBox(height: 325.h, child: const Center(child: BaseIndicator()));
+            return const SafeArea(child: SizedBox(child: Center(child: BaseIndicator())));
           }
         },
       ),
     );
   }
 
-  Widget _hasDataBody(MovieDetail data, ValueNotifier<bool> isLiked, BuildContext context) {
+  Widget _hasDataBody(MovieDetail data, BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _image(data, isLiked),
+          _image(data, context),
           _titleAndInfos(data, context),
           15.verticalSpace,
           _tags(data),
@@ -96,39 +93,53 @@ class MovieDetailView extends HookWidget {
     );
   }
 
-  Stack _image(MovieDetail data, ValueNotifier<bool> isLiked) {
+  Stack _image(MovieDetail data, BuildContext context) {
     return Stack(
       children: [
-        if (data.backdropPath != null) ...[
+        if (data.backdropPath != null)
           CachedNetworkImage(
             fit: BoxFit.fitHeight,
             imageUrl: '${IMDBImageConstants.original}${data.backdropPath}',
             height: 325.h,
             errorWidget: (context, url, error) => Container(),
+          )
+        else if (data.posterPath != null)
+          CachedNetworkImage(
+            fit: BoxFit.fitWidth,
+            imageUrl: '${IMDBImageConstants.original}${data.posterPath}',
+            height: 325.h,
+            width: 1.sw,
+            errorWidget: (context, url, error) => Container(),
+          )
+        else
+          Container(
+            height: 325.h,
+            color: MGColors.grey,
+            alignment: Alignment.center,
+            child: const Icon(Icons.photo, color: MGColors.dark, size: 52),
           ),
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  stops: const [
-                    0.2,
-                    0.4,
-                    0.7,
-                    0.8,
-                    0.9,
-                    1,
-                  ],
-                  colors: [
-                    ...List.generate(5, (index) => Colors.transparent.withOpacity(0)),
-                    MGColors.dark.withOpacity(1),
-                  ],
-                ),
+        Positioned.fill(
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: const [
+                  0.2,
+                  0.4,
+                  0.7,
+                  0.8,
+                  0.9,
+                  1,
+                ],
+                colors: [
+                  ...List.generate(5, (index) => Colors.transparent.withOpacity(0)),
+                  MGColors.dark.withOpacity(1),
+                ],
               ),
             ),
           ),
-        ],
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -152,7 +163,7 @@ class MovieDetailView extends HookWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(data.originalTitle!, style: Theme.of(context).textTheme.titleMedium),
+          Text(data.title!, style: Theme.of(context).textTheme.titleMedium),
           10.verticalSpace,
           SizedBox(
             width: 0.5.sw,
@@ -172,8 +183,11 @@ class MovieDetailView extends HookWidget {
                 5.horizontalSpace,
                 Text('·', style: Theme.of(context).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w900)),
                 5.horizontalSpace,
-                Text(DateFormat('yyyy').format(DateTime.parse(data.releaseDate!)),
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 16)),
+                if (DateTime.tryParse(data.releaseDate!) != null)
+                  Text(DateFormat('yyyy').format(DateTime.tryParse(data.releaseDate!)!),
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 16))
+                else
+                  Text('?', style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 16)),
               ],
             ),
           ),
@@ -226,11 +240,7 @@ class MovieDetailView extends HookWidget {
               outline: true,
               isDark: true,
               foregroundColor: MGColors.grey,
-              icon: Icon(
-                Icons.download,
-                size: 24,
-                color: MGColors.grey.shade50,
-              ),
+              icon: Assets.icons.filmCamera.svg(color: Colors.white, height: 24),
               onPressed: () {},
             ),
           ),
