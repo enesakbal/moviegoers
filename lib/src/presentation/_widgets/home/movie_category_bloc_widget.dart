@@ -46,7 +46,7 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
         } else if (state is BaseMoviesHasData) {
           return _hasDataBody(title, context, state);
         } else if (state is BaseMoviesEmpty) {
-          return SliverToBoxAdapter(child: SizedBox(height: 325.h, child: Center(child: Text(state.message))));
+          return SliverToBoxAdapter(child: Container());
         } else {
           return SliverToBoxAdapter(
             child: SizedBox(height: 325.h, child: const Center(child: BaseIndicator())),
@@ -60,7 +60,7 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
     return SliverList(
       delegate: SliverChildListDelegate(
         [
-          25.verticalSpace,
+          30.verticalSpace,
           _title(title, context),
           20.verticalSpace,
           _movies(state),
