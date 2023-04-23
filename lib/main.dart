@@ -24,6 +24,7 @@ void main() async {
 
   await di.init();
 
+  Bloc.observer = GlobalBlocObserver();
   runApp(const MainApp());
 }
 
@@ -35,7 +36,7 @@ class MainApp extends StatelessWidget {
       theme: MGAppTheme().theme,
       routerDelegate: AutoRouterDelegate(
         router,
-        navigatorObservers: () => [observer],
+        navigatorObservers: () => [NavigatorObserver()],
       ),
       routeInformationParser: router.defaultRouteParser(),
       debugShowCheckedModeBanner: false,
