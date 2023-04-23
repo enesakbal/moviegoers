@@ -23,10 +23,10 @@ class MGAppTheme {
         fontWeight: FontWeight.w600,
       ),
       titleSmall: TextStyle(
-        color: MGColors.grey,
+        color: MGColors.grey.shade300,
         fontFamily: Assets.fonts.apercuProBold,
-        fontSize: 12.sp,
-        fontWeight: FontWeight.w500,
+        fontSize: 13.sp,
+        fontWeight: FontWeight.w400,
       ),
       bodyMedium: TextStyle(
         color: MGColors.grey.shade300,
