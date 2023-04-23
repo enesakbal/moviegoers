@@ -3,6 +3,8 @@
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
+import 'error_model/error_model.dart';
+
 /// It takes a DioError object and returns a custom error message
 class NetworkExceptions extends Equatable implements Exception {
   NetworkExceptions.fromDioError(DioError dioError) {
@@ -17,13 +19,6 @@ class NetworkExceptions extends Equatable implements Exception {
 
       case DioErrorType.receiveTimeout:
         message = 'Receive timeout in connection with API server';
-        break;
-
-      case DioErrorType.badResponse:
-        message = _handleError(
-          dioError.response?.statusCode,
-          dioError.response?.data,
-        );
         break;
 
       case DioErrorType.sendTimeout:
@@ -41,6 +36,10 @@ class NetworkExceptions extends Equatable implements Exception {
 
       case DioErrorType.badCertificate:
         message = 'Bad Certificate';
+        break;
+
+      case DioErrorType.badResponse:
+        message = ErrorModel.fromJson(dioError.response?.data as Map<String, dynamic>).statusMessage!;
         break;
 
       case DioErrorType.unknown:
