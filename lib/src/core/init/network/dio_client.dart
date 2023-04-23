@@ -4,7 +4,6 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
-import 'package:logging/logging.dart' as logging;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../constants/app_constants.dart';
@@ -25,10 +24,7 @@ class DioClient {
       ..options.receiveTimeout = const Duration(milliseconds: receiveTimeout)
       ..options.responseType = ResponseType.json
       ..interceptors.add(
-        PrettyDioLogger(
-          compact: false,
-          logPrint: (object) => logging.Logger('DIO CLIENT').fine(object),
-        ),
+        PrettyDioLogger(compact: false, logPrint: (object) => log(object.toString(), name: 'api')),
       )
       ..interceptors.add(
         RetryInterceptor(
