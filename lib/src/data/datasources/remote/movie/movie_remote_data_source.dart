@@ -7,6 +7,7 @@ import '../../../models/movie/movie_lists/popular/popular_movies_model.dart';
 import '../../../models/movie/movie_lists/recommendation/recommendation_movies_model.dart';
 import '../../../models/movie/movie_lists/similiar/similiar_movies_model.dart';
 import '../../../models/movie/movie_lists/upcoming/upcoming_movies_model.dart';
+import '../../../models/movie/movie_provider/movie_provider_model.dart';
 import '../../../models/movie/movie_video/movie_video_model.dart';
 
 abstract class MovieRemoteDataSource {
@@ -21,6 +22,8 @@ abstract class MovieRemoteDataSource {
   Future<MovieCreditModel> getMovieCredits({required String movieID});
 
   Future<MovieExternalIdModel> getMovieExternalIDs({required String movieID});
+
+  Future<MovieProviderModel> getMovieProviders({required String movieID});
 
   Future<MovieVideoModel> getMovieVideos({required String movieID});
 

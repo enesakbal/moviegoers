@@ -20,8 +20,10 @@ class MovieVideoModel extends Equatable {
 
   Map<String, dynamic> toJson() => _$MovieVideoModelToJson(this);
 
-  MovieVideo toEntity() =>
-      MovieVideo(id: id, movieVideDetails: movieVideoDetailList!.map((e) => e.toEntity()).toList());
+  MovieVideo toEntity() => MovieVideo(
+      id: id,
+      movieVideDetails:
+          movieVideoDetailList!.map((e) => e.toEntity()).toList());
 
   @override
   List<Object?> get props => [id, movieVideoDetailList];
