@@ -17,6 +17,7 @@ import 'package:moviegoers/src/data/models/movie/movie_lists/popular/popular_mov
 import 'package:moviegoers/src/data/models/movie/movie_lists/recommendation/recommendation_movies_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_lists/similiar/similiar_movies_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_lists/upcoming/upcoming_movies_model.dart';
+import 'package:moviegoers/src/data/models/movie/movie_provider/movie_provider_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_video/movie_video_model.dart';
 
 void main() {
@@ -89,6 +90,12 @@ void main() {
     test('getMovieExternalIDs should return MovieExternalIdModel', () async {
       final response = await dataSource.getMovieExternalIDs(movieID: tMovieID);
       expect(response, isA<MovieExternalIdModel>());
+    });
+
+    test('getMovieProviders should return MovieProviderModel', () async {
+      final response = await dataSource.getMovieProviders(movieID: tMovieID);
+     
+      expect(response, isA<MovieProviderModel>());
     });
 
     test('getMovieVideos should return MovieVideoModel', () async {
