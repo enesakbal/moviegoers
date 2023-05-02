@@ -11,6 +11,7 @@ import '../entities/movie/movie_list/recommendation_movies.dart';
 import '../entities/movie/movie_list/similiar_movies.dart';
 import '../entities/movie/movie_list/upcoming_movies.dart';
 import '../entities/movie/movie_video/movie_video.dart';
+import '../entities/movie_provider/movie_provider.dart';
 import '../repositories/movie_repository.dart';
 
 class MovieUsecase {
@@ -54,6 +55,10 @@ class MovieUsecase {
 
   Future<Either<NetworkExceptions, SimiliarMovies>> getMovieSimilars({required String movieID, required int page}) {
     return repository.getMovieSimilars(movieID: movieID, page: page);
+  }
+
+  Future<Either<NetworkExceptions, MovieProvider>> getMovieProviders({required String movieID}) {
+    return repository.getMovieProviders(movieID: movieID);
   }
 
   //  Future<Either<NetworkExceptions, MovieExternalId>> rateMovie({required String movieID}) {

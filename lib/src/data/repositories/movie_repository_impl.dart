@@ -11,6 +11,7 @@ import '../../domain/entities/movie/movie_list/recommendation_movies.dart';
 import '../../domain/entities/movie/movie_list/similiar_movies.dart';
 import '../../domain/entities/movie/movie_list/upcoming_movies.dart';
 import '../../domain/entities/movie/movie_video/movie_video.dart';
+import '../../domain/entities/movie_provider/movie_provider.dart';
 import '../../domain/repositories/movie_repository.dart';
 import '../datasources/remote/movie/movie_remote_data_source.dart';
 
@@ -126,6 +127,18 @@ class MovieRepositoryImpl extends MovieRepository {
       final movieList = result.toEntity();
 
       return Right(movieList);
+    } on DioError catch (e) {
+      return Left(NetworkExceptions.fromDioError(e));
+    }
+  }
+
+  @override
+  Future<Either<NetworkExceptions, MovieProvider>> getMovieProviders({required String movieID}) async {
+    try {
+      final result = await dataSource.getMovieProviders(movieID: movieID);
+      final providers = result.toEntity();
+
+      return Right(providers);
     } on DioError catch (e) {
       return Left(NetworkExceptions.fromDioError(e));
     }
