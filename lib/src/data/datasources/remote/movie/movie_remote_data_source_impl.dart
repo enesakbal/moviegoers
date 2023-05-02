@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '../../../../core/constants/url_constants.dart';
 import '../../../../core/init/network/dio_client.dart';
 import '../../../models/movie/movie_credit/movie_credit_model.dart';
@@ -8,6 +10,7 @@ import '../../../models/movie/movie_lists/popular/popular_movies_model.dart';
 import '../../../models/movie/movie_lists/recommendation/recommendation_movies_model.dart';
 import '../../../models/movie/movie_lists/similiar/similiar_movies_model.dart';
 import '../../../models/movie/movie_lists/upcoming/upcoming_movies_model.dart';
+import '../../../models/movie/movie_provider/movie_provider_model.dart';
 import '../../../models/movie/movie_video/movie_video_model.dart';
 import 'movie_remote_data_source.dart';
 
@@ -82,6 +85,20 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
       final movieList = MovieExternalIdModel.fromJson(response.data as Map<String, dynamic>);
 
       return movieList;
+    } on Exception catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<MovieProviderModel> getMovieProviders({required String movieID}) async {
+    try {
+      final response = await dioClient.get(UrlContants.movieProviders.replaceAll('{movie_id}', movieID));
+      log(((response.data as Map<String, dynamic>)['results'] as Map<String, dynamic>).length.toString());
+
+      final movieProviderList = MovieProviderModel.fromJson(response.data as Map<String, dynamic>);
+
+      return movieProviderList;
     } on Exception catch (_) {
       rethrow;
     }
