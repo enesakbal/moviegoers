@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../../domain/entities/movie_provider/results.dart';
+import '../../../../domain/entities/movie_provider/results_entity.dart';
 import 'lang/_export.dart';
 
 part 'results_model.g.dart';
@@ -71,7 +71,7 @@ class ResultsModel extends Equatable {
     ];
   }
 
-  Results toEntity() => Results(
+  ResultsEntity toEntity() => ResultsEntity(
         cn: ca!.toEntity(),
         de: de!.toEntity(),
         us: us!.toEntity(),
