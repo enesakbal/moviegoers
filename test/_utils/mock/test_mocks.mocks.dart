@@ -10,7 +10,7 @@ import 'package:mockito/mockito.dart' as _i1;
 import 'package:moviegoers/src/core/init/network/network_exception.dart'
     as _i15;
 import 'package:moviegoers/src/data/datasources/remote/movie/movie_remote_data_source.dart'
-    as _i25;
+    as _i26;
 import 'package:moviegoers/src/data/models/movie/movie_credit/movie_credit_model.dart'
     as _i7;
 import 'package:moviegoers/src/data/models/movie/movie_detail/movie_detail_model.dart'
@@ -49,6 +49,8 @@ import 'package:moviegoers/src/domain/entities/movie/movie_list/upcoming_movies.
     as _i18;
 import 'package:moviegoers/src/domain/entities/movie/movie_video/movie_video.dart'
     as _i22;
+import 'package:moviegoers/src/domain/entities/movie_provider/movie_provider.dart'
+    as _i25;
 import 'package:moviegoers/src/domain/repositories/movie_repository.dart'
     as _i13;
 
@@ -397,13 +399,34 @@ class MockMovieRepository extends _i1.Mock implements _i13.MovieRepository {
             )),
           ) as _i14
               .Future<_i2.Either<_i15.NetworkExceptions, _i24.SimiliarMovies>>);
+  @override
+  _i14.Future<
+      _i2.Either<_i15.NetworkExceptions, _i25.MovieProvider>> getMovieProviders(
+          {required String? movieID}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getMovieProviders,
+          [],
+          {#movieID: movieID},
+        ),
+        returnValue: _i14.Future<
+                _i2.Either<_i15.NetworkExceptions, _i25.MovieProvider>>.value(
+            _FakeEither_0<_i15.NetworkExceptions, _i25.MovieProvider>(
+          this,
+          Invocation.method(
+            #getMovieProviders,
+            [],
+            {#movieID: movieID},
+          ),
+        )),
+      ) as _i14.Future<_i2.Either<_i15.NetworkExceptions, _i25.MovieProvider>>);
 }
 
 /// A class which mocks [MovieRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockMovieRemoteDataSource extends _i1.Mock
-    implements _i25.MovieRemoteDataSource {
+    implements _i26.MovieRemoteDataSource {
   MockMovieRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }

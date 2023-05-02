@@ -12,6 +12,7 @@ import 'package:moviegoers/src/data/models/movie/movie_lists/popular/popular_mov
 import 'package:moviegoers/src/data/models/movie/movie_lists/recommendation/recommendation_movies_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_lists/similiar/similiar_movies_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_lists/upcoming/upcoming_movies_model.dart';
+import 'package:moviegoers/src/data/models/movie/movie_provider/movie_provider_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_video/movie_video_model.dart';
 import 'package:moviegoers/src/domain/entities/movie/movie_credit/movie_credit.dart';
 import 'package:moviegoers/src/domain/entities/movie/movie_detail/movie_detail.dart';
@@ -22,6 +23,7 @@ import 'package:moviegoers/src/domain/entities/movie/movie_list/recommendation_m
 import 'package:moviegoers/src/domain/entities/movie/movie_list/similiar_movies.dart';
 import 'package:moviegoers/src/domain/entities/movie/movie_list/upcoming_movies.dart';
 import 'package:moviegoers/src/domain/entities/movie/movie_video/movie_video.dart';
+import 'package:moviegoers/src/domain/entities/movie_provider/movie_provider.dart';
 import 'package:moviegoers/src/domain/usecases/movie_usecase.dart';
 
 import '../../_utils/json_reader.dart';
@@ -33,6 +35,7 @@ void main() {
   late Map<String, dynamic> externalId;
   late Map<String, dynamic> movieDetail;
   late Map<String, dynamic> movieVideo;
+  late Map<String, dynamic> movieProvider;
 
   late PopularMovies tPopularMoviesEntity;
   late NowPlayingMovies tNowPlayingMoviesEntity;
@@ -44,6 +47,7 @@ void main() {
   late MovieCredit tMovieCreditEntity;
   late MovieExternalId tMovieExternalIdEntity;
   late MovieVideo tMovieVideoEntity;
+  late MovieProvider tMovieProviderEntity;
 
   late MockMovieRepository mockMovieRepository;
   late MovieUsecase usecase;
@@ -56,6 +60,7 @@ void main() {
     externalId = readJson('movie_external_id_dummy_data.json') as Map<String, dynamic>;
     movieDetail = readJson('movie_detail_dummy_data.json') as Map<String, dynamic>;
     movieVideo = readJson('movie_video_dummy_data.json') as Map<String, dynamic>;
+    movieProvider = readJson('movie_provider_dummy_data.json') as Map<String, dynamic>;
 
     //* fake data
     tPopularMoviesEntity = PopularMoviesModel.fromJson(movieList).toEntity();
@@ -67,6 +72,7 @@ void main() {
     tMovieCreditEntity = MovieCreditModel.fromJson(movieCredit).toEntity();
     tMovieExternalIdEntity = MovieExternalIdModel.fromJson(externalId).toEntity();
     tMovieVideoEntity = MovieVideoModel.fromJson(movieVideo).toEntity();
+    tMovieProviderEntity = MovieProviderModel.fromJson(movieProvider).toEntity();
 
     //* mock
     mockMovieRepository = MockMovieRepository();
@@ -133,5 +139,12 @@ void main() {
 
     final result = await usecase.getMovieVideos(movieID: '550');
     expect(result, Right<dynamic, MovieVideo>(tMovieVideoEntity));
+  });
+
+  test('Provider', () async {
+    when(mockMovieRepository.getMovieProviders(movieID: '550')).thenAnswer((_) async => Right(tMovieProviderEntity));
+
+    final result = await usecase.getMovieProviders(movieID: '550');
+    expect(result, Right<dynamic, MovieProvider>(tMovieProviderEntity));
   });
 }
