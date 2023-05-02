@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../domain/entities/movie_provider/provider_entity.dart';
+
 part 'provider_model.g.dart';
 
 @JsonSerializable()
@@ -21,8 +23,7 @@ class ProviderModel extends Equatable {
     this.providerName,
   });
 
-  factory ProviderModel.fromJson(Map<String, dynamic> json) =>
-      _$ProviderModelFromJson(json);
+  factory ProviderModel.fromJson(Map<String, dynamic> json) => _$ProviderModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProviderModelToJson(this);
 
@@ -35,4 +36,11 @@ class ProviderModel extends Equatable {
       providerName,
     ];
   }
+
+  ProviderEntity toEntity() => ProviderEntity(
+        displayPriority: displayPriority,
+        logoPath: logoPath,
+        providerId: providerId,
+        providerName: providerName,
+      );
 }

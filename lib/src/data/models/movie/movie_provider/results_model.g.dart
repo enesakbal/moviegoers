@@ -7,7 +7,7 @@ part of 'results_model.dart';
 // **************************************************************************
 
 ResultsModel _$ResultsModelFromJson(Map<String, dynamic> json) => ResultsModel(
-      cn: json['CA'] == null
+      ca: json['CA'] == null
           ? null
           : ModelCA.fromJson(json['CA'] as Map<String, dynamic>),
       de: json['DE'] == null
@@ -40,11 +40,14 @@ ResultsModel _$ResultsModelFromJson(Map<String, dynamic> json) => ResultsModel(
       tr: json['TR'] == null
           ? null
           : ModelTR.fromJson(json['TR'] as Map<String, dynamic>),
+      ru: json['RU'] == null
+          ? null
+          : ModelRU.fromJson(json['RU'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ResultsModelToJson(ResultsModel instance) =>
     <String, dynamic>{
-      'CA': instance.cn,
+      'CA': instance.ca,
       'DE': instance.de,
       'US': instance.us,
       'ES': instance.es,
@@ -55,4 +58,5 @@ Map<String, dynamic> _$ResultsModelToJson(ResultsModel instance) =>
       'JP': instance.jp,
       'KR': instance.kr,
       'TR': instance.tr,
+      'RU': instance.ru,
     };

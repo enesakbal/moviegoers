@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../../../domain/entities/movie_provider/results.dart';
 import 'lang/_export.dart';
 
 part 'results_model.g.dart';
@@ -8,7 +9,7 @@ part 'results_model.g.dart';
 @JsonSerializable()
 class ResultsModel extends Equatable {
   @JsonKey(name: 'CA')
-  final ModelCA? cn;
+  final ModelCA? ca;
   @JsonKey(name: 'DE')
   final ModelDE? de;
   @JsonKey(name: 'US')
@@ -29,8 +30,10 @@ class ResultsModel extends Equatable {
   final ModelKR? kr;
   @JsonKey(name: 'TR')
   final ModelTR? tr;
+  @JsonKey(name: 'RU')
+  final ModelRU? ru;
   const ResultsModel({
-    this.cn,
+    this.ca,
     this.de,
     this.us,
     this.es,
@@ -41,6 +44,7 @@ class ResultsModel extends Equatable {
     this.jp,
     this.kr,
     this.tr,
+    this.ru,
   });
 
   factory ResultsModel.fromJson(Map<String, dynamic> json) {
@@ -52,7 +56,7 @@ class ResultsModel extends Equatable {
   @override
   List<Object?> get props {
     return [
-      cn,
+      ca,
       de,
       us,
       es,
@@ -63,6 +67,22 @@ class ResultsModel extends Equatable {
       jp,
       kr,
       tr,
+      ru,
     ];
   }
+
+  Results toEntity() => Results(
+        cn: ca!.toEntity(),
+        de: de!.toEntity(),
+        us: us!.toEntity(),
+        es: es!.toEntity(),
+        fr: fr!.toEntity(),
+        gb: gb!.toEntity(),
+        ind: ind!.toEntity(),
+        it: it!.toEntity(),
+        jp: jp!.toEntity(),
+        kr: kr!.toEntity(),
+        tr: tr!.toEntity(),
+        ru: ru!.toEntity(),
+      );
 }

@@ -10,5 +10,3 @@ export 'model_kr.dart';
 export 'model_ru.dart';
 export 'model_tr.dart';
 export 'model_us.dart';
-
-//TODO BUNLAR ULKE OLMALI DIL DEĞİL
