@@ -1,0 +1,27 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'model_de.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+ModelDE _$ModelDEFromJson(Map<String, dynamic> json) => ModelDE(
+      link: json['link'] as String?,
+      rent: (json['rent'] as List<dynamic>?)
+          ?.map((e) => ProviderModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      flatrate: (json['flatrate'] as List<dynamic>?)
+          ?.map((e) => ProviderModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      buy: (json['buy'] as List<dynamic>?)
+          ?.map((e) => ProviderModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$ModelDEToJson(ModelDE instance) => <String, dynamic>{
+      'link': instance.link,
+      'rent': instance.rent,
+      'flatrate': instance.flatrate,
+      'buy': instance.buy,
+    };
