@@ -1,28 +1,28 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../../../domain/entities/movie_provider/lang/_export.dart';
+import '../../../../../domain/entities/movie_provider/country/_export.dart';
 import '../provider_model.dart';
 
-part 'model_de.g.dart';
+part 'model_fr.g.dart';
 
 @JsonSerializable()
-class ModelDE extends Equatable {
+class ModelFR extends Equatable {
   final String? link;
   final List<ProviderModel>? rent;
   final List<ProviderModel>? flatrate;
   final List<ProviderModel>? buy;
 
-  const ModelDE({this.link, this.rent, this.flatrate, this.buy});
+  const ModelFR({this.link, this.rent, this.flatrate, this.buy});
 
-  factory ModelDE.fromJson(Map<String, dynamic> json) => _$ModelDEFromJson(json);
+  factory ModelFR.fromJson(Map<String, dynamic> json) => _$ModelFRFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ModelDEToJson(this);
+  Map<String, dynamic> toJson() => _$ModelFRToJson(this);
 
   @override
   List<Object?> get props => [link, rent, flatrate, buy];
 
-  DE toEntity() => DE(
+  FR toEntity() => FR(
         link: link,
         rent: rent == null ? null : rent!.map((e) => e.toEntity()).toList(),
         flatrate: flatrate == null ? null : flatrate!.map((e) => e.toEntity()).toList(),

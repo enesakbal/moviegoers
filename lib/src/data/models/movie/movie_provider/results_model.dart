@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../domain/entities/movie_provider/results_entity.dart';
-import 'lang/_export.dart';
+import 'country/_export.dart';
 
 part 'results_model.g.dart';
 
@@ -72,17 +72,17 @@ class ResultsModel extends Equatable {
   }
 
   ResultsEntity toEntity() => ResultsEntity(
-        cn: ca!.toEntity(),
-        de: de!.toEntity(),
-        us: us!.toEntity(),
-        es: es!.toEntity(),
-        fr: fr!.toEntity(),
-        gb: gb!.toEntity(),
-        ind: ind!.toEntity(),
-        it: it!.toEntity(),
-        jp: jp!.toEntity(),
-        kr: kr!.toEntity(),
-        tr: tr!.toEntity(),
-        ru: ru!.toEntity(),
+        ca: ca == null ? null : ca!.toEntity(),
+        de: de == null ? null : de!.toEntity(),
+        us: us == null ? null : us!.toEntity(),
+        es: es == null ? null : es!.toEntity(),
+        fr: fr == null ? null : fr!.toEntity(),
+        gb: gb == null ? null : gb!.toEntity(),
+        ind: ind == null ? null : ind!.toEntity(),
+        it: it == null ? null : it!.toEntity(),
+        jp: jp == null ? null : jp!.toEntity(),
+        kr: kr == null ? null : kr!.toEntity(),
+        tr: tr == null ? null : tr!.toEntity(),
+        ru: ru == null ? null : ru!.toEntity(),
       );
 }

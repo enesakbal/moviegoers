@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 
-import 'lang/_export.dart';
+import 'country/_export.dart';
 
 class ResultsEntity extends Equatable {
-  final CN? cn;
+  final CA? ca;
   final DE? de;
   final US? us;
   final ES? es;
@@ -17,7 +17,7 @@ class ResultsEntity extends Equatable {
   final RU? ru;
 
   const ResultsEntity({
-    this.cn,
+    this.ca,
     this.de,
     this.us,
     this.es,
@@ -34,7 +34,7 @@ class ResultsEntity extends Equatable {
   @override
   List<Object?> get props {
     return [
-      cn,
+      ca,
       de,
       us,
       es,
@@ -48,4 +48,19 @@ class ResultsEntity extends Equatable {
       ru,
     ];
   }
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'CA': ca,
+        'DE': de,
+        'US': us,
+        'ES': es,
+        'FR': fr,
+        'GB': gb,
+        'IN': ind,
+        'IT': it,
+        'JP': jp,
+        'KR': kr,
+        'TR': tr,
+        'RU': ru,
+      };
 }

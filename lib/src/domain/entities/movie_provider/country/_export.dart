@@ -1,4 +1,4 @@
-export 'cn.dart';
+export 'ca.dart';
 export 'de.dart';
 export 'es.dart';
 export 'fr.dart';
