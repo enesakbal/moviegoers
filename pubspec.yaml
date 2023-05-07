@@ -12,6 +12,7 @@ dependencies:
   cached_network_image: ^3.2.3
   carousel_slider: ^4.2.1
   connectivity_plus: ^3.0.3
+  cool_dropdown: ^2.1.0
   dartz: ^0.10.1
   dio: ^5.0.3
   dio_smart_retry: ^5.0.0
@@ -52,6 +53,7 @@ flutter_gen:
   output: lib/src/config/gen/
   inputs:
     - assets/icons/
+    - assets/flags/
 
   integrations:
     flutter_svg: true
@@ -75,6 +77,7 @@ flutter:
     - assets/colors/
     - assets/icons/
     - assets/fonts/
+    - assets/flags/
 
 
 
