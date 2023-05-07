@@ -7,6 +7,7 @@ import 'package:moviegoers/src/data/models/movie/movie_lists/popular/popular_mov
 import 'package:moviegoers/src/data/models/movie/movie_lists/recommendation/recommendation_movies_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_lists/similiar/similiar_movies_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_lists/upcoming/upcoming_movies_model.dart';
+import 'package:moviegoers/src/data/models/movie/movie_provider/movie_provider_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_video/movie_video_model.dart';
 
 import '../../_utils/json_reader.dart';
@@ -17,6 +18,7 @@ void main() {
   late dynamic movieDetailData;
   late dynamic movieExternalData;
   late dynamic creditData;
+  late dynamic providerData;
 
   setUp(() {
     listData = readJson('movie_list_dummy_data.json');
@@ -24,6 +26,7 @@ void main() {
     movieDetailData = readJson('movie_detail_dummy_data.json');
     movieExternalData = readJson('movie_external_id_dummy_data.json');
     creditData = readJson('movie_credit_dummy_data.json');
+    providerData = readJson('movie_provider_dummy_data.json');
   });
 
   group('to Entity', () {
@@ -87,6 +90,14 @@ void main() {
     //* MovieDetailModel
     test('MovieDetailModel to MovieDetail should be successful', () {
       final model = MovieDetailModel.fromJson(movieDetailData as Map<String, dynamic>);
+
+      final entity = model.toEntity();
+      expect(entity, isNotNull);
+    });
+
+    //* MovieProviderModel
+    test('MovieProviderModel to MovieProvider should be successful', () {
+      final model = MovieProviderModel.fromJson(providerData as Map<String, dynamic>);
 
       final entity = model.toEntity();
       expect(entity, isNotNull);
