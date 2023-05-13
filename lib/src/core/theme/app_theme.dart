@@ -16,6 +16,12 @@ class MGAppTheme {
 
   TextTheme _textTheme() {
     return TextTheme(
+      titleLarge: TextStyle(
+        color: Colors.white,
+        fontFamily: Assets.fonts.apercuProBold,
+        fontSize: 22.sp,
+        fontWeight: FontWeight.w800,
+      ),
       titleMedium: TextStyle(
         color: Colors.white,
         fontFamily: Assets.fonts.apercuProBold,
@@ -34,6 +40,13 @@ class MGAppTheme {
         fontSize: 14.sp,
         wordSpacing: 4,
         fontWeight: FontWeight.w400,
+      ),
+      bodyLarge: TextStyle(
+        color: MGColors.grey.shade300,
+        fontFamily: Assets.fonts.apercuProRegular,
+        fontSize: 18.sp,
+        wordSpacing: 4,
+        fontWeight: FontWeight.w600,
       ),
     );
   }
