@@ -1,5 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cool_dropdown/cool_dropdown.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,13 +16,17 @@ import '../../core/components/buttons/base_icon_button.dart';
 import '../../core/components/buttons/favorite_icon_button.dart';
 import '../../core/components/card/actor_card.dart';
 import '../../core/components/card/movie_card.dart';
+import '../../core/components/dialogs/base_bottom_sheet.dart';
 import '../../core/components/indicator/base_indicator.dart';
 import '../../core/constants/imdb_image_constants.dart';
 import '../../core/extensions/int_extensions.dart';
 import '../../core/init/language/locale_keys.g.dart';
 import '../../domain/entities/movie/movie_detail/movie_detail.dart';
+import '../../domain/entities/movie_provider/provider_entity.dart';
+import '../_widgets/movie_detail/country_dropdown.dart';
 import '../_widgets/tag_container.dart';
 import '../bloc/blocs.dart';
+import '../bloc/movie_provider/movie_provider_bloc.dart';
 
 class MovieDetailView extends HookWidget {
   const MovieDetailView({
@@ -30,6 +36,7 @@ class MovieDetailView extends HookWidget {
     required this.recommendationMoviesBloc,
     required this.similiarMoviesBloc,
     required this.movieCreditBloc,
+    required this.movieProviderBloc,
   });
 
   final String movieID;
@@ -37,16 +44,21 @@ class MovieDetailView extends HookWidget {
   final RecommendationMoviesBloc recommendationMoviesBloc;
   final SimiliarMoviesBloc similiarMoviesBloc;
   final MovieCreditBloc movieCreditBloc;
+  final MovieProviderBloc movieProviderBloc;
 
   @override
   Widget build(BuildContext context) {
+    late DropdownController dropdownController;
+
     useEffect(() {
       movieDetailBloc.add(FetchMovieDetail(movieID));
       recommendationMoviesBloc.add(FetchMovies(page: 1, movieID: movieID));
       similiarMoviesBloc.add(FetchMovies(page: 1, movieID: movieID));
       movieCreditBloc.add(FetchMovieCredit(movieID));
-
-      return () {};
+      dropdownController = DropdownController();
+      return () {
+        dropdownController.dispose();
+      };
     }, []);
 
     return Scaffold(
@@ -57,7 +69,7 @@ class MovieDetailView extends HookWidget {
           if (state is MovieDetailError) {
             return SizedBox.expand(child: Center(child: Text(state.message)));
           } else if (state is MovieDetailHasData) {
-            return _hasDataBody(state.movieDetail, context);
+            return _hasDataBody(context, data: state.movieDetail, dropdownController: dropdownController);
           } else {
             return const SafeArea(child: SizedBox(child: Center(child: BaseIndicator())));
           }
@@ -66,7 +78,11 @@ class MovieDetailView extends HookWidget {
     );
   }
 
-  Widget _hasDataBody(MovieDetail data, BuildContext context) {
+  Widget _hasDataBody(
+    BuildContext context, {
+    required MovieDetail data,
+    required DropdownController dropdownController,
+  }) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +92,7 @@ class MovieDetailView extends HookWidget {
           15.verticalSpace,
           _tags(data),
           30.verticalSpace,
-          _buttons(),
+          _buttons(context, dropdownController: dropdownController),
           25.verticalSpace,
           _credits(),
           15.verticalSpace,
@@ -213,7 +229,7 @@ class MovieDetailView extends HookWidget {
     );
   }
 
-  Padding _buttons() {
+  Padding _buttons(BuildContext context, {required DropdownController dropdownController}) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       child: Row(
@@ -241,9 +257,12 @@ class MovieDetailView extends HookWidget {
               isDark: true,
               foregroundColor: MGColors.grey,
               icon: Assets.icons.filmCamera.svg(color: Colors.white, height: 24),
-              onPressed: () {},
+              onPressed: () async {
+                await _providers(context, dropdownController: dropdownController).show<BaseBottomSheet>(context);
+              },
             ),
           ),
+
           10.horizontalSpace,
           Expanded(
             child: BaseIconButton(
@@ -262,6 +281,107 @@ class MovieDetailView extends HookWidget {
           //* bloc builder
         ],
       ),
+    );
+  }
+
+  BaseBottomSheet _providers(BuildContext context, {required DropdownController dropdownController}) {
+    return BaseBottomSheet(
+      initFunc: () => movieProviderBloc.add(FetchMovieProvider(movieID)),
+      child: BlocBuilder<MovieProviderBloc, MovieProviderState>(
+          bloc: movieProviderBloc,
+          builder: (context, state) {
+            if (state is MovieProviderLoading) {
+              return const Center(
+                child: BaseIndicator(),
+              );
+            } else if (state is MovieProviderError) {
+              return const Center(child: Text('ERROR'));
+            }
+            return Column(
+              children: [
+                Align(
+                  alignment: Alignment.topRight,
+                  child: CountryDropdown(
+                    dropdownController: dropdownController,
+                    defaultItem: movieProviderBloc.getCurrentDropdownItem(),
+                    onChange: (value) {
+                      movieProviderBloc.add(SwitchCountry(value));
+                      dropdownController.close();
+                    },
+                  ),
+                ),
+                25.verticalSpace,
+                if (state is MovieProviderHasData) ...[
+                  _providerCategory(
+                    context,
+                    title: 'Buy',
+                    data: state.movieProvider.buy,
+                  ),
+                  25.verticalSpace,
+                  _providerCategory(
+                    context,
+                    title: 'Rent',
+                    data: state.movieProvider.rent,
+                  ),
+                  25.verticalSpace,
+                  _providerCategory(
+                    context,
+                    title: 'Flatrate',
+                    data: state.movieProvider.flatrate,
+                  )
+                ] else if (state is MovieProviderEmpty) ...[
+                  Text(
+                    state.message,
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.white),
+                  ),
+                  30.verticalSpace
+                ],
+              ],
+            );
+          }),
+    );
+  }
+
+  Widget _providerCategory(
+    BuildContext context, {
+    required String title,
+    required List<ProviderEntity>? data,
+  }) {
+    if (data == null) {
+      return Container();
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 25, fontWeight: FontWeight.w800)),
+        15.verticalSpace,
+        SizedBox(
+          height: 50,
+          width: 1.sw,
+          // color: Colors.red,
+          // padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+          child: GridView.builder(
+            shrinkWrap: true,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
+              mainAxisSpacing: 24,
+              crossAxisSpacing: 12,
+            ),
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.zero,
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: CachedNetworkImage(
+                  imageUrl: IMDBImageConstants.original + data[index].logoPath!,
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 
