@@ -27,7 +27,7 @@ class MovieProviderLoading extends MovieProviderState {
 class MovieProviderEmpty extends MovieProviderState {
   final String message;
 
-  const MovieProviderEmpty(this.message);
+  const MovieProviderEmpty({this.message = 'There is no provider'});
 
   @override
   List<Object> get props => [message];
