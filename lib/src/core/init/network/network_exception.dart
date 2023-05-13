@@ -51,40 +51,6 @@ class NetworkExceptions extends Equatable implements Exception {
 
   late String message;
 
-  /// It returns a string based on the status code of the error
-  ///
-  /// Args:
-  ///   statusCode (int): The HTTP status code of the response.
-  ///
-  /// Returns:
-  ///   A string
-  String _handleError(int? statusCode, dynamic error) {
-    switch (statusCode) {
-      case 400:
-        return 'Invalid email';
-      case 401:
-        return 'Unauthorized';
-      case 403:
-        return 'Forbidden';
-      case 404:
-        return 'The requested resource does not exist.';
-      case 405:
-        return 'Method not allowed. Please check the Allow header for the allowed HTTP methods.';
-      case 409:
-        return 'Email already exists';
-      case 415:
-        return 'Unsupported media type. The requested content type or version number is invalid.';
-      case 422:
-        return 'Data validation failed.';
-      case 429:
-        return 'Too many requests.';
-      case 500:
-        return 'Internal server error.';
-      default:
-        return 'Oops something went wrong!';
-    }
-  }
-
   @override
   List<Object> get props => [message];
 }
