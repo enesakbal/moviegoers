@@ -15,6 +15,16 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    MovieBlocProviderRoute.name: (routeData) {
+      final args = routeData.argsAs<MovieBlocProviderRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: MovieBlocProviderWidget(
+          key: args.key,
+          movieID: args.movieID,
+        ),
+      );
+    },
     HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -33,17 +43,45 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SplashView(),
       );
     },
-    MovieBlocProviderRoute.name: (routeData) {
-      final args = routeData.argsAs<MovieBlocProviderRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: MovieBlocProviderWidget(
-          key: args.key,
-          movieID: args.movieID,
-        ),
-      );
-    },
   };
+}
+
+/// generated route for
+/// [MovieBlocProviderWidget]
+class MovieBlocProviderRoute extends PageRouteInfo<MovieBlocProviderRouteArgs> {
+  MovieBlocProviderRoute({
+    Key? key,
+    required String movieID,
+    List<PageRouteInfo>? children,
+  }) : super(
+          MovieBlocProviderRoute.name,
+          args: MovieBlocProviderRouteArgs(
+            key: key,
+            movieID: movieID,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'MovieBlocProviderRoute';
+
+  static const PageInfo<MovieBlocProviderRouteArgs> page =
+      PageInfo<MovieBlocProviderRouteArgs>(name);
+}
+
+class MovieBlocProviderRouteArgs {
+  const MovieBlocProviderRouteArgs({
+    this.key,
+    required this.movieID,
+  });
+
+  final Key? key;
+
+  final String movieID;
+
+  @override
+  String toString() {
+    return 'MovieBlocProviderRouteArgs{key: $key, movieID: $movieID}';
+  }
 }
 
 /// generated route for
@@ -86,42 +124,4 @@ class SplashRoute extends PageRouteInfo<void> {
   static const String name = 'SplashRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [MovieBlocProviderWidget]
-class MovieBlocProviderRoute extends PageRouteInfo<MovieBlocProviderRouteArgs> {
-  MovieBlocProviderRoute({
-    Key? key,
-    required String movieID,
-    List<PageRouteInfo>? children,
-  }) : super(
-          MovieBlocProviderRoute.name,
-          args: MovieBlocProviderRouteArgs(
-            key: key,
-            movieID: movieID,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'MovieBlocProviderRoute';
-
-  static const PageInfo<MovieBlocProviderRouteArgs> page =
-      PageInfo<MovieBlocProviderRouteArgs>(name);
-}
-
-class MovieBlocProviderRouteArgs {
-  const MovieBlocProviderRouteArgs({
-    this.key,
-    required this.movieID,
-  });
-
-  final Key? key;
-
-  final String movieID;
-
-  @override
-  String toString() {
-    return 'MovieBlocProviderRouteArgs{key: $key, movieID: $movieID}';
-  }
 }

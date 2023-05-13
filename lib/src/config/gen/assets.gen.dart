@@ -31,6 +31,50 @@ class $AssetsColorsGen {
   List<String> get values => [colors];
 }
 
+class $AssetsFlagsGen {
+  const $AssetsFlagsGen();
+
+  /// File path: assets/flags/ca.svg
+  SvgGenImage get ca => const SvgGenImage('assets/flags/ca.svg');
+
+  /// File path: assets/flags/de.svg
+  SvgGenImage get de => const SvgGenImage('assets/flags/de.svg');
+
+  /// File path: assets/flags/es.svg
+  SvgGenImage get es => const SvgGenImage('assets/flags/es.svg');
+
+  /// File path: assets/flags/fr.svg
+  SvgGenImage get fr => const SvgGenImage('assets/flags/fr.svg');
+
+  /// File path: assets/flags/gb.svg
+  SvgGenImage get gb => const SvgGenImage('assets/flags/gb.svg');
+
+  /// File path: assets/flags/ind.svg
+  SvgGenImage get ind => const SvgGenImage('assets/flags/ind.svg');
+
+  /// File path: assets/flags/it.svg
+  SvgGenImage get it => const SvgGenImage('assets/flags/it.svg');
+
+  /// File path: assets/flags/jp.svg
+  SvgGenImage get jp => const SvgGenImage('assets/flags/jp.svg');
+
+  /// File path: assets/flags/kr.svg
+  SvgGenImage get kr => const SvgGenImage('assets/flags/kr.svg');
+
+  /// File path: assets/flags/ru.svg
+  SvgGenImage get ru => const SvgGenImage('assets/flags/ru.svg');
+
+  /// File path: assets/flags/tr.svg
+  SvgGenImage get tr => const SvgGenImage('assets/flags/tr.svg');
+
+  /// File path: assets/flags/us.svg
+  SvgGenImage get us => const SvgGenImage('assets/flags/us.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values =>
+      [ca, de, es, fr, gb, ind, it, jp, kr, ru, tr, us];
+}
+
 class $AssetsFontsGen {
   const $AssetsFontsGen();
 
@@ -50,7 +94,8 @@ class $AssetsFontsGen {
   String get apercuProLight => 'assets/fonts/Apercu Pro Light.otf';
 
   /// File path: assets/fonts/Apercu Pro Medium Italic.otf
-  String get apercuProMediumItalic => 'assets/fonts/Apercu Pro Medium Italic.otf';
+  String get apercuProMediumItalic =>
+      'assets/fonts/Apercu Pro Medium Italic.otf';
 
   /// File path: assets/fonts/Apercu Pro Medium.otf
   String get apercuProMedium => 'assets/fonts/Apercu Pro Medium.otf';
@@ -85,13 +130,16 @@ class $AssetsIconsGen {
   SvgGenImage get close => const SvgGenImage('assets/icons/close.svg');
 
   /// File path: assets/icons/empty_heart.svg
-  SvgGenImage get emptyHeart => const SvgGenImage('assets/icons/empty_heart.svg');
+  SvgGenImage get emptyHeart =>
+      const SvgGenImage('assets/icons/empty_heart.svg');
 
   /// File path: assets/icons/filled_heart.svg
-  SvgGenImage get filledHeart => const SvgGenImage('assets/icons/filled_heart.svg');
+  SvgGenImage get filledHeart =>
+      const SvgGenImage('assets/icons/filled_heart.svg');
 
   /// File path: assets/icons/film_camera.svg
-  SvgGenImage get filmCamera => const SvgGenImage('assets/icons/film_camera.svg');
+  SvgGenImage get filmCamera =>
+      const SvgGenImage('assets/icons/film_camera.svg');
 
   /// File path: assets/icons/left_arrow.svg
   SvgGenImage get leftArrow => const SvgGenImage('assets/icons/left_arrow.svg');
@@ -103,7 +151,8 @@ class $AssetsIconsGen {
   SvgGenImage get play => const SvgGenImage('assets/icons/play.svg');
 
   /// File path: assets/icons/right_arrow.svg
-  SvgGenImage get rightArrow => const SvgGenImage('assets/icons/right_arrow.svg');
+  SvgGenImage get rightArrow =>
+      const SvgGenImage('assets/icons/right_arrow.svg');
 
   /// File path: assets/icons/settings.svg
   SvgGenImage get settings => const SvgGenImage('assets/icons/settings.svg');
@@ -115,14 +164,27 @@ class $AssetsIconsGen {
   SvgGenImage get star => const SvgGenImage('assets/icons/star.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [alert, close, emptyHeart, filledHeart, filmCamera, leftArrow, menu, play, rightArrow, settings, share, star];
+  List<SvgGenImage> get values => [
+        alert,
+        close,
+        emptyHeart,
+        filledHeart,
+        filmCamera,
+        leftArrow,
+        menu,
+        play,
+        rightArrow,
+        settings,
+        share,
+        star
+      ];
 }
 
 class Assets {
   Assets._();
 
   static const $AssetsColorsGen colors = $AssetsColorsGen();
+  static const $AssetsFlagsGen flags = $AssetsFlagsGen();
   static const $AssetsFontsGen fonts = $AssetsFontsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $LanguagesGen languages = $LanguagesGen();
