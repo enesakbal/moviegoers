@@ -16,7 +16,7 @@ class MovieProviderBloc extends Bloc<MovieProviderEvent, MovieProviderState> {
   final MovieUsecase _usecase;
 
   String _lastChoice = 'tr';
-  bool isFetch = false;
+  bool isFetched = false;
   CoolDropdownItem<String> getCurrentDropdownItem() => CountrySelectionUtils.dropDownItemList.firstWhere(
         (element) => element.value == _lastChoice,
       );
@@ -25,7 +25,7 @@ class MovieProviderBloc extends Bloc<MovieProviderEvent, MovieProviderState> {
     late ResultsEntity resultsEntity;
 
     on<FetchMovieProvider>((event, emit) async {
-      if (isFetch) {
+      if (isFetched) {
         add(SwitchCountry(_lastChoice));
         //* if has data, dont need to fetch again.
         return;
@@ -42,7 +42,7 @@ class MovieProviderBloc extends Bloc<MovieProviderEvent, MovieProviderState> {
           resultsEntity = data.results!;
           //* save data in only this bloc
 
-          isFetch = true;
+          isFetched = true;
           add(SwitchCountry(_lastChoice));
         },
       );

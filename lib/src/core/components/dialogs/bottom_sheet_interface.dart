@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 abstract class IBottomSheet extends HookWidget {
   const IBottomSheet({super.key});
 
-  Future<T?> show<T extends Widget>(BuildContext context, {bool isDissmissible = false}) {
-    return showModalBottomSheet<T>(
+  Future<void> show(BuildContext context, {bool isDissmissible = false}) {
+    return showModalBottomSheet<void>(
       context: context,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(

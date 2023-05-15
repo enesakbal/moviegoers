@@ -18,16 +18,9 @@ class BaseBottomSheet extends IBottomSheet {
   @override
   Widget build(BuildContext context) {
     useEffect(() {
-      // if (initAysnc != null) {
-      //   Future.delayed(
-      //     const Duration(milliseconds: 300),
-      //     () async => initAysnc!(),
-      //   );
-      // }
       if (initFunc != null) {
         initFunc!();
       }
-
       return () {};
     }, []);
 
