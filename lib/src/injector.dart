@@ -8,6 +8,7 @@ import 'data/datasources/remote/movie/movie_remote_data_source_impl.dart';
 import 'data/repositories/movie_repository_impl.dart';
 import 'domain/repositories/movie_repository.dart';
 import 'domain/usecases/movie_usecase.dart';
+import 'presentation/bloc/bloc/movie_video_bloc.dart';
 import 'presentation/bloc/blocs.dart';
 import 'presentation/bloc/movie_provider/movie_provider_bloc.dart';
 
@@ -40,5 +41,8 @@ Future<void> init() async {
     ..registerFactory<SimiliarMoviesBloc>(() => SimiliarMoviesBloc(injector()))
     ..registerFactory<MovieDetailBloc>(() => MovieDetailBloc(injector()))
     ..registerFactory<MovieCreditBloc>(() => MovieCreditBloc(injector()))
-    ..registerFactory<MovieProviderBloc>(() => MovieProviderBloc(injector()));
+    ..registerFactory<MovieProviderBloc>(() => MovieProviderBloc(injector()))
+    ..registerFactory<MovieVideoBloc>(() => MovieVideoBloc(injector()))
+    
+    ;
 }
