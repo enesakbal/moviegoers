@@ -25,12 +25,12 @@ class MovieVideoLoading extends MovieVideoState {
 }
 
 class MovieVideoHasData extends MovieVideoState {
-  final MovieVideo movieVideo;
+  final List<MovieVideoDetail?> movieVideoList;
 
-  const MovieVideoHasData(this.movieVideo);
+  const MovieVideoHasData(this.movieVideoList);
 
   @override
-  List<Object> get props => [MovieVideo];
+  List<Object> get props => [movieVideoList];
 
   @override
   String toString() => 'MovieVideoHasData()';

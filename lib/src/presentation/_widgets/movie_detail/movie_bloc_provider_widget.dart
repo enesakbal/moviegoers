@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../injector.dart' as di;
-import '../../bloc/bloc/movie_video_bloc.dart';
 import '../../bloc/blocs.dart';
 import '../../bloc/movie_provider/movie_provider_bloc.dart';
+import '../../bloc/movie_video/movie_video_bloc.dart';
 import '../../view/movie_detail_view.dart';
 
 @RoutePage()
