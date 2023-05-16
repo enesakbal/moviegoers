@@ -17,16 +17,20 @@ import '../../core/components/buttons/favorite_icon_button.dart';
 import '../../core/components/card/actor_card.dart';
 import '../../core/components/card/movie_card.dart';
 import '../../core/components/dialogs/base_bottom_sheet.dart';
+import '../../core/components/dialogs/base_info_dialog.dart';
 import '../../core/components/indicator/base_indicator.dart';
 import '../../core/constants/imdb_image_constants.dart';
+import '../../core/constants/youtube_video_constants.dart';
 import '../../core/extensions/int_extensions.dart';
 import '../../core/init/language/locale_keys.g.dart';
+import '../../core/utils/launch_url.dart';
 import '../../domain/entities/movie/movie_detail/movie_detail.dart';
 import '../../domain/entities/movie_provider/provider_entity.dart';
 import '../_widgets/movie_detail/country_dropdown.dart';
 import '../_widgets/tag_container.dart';
 import '../bloc/blocs.dart';
 import '../bloc/movie_provider/movie_provider_bloc.dart';
+import '../bloc/movie_video/movie_video_bloc.dart';
 
 class MovieDetailView extends HookWidget {
   const MovieDetailView({
@@ -37,6 +41,7 @@ class MovieDetailView extends HookWidget {
     required this.similiarMoviesBloc,
     required this.movieCreditBloc,
     required this.movieProviderBloc,
+    required this.movieVideoBloc,
   });
 
   final String movieID;
@@ -45,6 +50,7 @@ class MovieDetailView extends HookWidget {
   final SimiliarMoviesBloc similiarMoviesBloc;
   final MovieCreditBloc movieCreditBloc;
   final MovieProviderBloc movieProviderBloc;
+  final MovieVideoBloc movieVideoBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +104,7 @@ class MovieDetailView extends HookWidget {
           15.verticalSpace,
           _description(data, context),
           20.verticalSpace,
-          _divider(),
+          _divider,
           20.verticalSpace,
           _recommandations(),
           5.verticalSpace,
@@ -242,7 +248,7 @@ class MovieDetailView extends HookWidget {
               foregroundColor: Colors.white,
               backgroundColor: MGColors.green,
               iconPositionIsRight: false,
-              onPressed: () {},
+              onPressed: () async => _trailers().show(context, isDissmissible: true),
               child: const Icon(
                 Icons.play_arrow_rounded,
                 color: Colors.white,
@@ -257,9 +263,7 @@ class MovieDetailView extends HookWidget {
               isDark: true,
               foregroundColor: MGColors.grey,
               icon: Assets.icons.filmCamera.svg(color: Colors.white, height: 24),
-              onPressed: () async {
-                await _providers(context, dropdownController: dropdownController).show<BaseBottomSheet>(context);
-              },
+              onPressed: () async => _providers(context, dropdownController: dropdownController).show(context),
             ),
           ),
 
@@ -280,6 +284,90 @@ class MovieDetailView extends HookWidget {
 
           //* bloc builder
         ],
+      ),
+    );
+  }
+
+  BaseInfoDialog _trailers() {
+    return BaseInfoDialog(
+      'Videos',
+      initFunc: () => movieVideoBloc.add(FetchMovieVideos(movieID)),
+      content: BlocBuilder<MovieVideoBloc, MovieVideoState>(
+        bloc: movieVideoBloc,
+        builder: (context, state) {
+          if (state is MovieVideoLoading) {
+            return const Center(child: BaseIndicator());
+          } else if (state is MovieVideoError) {
+            return const Center(child: Text('ERROR'));
+          } else if (state is MovieVideoHasData) {
+            return SizedBox(
+              width: 325.w,
+              height: 450.h,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.r),
+                child: ListView.separated(
+                  padding: EdgeInsets.symmetric(vertical: 15.r),
+                  itemCount: state.movieVideoList.length,
+                  itemBuilder: (_, index) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        15.verticalSpace,
+                        GestureDetector(
+                          onTap: () async {
+                            await LaunchUrl.openYoutubeVideoFromKey(state.movieVideoList[index]!.key!);
+                          },
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              CachedNetworkImage(
+                                imageUrl: YoutubeVideoConstants.videoImage
+                                    .replaceAll('{key}', state.movieVideoList[index]!.key!),
+                                fit: BoxFit.fill,
+                              ),
+                              PhysicalModel(
+                                color: MGColors.grey.withOpacity(0.8),
+                                shape: BoxShape.circle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Assets.icons.play.svg(color: Colors.white),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        10.verticalSpace,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              state.movieVideoList[index]!.name!,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.white),
+                            ),
+                            Text(
+                              DateFormat.yMd().format(state.movieVideoList[index]!.publishedAt!),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: Colors.white),
+                            ),
+                          ],
+                        ),
+                        10.verticalSpace,
+                      ],
+                    );
+                  },
+                  separatorBuilder: (_, __) => _divider,
+                ),
+              ),
+            );
+          } else {
+            return Container();
+          }
+        },
       ),
     );
   }
@@ -523,13 +611,8 @@ class MovieDetailView extends HookWidget {
     );
   }
 
-  Widget _divider() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.w),
-      child: const Divider(
-        color: Colors.white,
-        thickness: 0.1,
-      ),
-    );
-  }
+  Widget get _divider => Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
+        child: const Divider(color: Colors.white, thickness: 0.1),
+      );
 }
