@@ -29,7 +29,7 @@ class BaseInfoDialog extends IDialog {
     }, []);
 
     return SimpleDialog(
-      backgroundColor: MGColors.grey,
+      backgroundColor: MGColors.dark,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       insetPadding: const EdgeInsets.all(10),
       contentPadding: EdgeInsets.all(10.r),
