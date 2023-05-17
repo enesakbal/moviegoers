@@ -37,6 +37,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ProjectComponentsView(),
       );
     },
+    MovieListingRoute.name: (routeData) {
+      final args = routeData.argsAs<MovieListingRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: MovieListingView(
+          args.type,
+          key: args.key,
+        ),
+      );
+    },
     SplashRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -64,8 +74,7 @@ class MovieBlocProviderRoute extends PageRouteInfo<MovieBlocProviderRouteArgs> {
 
   static const String name = 'MovieBlocProviderRoute';
 
-  static const PageInfo<MovieBlocProviderRouteArgs> page =
-      PageInfo<MovieBlocProviderRouteArgs>(name);
+  static const PageInfo<MovieBlocProviderRouteArgs> page = PageInfo<MovieBlocProviderRouteArgs>(name);
 }
 
 class MovieBlocProviderRouteArgs {
@@ -110,6 +119,43 @@ class ProjectComponentsRoute extends PageRouteInfo<void> {
   static const String name = 'ProjectComponentsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [MovieListingView]
+class MovieListingRoute extends PageRouteInfo<MovieListingRouteArgs> {
+  MovieListingRoute({
+    required MovieListTypes type,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          MovieListingRoute.name,
+          args: MovieListingRouteArgs(
+            type: type,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'MovieListingRoute';
+
+  static const PageInfo<MovieListingRouteArgs> page = PageInfo<MovieListingRouteArgs>(name);
+}
+
+class MovieListingRouteArgs {
+  const MovieListingRouteArgs({
+    required this.type,
+    this.key,
+  });
+
+  final MovieListTypes type;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'MovieListingRouteArgs{type: $type, key: $key}';
+  }
 }
 
 /// generated route for
