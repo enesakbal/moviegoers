@@ -13,6 +13,7 @@ import 'src/core/init/language/language_manager.dart';
 import 'src/core/theme/app_theme.dart';
 import 'src/injector.dart' as di;
 import 'src/presentation/bloc/blocs.dart';
+import 'src/presentation/bloc/movie_listings/movie_listings_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -72,6 +73,7 @@ class MainApp extends StatelessWidget {
       BlocProvider(create: (_) => di.injector<UpcomingMoviesBloc>()),
       BlocProvider(create: (_) => di.injector<NowPlayingMoviesBloc>()),
       BlocProvider(create: (_) => di.injector<MovieCreditBloc>()),
+      BlocProvider(create: (_) => di.injector<MovieListingsBloc>()),
     ], child: _localization(context));
   }
 
