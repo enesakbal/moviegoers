@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../config/router/app_router.dart';
 import '../../../core/components/card/movie_card.dart';
 import '../../../core/components/indicator/base_indicator.dart';
+import '../../../core/constants/enum/movie_enum.dart';
 import '../../../core/init/language/locale_keys.g.dart';
 import '../../bloc/movies/base_movie_bloc/base_movies_bloc.dart';
 import '../../bloc/movies/base_movie_blocs.dart';
@@ -17,6 +18,7 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final title = useState('error');
+    late MovieListTypes type;
 
     useEffect(() {
       String newTitle = 'error';
@@ -24,9 +26,11 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
       switch (T) {
         case NowPlayingMoviesBloc:
           newTitle = LocaleKeys.home_now_playing.tr();
+          type = MovieListTypes.NOWPLAYING;
           break;
         case UpcomingMoviesBloc:
           newTitle = LocaleKeys.home_upcoming.tr();
+          type = MovieListTypes.UPCOMING;
           break;
         default:
       }
@@ -37,14 +41,14 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
       return () {
         title.value = newTitle;
       };
-    }, [title]);
+    });
 
     return BlocBuilder<T, BaseMoviesState>(
       builder: (context, state) {
         if (state is BaseMoviesError) {
           return SliverToBoxAdapter(child: SizedBox(height: 325.h, child: Center(child: Text(state.message))));
         } else if (state is BaseMoviesHasData) {
-          return _hasDataBody(title, context, state);
+          return _hasDataBody(title, context, state, type);
         } else if (state is BaseMoviesEmpty) {
           return SliverToBoxAdapter(child: Container());
         } else {
@@ -56,12 +60,12 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
     );
   }
 
-  Widget _hasDataBody(ValueNotifier<String> title, BuildContext context, BaseMoviesHasData state) {
+  Widget _hasDataBody(ValueNotifier<String> title, BuildContext context, BaseMoviesHasData state, MovieListTypes type) {
     return SliverList(
       delegate: SliverChildListDelegate(
         [
           30.verticalSpace,
-          _title(title, context),
+          _title(title, context, type),
           20.verticalSpace,
           _movies(state),
           25.verticalSpace,
@@ -70,7 +74,7 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
     );
   }
 
-  Padding _title(ValueNotifier<String> title, BuildContext context) {
+  Padding _title(ValueNotifier<String> title, BuildContext context, MovieListTypes type) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 0.h, horizontal: 15.w),
       child: Row(
@@ -80,9 +84,12 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
             title.value,
             style: Theme.of(context).textTheme.titleMedium,
           ),
-          Text(
-            LocaleKeys.home_view_all.tr(),
-            style: Theme.of(context).textTheme.titleSmall,
+          GestureDetector(
+            onTap: () async => router.push(MovieListingRoute(type: type)),
+            child: Text(
+              LocaleKeys.home_view_all.tr(),
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
           ),
         ],
       ),

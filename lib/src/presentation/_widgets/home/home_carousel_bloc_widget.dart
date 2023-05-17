@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../config/router/app_router.dart';
 import '../../../core/components/card/movie_card.dart';
 import '../../../core/components/indicator/base_indicator.dart';
+import '../../../core/constants/enum/movie_enum.dart';
 import '../../../core/init/language/locale_keys.g.dart';
 import '../../bloc/blocs.dart';
 
@@ -41,7 +42,10 @@ class PopularCarouselBlocWidget extends HookWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(LocaleKeys.home_popular.tr(), style: Theme.of(context).textTheme.titleMedium),
-                          Text(LocaleKeys.home_view_all.tr(), style: Theme.of(context).textTheme.titleSmall),
+                          GestureDetector(
+                            onTap: () async => router.push(MovieListingRoute(type: MovieListTypes.POPULAR)),
+                            child: Text(LocaleKeys.home_view_all.tr(), style: Theme.of(context).textTheme.titleSmall),
+                          ),
                         ],
                       ),
                     ),
