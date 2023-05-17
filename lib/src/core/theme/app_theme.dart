@@ -57,10 +57,9 @@ class MGAppTheme {
       centerTitle: true,
       elevation: 0,
       titleTextStyle: TextStyle(
-        fontWeight: FontWeight.w400,
-        fontSize: 24.sp,
+        fontWeight: FontWeight.w700,
+        fontSize: 25.sp,
       ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.elliptical(600.h, 100.w))),
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.dark, //<-- For Android SEE HERE (dark icons)
         statusBarBrightness: Brightness.light, //

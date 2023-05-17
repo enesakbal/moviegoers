@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../config/gen/assets.gen.dart';
 import '../../../config/gen/colors.gen.dart';
@@ -19,14 +20,16 @@ class SliverBaseAppBar extends StatelessWidget {
       stretch: true,
       shadowColor: MGColors.blue.shade600.withOpacity(0.3),
       forceElevated: true,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.elliptical(600.h, 100.w))),
     );
   }
 }
 
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const BaseAppBar({super.key, required this.title});
+  const BaseAppBar({super.key, required this.title, this.hasRadius = false});
 
   final String title;
+  final bool hasRadius;
 
   @override
   Widget build(BuildContext context) {

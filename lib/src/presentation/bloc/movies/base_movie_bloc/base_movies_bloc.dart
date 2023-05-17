@@ -47,7 +47,7 @@ abstract class BaseMoviesBloc extends Bloc<BaseMoviesEvent, BaseMoviesState> {
         if (data.movies!.isEmpty) {
           emit(const BaseMoviesEmpty(message: 'There is no data'));
         } else {
-          emit(BaseMoviesHasData(data.movies!.take(6).toList()));
+          emit(BaseMoviesHasData(data.movies!.take(4).toList()));
         }
       },
     );
