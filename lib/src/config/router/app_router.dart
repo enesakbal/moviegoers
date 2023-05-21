@@ -6,6 +6,7 @@ import '../../presentation/_widgets/movie_detail/movie_bloc_provider_widget.dart
 import '../../presentation/view/_project_components_view.dart';
 import '../../presentation/view/home_view.dart';
 import '../../presentation/view/movie_listing_view.dart';
+import '../../presentation/view/search_view.dart';
 import '../../presentation/view/splash_view.dart';
 
 part 'app_router.gr.dart';
@@ -34,6 +35,13 @@ class AppRouter extends _$AppRouter {
       path: '/movie_listings',
       durationInMilliseconds: 500,
       reverseDurationInMilliseconds: 500,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+    ),
+    CustomRoute(
+      page: SearchRoute.page,
+      path: '/search',
+      durationInMilliseconds: 250,
+      reverseDurationInMilliseconds: 250,
       transitionsBuilder: TransitionsBuilders.fadeIn,
     ),
     AutoRoute(page: ProjectComponentsRoute.page, path: '/components'),

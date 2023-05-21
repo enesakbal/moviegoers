@@ -54,6 +54,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SplashView(),
       );
     },
+    SearchRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SearchView(),
+      );
+    },
   };
 }
 
@@ -75,7 +81,8 @@ class MovieBlocProviderRoute extends PageRouteInfo<MovieBlocProviderRouteArgs> {
 
   static const String name = 'MovieBlocProviderRoute';
 
-  static const PageInfo<MovieBlocProviderRouteArgs> page = PageInfo<MovieBlocProviderRouteArgs>(name);
+  static const PageInfo<MovieBlocProviderRouteArgs> page =
+      PageInfo<MovieBlocProviderRouteArgs>(name);
 }
 
 class MovieBlocProviderRouteArgs {
@@ -142,7 +149,8 @@ class MovieListingRoute extends PageRouteInfo<MovieListingRouteArgs> {
 
   static const String name = 'MovieListingRoute';
 
-  static const PageInfo<MovieListingRouteArgs> page = PageInfo<MovieListingRouteArgs>(name);
+  static const PageInfo<MovieListingRouteArgs> page =
+      PageInfo<MovieListingRouteArgs>(name);
 }
 
 class MovieListingRouteArgs {
@@ -174,6 +182,20 @@ class SplashRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SplashRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SearchView]
+class SearchRoute extends PageRouteInfo<void> {
+  const SearchRoute({List<PageRouteInfo>? children})
+      : super(
+          SearchRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
