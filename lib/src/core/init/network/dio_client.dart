@@ -1,6 +1,7 @@
 // ignore_for_file: inference_failure_on_function_invocation, inference_failure_on_untyped_parameter
 
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
@@ -19,7 +20,8 @@ class DioClient {
   DioClient(this._dio) {
     _dio
       ..options.baseUrl = ApplicationConstants.baseUrl
-      ..options.queryParameters = {'api_key': ApplicationConstants.apiKey}
+      // ..options.queryParameters = {'api_key': ApplicationConstants.apiKey}
+      ..options.headers = {HttpHeaders.authorizationHeader: 'Bearer ${ApplicationConstants.apiToken}'}
       ..options.connectTimeout = const Duration(milliseconds: connectionTimeout)
       ..options.receiveTimeout = const Duration(milliseconds: receiveTimeout)
       ..options.responseType = ResponseType.json
