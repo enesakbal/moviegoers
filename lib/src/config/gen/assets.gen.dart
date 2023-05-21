@@ -154,6 +154,9 @@ class $AssetsIconsGen {
   SvgGenImage get rightArrow =>
       const SvgGenImage('assets/icons/right_arrow.svg');
 
+  /// File path: assets/icons/search.svg
+  SvgGenImage get search => const SvgGenImage('assets/icons/search.svg');
+
   /// File path: assets/icons/settings.svg
   SvgGenImage get settings => const SvgGenImage('assets/icons/settings.svg');
 
@@ -174,6 +177,7 @@ class $AssetsIconsGen {
         menu,
         play,
         rightArrow,
+        search,
         settings,
         share,
         star
