@@ -10,8 +10,8 @@ import '../../domain/entities/movie/movie_list/popular_movies.dart';
 import '../../domain/entities/movie/movie_list/recommendation_movies.dart';
 import '../../domain/entities/movie/movie_list/similiar_movies.dart';
 import '../../domain/entities/movie/movie_list/upcoming_movies.dart';
+import '../../domain/entities/movie/movie_provider/movie_provider.dart';
 import '../../domain/entities/movie/movie_video/movie_video.dart';
-import '../../domain/entities/movie_provider/movie_provider.dart';
 import '../../domain/repositories/movie_repository.dart';
 import '../datasources/remote/movie/movie_remote_data_source.dart';
 

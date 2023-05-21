@@ -49,7 +49,7 @@ import 'package:moviegoers/src/domain/entities/movie/movie_list/upcoming_movies.
     as _i18;
 import 'package:moviegoers/src/domain/entities/movie/movie_video/movie_video.dart'
     as _i22;
-import 'package:moviegoers/src/domain/entities/movie_provider/movie_provider.dart'
+import 'package:moviegoers/src/domain/entities/movie/movie_provider/movie_provider.dart'
     as _i25;
 import 'package:moviegoers/src/domain/repositories/movie_repository.dart'
     as _i13;

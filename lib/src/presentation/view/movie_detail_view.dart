@@ -25,7 +25,7 @@ import '../../core/extensions/int_extensions.dart';
 import '../../core/init/language/locale_keys.g.dart';
 import '../../core/utils/launch_url.dart';
 import '../../domain/entities/movie/movie_detail/movie_detail.dart';
-import '../../domain/entities/movie_provider/provider_entity.dart';
+import '../../domain/entities/movie/movie_provider/provider_entity.dart';
 import '../_widgets/movie_detail/country_dropdown.dart';
 import '../_widgets/tag_container.dart';
 import '../bloc/blocs.dart';

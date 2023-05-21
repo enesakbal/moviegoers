@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../../domain/entities/movie_provider/results_entity.dart';
+import '../../../../domain/entities/movie/movie_provider/results_entity.dart';
 import 'country/_export.dart';
 
 part 'results_model.g.dart';

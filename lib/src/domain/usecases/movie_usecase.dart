@@ -8,8 +8,8 @@ import '../entities/movie/movie_external_id/movie_external_id.dart';
 import '../entities/movie/movie_list/base/movie_interface.dart';
 import '../entities/movie/movie_list/recommendation_movies.dart';
 import '../entities/movie/movie_list/similiar_movies.dart';
+import '../entities/movie/movie_provider/movie_provider.dart';
 import '../entities/movie/movie_video/movie_video.dart';
-import '../entities/movie_provider/movie_provider.dart';
 import '../repositories/movie_repository.dart';
 
 class MovieUsecase {

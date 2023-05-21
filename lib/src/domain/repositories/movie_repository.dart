@@ -9,8 +9,8 @@ import '../entities/movie/movie_list/popular_movies.dart';
 import '../entities/movie/movie_list/recommendation_movies.dart';
 import '../entities/movie/movie_list/similiar_movies.dart';
 import '../entities/movie/movie_list/upcoming_movies.dart';
+import '../entities/movie/movie_provider/movie_provider.dart';
 import '../entities/movie/movie_video/movie_video.dart';
-import '../entities/movie_provider/movie_provider.dart';
 
 abstract class MovieRepository {
   Future<Either<NetworkExceptions, PopularMovies>> getPopularMovies({required int page});

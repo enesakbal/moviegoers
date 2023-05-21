@@ -5,8 +5,8 @@ import 'package:cool_dropdown/models/cool_dropdown_item.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../core/utils/country_selection.dart';
-import '../../../domain/entities/movie_provider/country/_interface.dart';
-import '../../../domain/entities/movie_provider/results_entity.dart';
+import '../../../domain/entities/movie/movie_provider/country/_interface.dart';
+import '../../../domain/entities/movie/movie_provider/results_entity.dart';
 import '../../../domain/usecases/movie_usecase.dart';
 
 part 'movie_provider_event.dart';
