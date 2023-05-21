@@ -3,6 +3,7 @@ class UrlContants {
   static const popularMovies = '/movie/popular';
   static const nowPlayingMovies = '/movie/now_playing';
   static const upcomingMovies = '/movie/upcoming';
+  static const topRatedMovies = '/movie/top_rated';
 
   //* movie info
   static const movieDetail = '/movie/{movie_id}';

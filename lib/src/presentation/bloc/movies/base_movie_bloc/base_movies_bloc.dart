@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
@@ -17,38 +15,45 @@ abstract class BaseMoviesBloc extends Bloc<BaseMoviesEvent, BaseMoviesState> {
   final MovieUsecase _usecase;
 
   BaseMoviesBloc(this._usecase) : super(const BaseMoviesInitial()) {
-    on<FetchMovies>(fetchMovie);
-  }
+    bool didFetch = false;
 
-  FutureOr<void> fetchMovie(FetchMovies event, Emitter<BaseMoviesState> emit) async {
-    emit(const BaseMoviesLoading());
-
-    late Either<NetworkExceptions, MovieI> result;
-    if (this is PopularMoviesBloc) {
-      result = await _usecase.getPopularMovies(page: event.page);
-    } else if (this is UpcomingMoviesBloc) {
-      result = await _usecase.getUpcomingMovies(page: event.page);
-    } else if (this is NowPlayingMoviesBloc) {
-      result = await _usecase.getNowPlayingMovies(page: event.page);
-    } else if (this is RecommendationMoviesBloc) {
-      assert(event.movieID != null, 'MOVIEID CANT BE NULL');
-      result = await _usecase.getMovieRecommendations(movieID: event.movieID!, page: event.page);
-    } else if (this is SimiliarMoviesBloc) {
-      assert(event.movieID != null, 'MOVIEID CANT BE NULL');
-      result = await _usecase.getMovieSimilars(movieID: event.movieID!, page: event.page);
-    } else {
-      emit(const BaseMoviesError(message: 'Something went wrong'));
-      return;
-    }
-
-    result.fold(
-      (failure) => emit(BaseMoviesError(message: failure.message)),
-      (data) {
-        if (data.movies!.isEmpty) {
-          emit(const BaseMoviesEmpty(message: 'There is no data'));
-        } else {
-          emit(BaseMoviesHasData(data.movies!.take(4).toList()));
+    on<FetchMovies>(
+      (event, emit) async {
+        if (didFetch) {
+          return;
         }
+        emit(const BaseMoviesLoading());
+        late Either<NetworkExceptions, MovieI> result;
+        if (this is PopularMoviesBloc) {
+          result = await _usecase.getPopularMovies(page: event.page);
+        } else if (this is UpcomingMoviesBloc) {
+          result = await _usecase.getUpcomingMovies(page: event.page);
+        } else if (this is NowPlayingMoviesBloc) {
+          result = await _usecase.getNowPlayingMovies(page: event.page);
+        } else if (this is TopRatedMoviesBloc) {
+          result = await _usecase.getTopRatedMovies(page: event.page);
+        } else if (this is RecommendationMoviesBloc) {
+          assert(event.movieID != null, 'MOVIEID CANT BE NULL');
+          result = await _usecase.getMovieRecommendations(movieID: event.movieID!, page: event.page);
+        } else if (this is SimiliarMoviesBloc) {
+          assert(event.movieID != null, 'MOVIEID CANT BE NULL');
+          result = await _usecase.getMovieSimilars(movieID: event.movieID!, page: event.page);
+        } else {
+          emit(const BaseMoviesError(message: 'Something went wrong'));
+          return;
+        }
+
+        result.fold(
+          (failure) => emit(BaseMoviesError(message: failure.message)),
+          (data) {
+            didFetch = true;
+            if (data.movies!.isEmpty) {
+              emit(const BaseMoviesEmpty(message: 'There is no data'));
+            } else {
+              emit(BaseMoviesHasData(data.movies!.take(4).toList()));
+            }
+          },
+        );
       },
     );
   }

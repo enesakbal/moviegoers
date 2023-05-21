@@ -9,6 +9,7 @@ import '../../domain/entities/movie/movie_list/now_playing_movies.dart';
 import '../../domain/entities/movie/movie_list/popular_movies.dart';
 import '../../domain/entities/movie/movie_list/recommendation_movies.dart';
 import '../../domain/entities/movie/movie_list/similiar_movies.dart';
+import '../../domain/entities/movie/movie_list/top_rated_movies.dart';
 import '../../domain/entities/movie/movie_list/upcoming_movies.dart';
 import '../../domain/entities/movie/movie_provider/movie_provider.dart';
 import '../../domain/entities/movie/movie_video/movie_video.dart';
@@ -46,6 +47,17 @@ class MovieRepositoryImpl extends MovieRepository {
   Future<Either<NetworkExceptions, UpcomingMovies>> getUpcomingMovies({required int page}) async {
     try {
       final result = await dataSource.getUpcomingMovies(page: page);
+      final movieList = result.toEntity();
+
+      return Right(movieList);
+    } on DioError catch (e) {
+      return Left(NetworkExceptions.fromDioError(e));
+    }
+  }
+  @override
+  Future<Either<NetworkExceptions, TopRatedMovies>> getTopRatedMovies({required int page}) async {
+    try {
+      final result = await dataSource.getTopRatedMovies(page: page);
       final movieList = result.toEntity();
 
       return Right(movieList);

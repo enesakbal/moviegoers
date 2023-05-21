@@ -11,6 +11,9 @@ class UpcomingMoviesBloc extends BaseMoviesBloc {
 class NowPlayingMoviesBloc extends BaseMoviesBloc {
   NowPlayingMoviesBloc(super.usecase);
 }
+class TopRatedMoviesBloc extends BaseMoviesBloc {
+  TopRatedMoviesBloc(super.usecase);
+}
 
 class RecommendationMoviesBloc extends BaseMoviesBloc {
   RecommendationMoviesBloc(super.usecase);

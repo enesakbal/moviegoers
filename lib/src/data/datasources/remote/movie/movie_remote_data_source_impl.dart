@@ -9,6 +9,7 @@ import '../../../models/movie/movie_lists/now_playing/now_playing_movies_model.d
 import '../../../models/movie/movie_lists/popular/popular_movies_model.dart';
 import '../../../models/movie/movie_lists/recommendation/recommendation_movies_model.dart';
 import '../../../models/movie/movie_lists/similiar/similiar_movies_model.dart';
+import '../../../models/movie/movie_lists/top_rated/top_rated_movies_model.dart';
 import '../../../models/movie/movie_lists/upcoming/upcoming_movies_model.dart';
 import '../../../models/movie/movie_provider/movie_provider_model.dart';
 import '../../../models/movie/movie_video/movie_video_model.dart';
@@ -47,6 +48,18 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
     try {
       final response = await dioClient.get(UrlContants.upcomingMovies, queryParameters: {'page': page});
       final movieList = UpcomingMoviesModel.fromJson(response.data as Map<String, dynamic>);
+
+      return movieList;
+    } on Exception catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<TopRatedMoviesModel> getTopRatedMovies({required int page}) async {
+    try {
+      final response = await dioClient.get(UrlContants.topRatedMovies, queryParameters: {'page': page});
+      final movieList = TopRatedMoviesModel.fromJson(response.data as Map<String, dynamic>);
 
       return movieList;
     } on Exception catch (_) {

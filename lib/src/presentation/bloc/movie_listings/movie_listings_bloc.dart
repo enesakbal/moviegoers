@@ -50,6 +50,9 @@ class MovieListingsBloc extends Bloc<MovieListingsEvent, MovieListingsState> {
         case MovieListTypes.UPCOMING:
           result = await _usecase.getUpcomingMovies(page: _currentPage);
           break;
+        case MovieListTypes.TOPRATED:
+          result = await _usecase.getTopRatedMovies(page: _currentPage);
+          break;
         case MovieListTypes.RECOMMENDED:
           assert(event.movieID != null, 'MOVIEID CANT BE NULL');
           result = await _usecase.getMovieRecommendations(movieID: event.movieID!, page: _currentPage);

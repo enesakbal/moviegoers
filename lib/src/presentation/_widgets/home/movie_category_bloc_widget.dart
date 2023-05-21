@@ -18,37 +18,38 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final title = useState('error');
-    late MovieListTypes type;
+    final type = useState<MovieListTypes>(MovieListTypes.POPULAR);
 
     useEffect(() {
-      String newTitle = 'error';
+      title.value = 'ERROR';
 
       switch (T) {
         case NowPlayingMoviesBloc:
-          newTitle = LocaleKeys.home_now_playing.tr();
-          type = MovieListTypes.NOWPLAYING;
+          title.value = LocaleKeys.home_now_playing.tr();
+          type.value = MovieListTypes.NOWPLAYING;
           break;
         case UpcomingMoviesBloc:
-          newTitle = LocaleKeys.home_upcoming.tr();
-          type = MovieListTypes.UPCOMING;
+          title.value = LocaleKeys.home_upcoming.tr();
+          type.value = MovieListTypes.UPCOMING;
+          break;
+        case TopRatedMoviesBloc:
+          title.value = LocaleKeys.home_top_rated.tr();
+          type.value = MovieListTypes.TOPRATED;
           break;
         default:
       }
 
-      title.value = newTitle;
       context.read<T>().add(const FetchMovies(page: 1));
 
-      return () {
-        title.value = newTitle;
-      };
-    });
+      return () {};
+    }, []);
 
     return BlocBuilder<T, BaseMoviesState>(
       builder: (context, state) {
         if (state is BaseMoviesError) {
           return SliverToBoxAdapter(child: SizedBox(height: 325.h, child: Center(child: Text(state.message))));
         } else if (state is BaseMoviesHasData) {
-          return _hasDataBody(title, context, state, type);
+          return _hasDataBody(title, context, state, type.value);
         } else if (state is BaseMoviesEmpty) {
           return SliverToBoxAdapter(child: Container());
         } else {

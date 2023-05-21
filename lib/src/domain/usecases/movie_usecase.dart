@@ -28,6 +28,10 @@ class MovieUsecase {
     return repository.getUpcomingMovies(page: page);
   }
 
+  Future<Either<NetworkExceptions, MovieI>> getTopRatedMovies({required int page}) {
+    return repository.getTopRatedMovies(page: page);
+  }
+
   Future<Either<NetworkExceptions, MovieDetail>> getMovieDetails({required String movieID}) {
     return repository.getMovieDetails(movieID: movieID);
   }

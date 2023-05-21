@@ -8,6 +8,7 @@ import '../entities/movie/movie_list/now_playing_movies.dart';
 import '../entities/movie/movie_list/popular_movies.dart';
 import '../entities/movie/movie_list/recommendation_movies.dart';
 import '../entities/movie/movie_list/similiar_movies.dart';
+import '../entities/movie/movie_list/top_rated_movies.dart';
 import '../entities/movie/movie_list/upcoming_movies.dart';
 import '../entities/movie/movie_provider/movie_provider.dart';
 import '../entities/movie/movie_video/movie_video.dart';
@@ -21,6 +22,9 @@ abstract class MovieRepository {
 
   Future<Either<NetworkExceptions, UpcomingMovies>> getUpcomingMovies({required int page});
   //* /movie/upcoming
+
+  Future<Either<NetworkExceptions, TopRatedMovies>> getTopRatedMovies({required int page});
+  //* /movie/top_rated
 
   Future<Either<NetworkExceptions, MovieDetail>> getMovieDetails({required String movieID});
   //* /movie/{movie_id}
