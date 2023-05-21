@@ -16,6 +16,7 @@ import 'package:moviegoers/src/data/models/movie/movie_lists/now_playing/now_pla
 import 'package:moviegoers/src/data/models/movie/movie_lists/popular/popular_movies_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_lists/recommendation/recommendation_movies_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_lists/similiar/similiar_movies_model.dart';
+import 'package:moviegoers/src/data/models/movie/movie_lists/top_rated/top_rated_movies_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_lists/upcoming/upcoming_movies_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_provider/movie_provider_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_video/movie_video_model.dart';
@@ -77,6 +78,11 @@ void main() {
       expect(response, isA<UpcomingMoviesModel>());
     });
 
+    test('getTopRatedMovies should return TopRatedMoviesModel', () async {
+      final response = await dataSource.getTopRatedMovies(page: 1);
+      expect(response, isA<TopRatedMoviesModel>());
+    });
+
     test('getMovieDetails should return MovieDetailModel', () async {
       final response = await dataSource.getMovieDetails(movieID: tMovieID);
       expect(response, isA<MovieDetailModel>());
@@ -94,7 +100,6 @@ void main() {
 
     test('getMovieProviders should return MovieProviderModel', () async {
       final response = await dataSource.getMovieProviders(movieID: tMovieID);
-     
       expect(response, isA<MovieProviderModel>());
     });
 

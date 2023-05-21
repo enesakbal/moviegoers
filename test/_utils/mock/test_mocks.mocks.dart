@@ -3,56 +3,58 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i14;
+import 'dart:async' as _i15;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:moviegoers/src/core/init/network/network_exception.dart'
-    as _i15;
+    as _i16;
 import 'package:moviegoers/src/data/datasources/remote/movie/movie_remote_data_source.dart'
-    as _i26;
+    as _i27;
 import 'package:moviegoers/src/data/models/movie/movie_credit/movie_credit_model.dart'
-    as _i7;
-import 'package:moviegoers/src/data/models/movie/movie_detail/movie_detail_model.dart'
-    as _i6;
-import 'package:moviegoers/src/data/models/movie/movie_external_id/movie_external_id_model.dart'
     as _i8;
+import 'package:moviegoers/src/data/models/movie/movie_detail/movie_detail_model.dart'
+    as _i7;
+import 'package:moviegoers/src/data/models/movie/movie_external_id/movie_external_id_model.dart'
+    as _i9;
 import 'package:moviegoers/src/data/models/movie/movie_lists/now_playing/now_playing_movies_model.dart'
     as _i4;
 import 'package:moviegoers/src/data/models/movie/movie_lists/popular/popular_movies_model.dart'
     as _i3;
 import 'package:moviegoers/src/data/models/movie/movie_lists/recommendation/recommendation_movies_model.dart'
-    as _i11;
-import 'package:moviegoers/src/data/models/movie/movie_lists/similiar/similiar_movies_model.dart'
     as _i12;
+import 'package:moviegoers/src/data/models/movie/movie_lists/similiar/similiar_movies_model.dart'
+    as _i13;
+import 'package:moviegoers/src/data/models/movie/movie_lists/top_rated/top_rated_movies_model.dart'
+    as _i6;
 import 'package:moviegoers/src/data/models/movie/movie_lists/upcoming/upcoming_movies_model.dart'
     as _i5;
 import 'package:moviegoers/src/data/models/movie/movie_provider/movie_provider_model.dart'
-    as _i9;
-import 'package:moviegoers/src/data/models/movie/movie_video/movie_video_model.dart'
     as _i10;
+import 'package:moviegoers/src/data/models/movie/movie_video/movie_video_model.dart'
+    as _i11;
 import 'package:moviegoers/src/domain/entities/movie/movie_credit/movie_credit.dart'
-    as _i20;
-import 'package:moviegoers/src/domain/entities/movie/movie_detail/movie_detail.dart'
-    as _i19;
-import 'package:moviegoers/src/domain/entities/movie/movie_external_id/movie_external_id.dart'
     as _i21;
-import 'package:moviegoers/src/domain/entities/movie/movie_list/now_playing_movies.dart'
-    as _i17;
-import 'package:moviegoers/src/domain/entities/movie/movie_list/popular_movies.dart'
-    as _i16;
-import 'package:moviegoers/src/domain/entities/movie/movie_list/recommendation_movies.dart'
-    as _i23;
-import 'package:moviegoers/src/domain/entities/movie/movie_list/similiar_movies.dart'
-    as _i24;
-import 'package:moviegoers/src/domain/entities/movie/movie_list/upcoming_movies.dart'
-    as _i18;
-import 'package:moviegoers/src/domain/entities/movie/movie_video/movie_video.dart'
+import 'package:moviegoers/src/domain/entities/movie/movie_detail/movie_detail.dart'
+    as _i20;
+import 'package:moviegoers/src/domain/entities/movie/movie_external_id/movie_external_id.dart'
     as _i22;
-import 'package:moviegoers/src/domain/entities/movie/movie_provider/movie_provider.dart'
+import 'package:moviegoers/src/domain/entities/movie/movie_list/now_playing_movies.dart'
+    as _i18;
+import 'package:moviegoers/src/domain/entities/movie/movie_list/popular_movies.dart'
+    as _i17;
+import 'package:moviegoers/src/domain/entities/movie/movie_list/recommendation_movies.dart'
+    as _i24;
+import 'package:moviegoers/src/domain/entities/movie/movie_list/similiar_movies.dart'
     as _i25;
+import 'package:moviegoers/src/domain/entities/movie/movie_list/upcoming_movies.dart'
+    as _i19;
+import 'package:moviegoers/src/domain/entities/movie/movie_provider/movie_provider.dart'
+    as _i26;
+import 'package:moviegoers/src/domain/entities/movie/movie_video/movie_video.dart'
+    as _i23;
 import 'package:moviegoers/src/domain/repositories/movie_repository.dart'
-    as _i13;
+    as _i14;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -108,9 +110,9 @@ class _FakeUpcomingMoviesModel_3 extends _i1.SmartFake
         );
 }
 
-class _FakeMovieDetailModel_4 extends _i1.SmartFake
-    implements _i6.MovieDetailModel {
-  _FakeMovieDetailModel_4(
+class _FakeTopRatedMoviesModel_4 extends _i1.SmartFake
+    implements _i6.TopRatedMoviesModel {
+  _FakeTopRatedMoviesModel_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -119,9 +121,9 @@ class _FakeMovieDetailModel_4 extends _i1.SmartFake
         );
 }
 
-class _FakeMovieCreditModel_5 extends _i1.SmartFake
-    implements _i7.MovieCreditModel {
-  _FakeMovieCreditModel_5(
+class _FakeMovieDetailModel_5 extends _i1.SmartFake
+    implements _i7.MovieDetailModel {
+  _FakeMovieDetailModel_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -130,9 +132,9 @@ class _FakeMovieCreditModel_5 extends _i1.SmartFake
         );
 }
 
-class _FakeMovieExternalIdModel_6 extends _i1.SmartFake
-    implements _i8.MovieExternalIdModel {
-  _FakeMovieExternalIdModel_6(
+class _FakeMovieCreditModel_6 extends _i1.SmartFake
+    implements _i8.MovieCreditModel {
+  _FakeMovieCreditModel_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -141,9 +143,9 @@ class _FakeMovieExternalIdModel_6 extends _i1.SmartFake
         );
 }
 
-class _FakeMovieProviderModel_7 extends _i1.SmartFake
-    implements _i9.MovieProviderModel {
-  _FakeMovieProviderModel_7(
+class _FakeMovieExternalIdModel_7 extends _i1.SmartFake
+    implements _i9.MovieExternalIdModel {
+  _FakeMovieExternalIdModel_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -152,9 +154,9 @@ class _FakeMovieProviderModel_7 extends _i1.SmartFake
         );
 }
 
-class _FakeMovieVideoModel_8 extends _i1.SmartFake
-    implements _i10.MovieVideoModel {
-  _FakeMovieVideoModel_8(
+class _FakeMovieProviderModel_8 extends _i1.SmartFake
+    implements _i10.MovieProviderModel {
+  _FakeMovieProviderModel_8(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -163,9 +165,9 @@ class _FakeMovieVideoModel_8 extends _i1.SmartFake
         );
 }
 
-class _FakeRecommendationMoviesModel_9 extends _i1.SmartFake
-    implements _i11.RecommendationMoviesModel {
-  _FakeRecommendationMoviesModel_9(
+class _FakeMovieVideoModel_9 extends _i1.SmartFake
+    implements _i11.MovieVideoModel {
+  _FakeMovieVideoModel_9(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -174,9 +176,20 @@ class _FakeRecommendationMoviesModel_9 extends _i1.SmartFake
         );
 }
 
-class _FakeSimiliarMoviesModel_10 extends _i1.SmartFake
-    implements _i12.SimiliarMoviesModel {
-  _FakeSimiliarMoviesModel_10(
+class _FakeRecommendationMoviesModel_10 extends _i1.SmartFake
+    implements _i12.RecommendationMoviesModel {
+  _FakeRecommendationMoviesModel_10(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeSimiliarMoviesModel_11 extends _i1.SmartFake
+    implements _i13.SimiliarMoviesModel {
+  _FakeSimiliarMoviesModel_11(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -188,14 +201,14 @@ class _FakeSimiliarMoviesModel_10 extends _i1.SmartFake
 /// A class which mocks [MovieRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMovieRepository extends _i1.Mock implements _i13.MovieRepository {
+class MockMovieRepository extends _i1.Mock implements _i14.MovieRepository {
   MockMovieRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i14.Future<
-      _i2.Either<_i15.NetworkExceptions, _i16.PopularMovies>> getPopularMovies(
+  _i15.Future<
+      _i2.Either<_i16.NetworkExceptions, _i17.PopularMovies>> getPopularMovies(
           {required int? page}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -203,9 +216,9 @@ class MockMovieRepository extends _i1.Mock implements _i13.MovieRepository {
           [],
           {#page: page},
         ),
-        returnValue: _i14.Future<
-                _i2.Either<_i15.NetworkExceptions, _i16.PopularMovies>>.value(
-            _FakeEither_0<_i15.NetworkExceptions, _i16.PopularMovies>(
+        returnValue: _i15.Future<
+                _i2.Either<_i16.NetworkExceptions, _i17.PopularMovies>>.value(
+            _FakeEither_0<_i16.NetworkExceptions, _i17.PopularMovies>(
           this,
           Invocation.method(
             #getPopularMovies,
@@ -213,19 +226,19 @@ class MockMovieRepository extends _i1.Mock implements _i13.MovieRepository {
             {#page: page},
           ),
         )),
-      ) as _i14.Future<_i2.Either<_i15.NetworkExceptions, _i16.PopularMovies>>);
+      ) as _i15.Future<_i2.Either<_i16.NetworkExceptions, _i17.PopularMovies>>);
   @override
-  _i14.Future<_i2.Either<_i15.NetworkExceptions, _i17.NowPlayingMovies>>
+  _i15.Future<_i2.Either<_i16.NetworkExceptions, _i18.NowPlayingMovies>>
       getNowPlayingMovies({required int? page}) => (super.noSuchMethod(
             Invocation.method(
               #getNowPlayingMovies,
               [],
               {#page: page},
             ),
-            returnValue: _i14.Future<
-                    _i2.Either<_i15.NetworkExceptions,
-                        _i17.NowPlayingMovies>>.value(
-                _FakeEither_0<_i15.NetworkExceptions, _i17.NowPlayingMovies>(
+            returnValue: _i15.Future<
+                    _i2.Either<_i16.NetworkExceptions,
+                        _i18.NowPlayingMovies>>.value(
+                _FakeEither_0<_i16.NetworkExceptions, _i18.NowPlayingMovies>(
               this,
               Invocation.method(
                 #getNowPlayingMovies,
@@ -233,20 +246,20 @@ class MockMovieRepository extends _i1.Mock implements _i13.MovieRepository {
                 {#page: page},
               ),
             )),
-          ) as _i14.Future<
-              _i2.Either<_i15.NetworkExceptions, _i17.NowPlayingMovies>>);
+          ) as _i15.Future<
+              _i2.Either<_i16.NetworkExceptions, _i18.NowPlayingMovies>>);
   @override
-  _i14.Future<_i2.Either<_i15.NetworkExceptions, _i18.UpcomingMovies>>
+  _i15.Future<_i2.Either<_i16.NetworkExceptions, _i19.UpcomingMovies>>
       getUpcomingMovies({required int? page}) => (super.noSuchMethod(
             Invocation.method(
               #getUpcomingMovies,
               [],
               {#page: page},
             ),
-            returnValue: _i14.Future<
-                    _i2.Either<_i15.NetworkExceptions,
-                        _i18.UpcomingMovies>>.value(
-                _FakeEither_0<_i15.NetworkExceptions, _i18.UpcomingMovies>(
+            returnValue: _i15.Future<
+                    _i2.Either<_i16.NetworkExceptions,
+                        _i19.UpcomingMovies>>.value(
+                _FakeEither_0<_i16.NetworkExceptions, _i19.UpcomingMovies>(
               this,
               Invocation.method(
                 #getUpcomingMovies,
@@ -254,19 +267,19 @@ class MockMovieRepository extends _i1.Mock implements _i13.MovieRepository {
                 {#page: page},
               ),
             )),
-          ) as _i14
-              .Future<_i2.Either<_i15.NetworkExceptions, _i18.UpcomingMovies>>);
+          ) as _i15
+              .Future<_i2.Either<_i16.NetworkExceptions, _i19.UpcomingMovies>>);
   @override
-  _i14.Future<_i2.Either<_i15.NetworkExceptions, _i19.MovieDetail>>
+  _i15.Future<_i2.Either<_i16.NetworkExceptions, _i20.MovieDetail>>
       getMovieDetails({required String? movieID}) => (super.noSuchMethod(
             Invocation.method(
               #getMovieDetails,
               [],
               {#movieID: movieID},
             ),
-            returnValue: _i14.Future<
-                    _i2.Either<_i15.NetworkExceptions, _i19.MovieDetail>>.value(
-                _FakeEither_0<_i15.NetworkExceptions, _i19.MovieDetail>(
+            returnValue: _i15.Future<
+                    _i2.Either<_i16.NetworkExceptions, _i20.MovieDetail>>.value(
+                _FakeEither_0<_i16.NetworkExceptions, _i20.MovieDetail>(
               this,
               Invocation.method(
                 #getMovieDetails,
@@ -274,19 +287,19 @@ class MockMovieRepository extends _i1.Mock implements _i13.MovieRepository {
                 {#movieID: movieID},
               ),
             )),
-          ) as _i14
-              .Future<_i2.Either<_i15.NetworkExceptions, _i19.MovieDetail>>);
+          ) as _i15
+              .Future<_i2.Either<_i16.NetworkExceptions, _i20.MovieDetail>>);
   @override
-  _i14.Future<_i2.Either<_i15.NetworkExceptions, _i20.MovieCredit>>
+  _i15.Future<_i2.Either<_i16.NetworkExceptions, _i21.MovieCredit>>
       getMovieCredits({required String? movieID}) => (super.noSuchMethod(
             Invocation.method(
               #getMovieCredits,
               [],
               {#movieID: movieID},
             ),
-            returnValue: _i14.Future<
-                    _i2.Either<_i15.NetworkExceptions, _i20.MovieCredit>>.value(
-                _FakeEither_0<_i15.NetworkExceptions, _i20.MovieCredit>(
+            returnValue: _i15.Future<
+                    _i2.Either<_i16.NetworkExceptions, _i21.MovieCredit>>.value(
+                _FakeEither_0<_i16.NetworkExceptions, _i21.MovieCredit>(
               this,
               Invocation.method(
                 #getMovieCredits,
@@ -294,20 +307,20 @@ class MockMovieRepository extends _i1.Mock implements _i13.MovieRepository {
                 {#movieID: movieID},
               ),
             )),
-          ) as _i14
-              .Future<_i2.Either<_i15.NetworkExceptions, _i20.MovieCredit>>);
+          ) as _i15
+              .Future<_i2.Either<_i16.NetworkExceptions, _i21.MovieCredit>>);
   @override
-  _i14.Future<_i2.Either<_i15.NetworkExceptions, _i21.MovieExternalId>>
+  _i15.Future<_i2.Either<_i16.NetworkExceptions, _i22.MovieExternalId>>
       getMovieExternalIDs({required String? movieID}) => (super.noSuchMethod(
             Invocation.method(
               #getMovieExternalIDs,
               [],
               {#movieID: movieID},
             ),
-            returnValue: _i14.Future<
-                    _i2.Either<_i15.NetworkExceptions,
-                        _i21.MovieExternalId>>.value(
-                _FakeEither_0<_i15.NetworkExceptions, _i21.MovieExternalId>(
+            returnValue: _i15.Future<
+                    _i2.Either<_i16.NetworkExceptions,
+                        _i22.MovieExternalId>>.value(
+                _FakeEither_0<_i16.NetworkExceptions, _i22.MovieExternalId>(
               this,
               Invocation.method(
                 #getMovieExternalIDs,
@@ -315,19 +328,19 @@ class MockMovieRepository extends _i1.Mock implements _i13.MovieRepository {
                 {#movieID: movieID},
               ),
             )),
-          ) as _i14.Future<
-              _i2.Either<_i15.NetworkExceptions, _i21.MovieExternalId>>);
+          ) as _i15.Future<
+              _i2.Either<_i16.NetworkExceptions, _i22.MovieExternalId>>);
   @override
-  _i14.Future<_i2.Either<_i15.NetworkExceptions, _i22.MovieVideo>>
+  _i15.Future<_i2.Either<_i16.NetworkExceptions, _i23.MovieVideo>>
       getMovieVideos({required String? movieID}) => (super.noSuchMethod(
             Invocation.method(
               #getMovieVideos,
               [],
               {#movieID: movieID},
             ),
-            returnValue: _i14.Future<
-                    _i2.Either<_i15.NetworkExceptions, _i22.MovieVideo>>.value(
-                _FakeEither_0<_i15.NetworkExceptions, _i22.MovieVideo>(
+            returnValue: _i15.Future<
+                    _i2.Either<_i16.NetworkExceptions, _i23.MovieVideo>>.value(
+                _FakeEither_0<_i16.NetworkExceptions, _i23.MovieVideo>(
               this,
               Invocation.method(
                 #getMovieVideos,
@@ -335,10 +348,10 @@ class MockMovieRepository extends _i1.Mock implements _i13.MovieRepository {
                 {#movieID: movieID},
               ),
             )),
-          ) as _i14
-              .Future<_i2.Either<_i15.NetworkExceptions, _i22.MovieVideo>>);
+          ) as _i15
+              .Future<_i2.Either<_i16.NetworkExceptions, _i23.MovieVideo>>);
   @override
-  _i14.Future<_i2.Either<_i15.NetworkExceptions, _i23.RecommendationMovies>>
+  _i15.Future<_i2.Either<_i16.NetworkExceptions, _i24.RecommendationMovies>>
       getMovieRecommendations({
     required String? movieID,
     required int? page,
@@ -352,10 +365,10 @@ class MockMovieRepository extends _i1.Mock implements _i13.MovieRepository {
                 #page: page,
               },
             ),
-            returnValue: _i14.Future<
-                _i2.Either<_i15.NetworkExceptions,
-                    _i23.RecommendationMovies>>.value(_FakeEither_0<
-                _i15.NetworkExceptions, _i23.RecommendationMovies>(
+            returnValue: _i15.Future<
+                _i2.Either<_i16.NetworkExceptions,
+                    _i24.RecommendationMovies>>.value(_FakeEither_0<
+                _i16.NetworkExceptions, _i24.RecommendationMovies>(
               this,
               Invocation.method(
                 #getMovieRecommendations,
@@ -366,10 +379,10 @@ class MockMovieRepository extends _i1.Mock implements _i13.MovieRepository {
                 },
               ),
             )),
-          ) as _i14.Future<
-              _i2.Either<_i15.NetworkExceptions, _i23.RecommendationMovies>>);
+          ) as _i15.Future<
+              _i2.Either<_i16.NetworkExceptions, _i24.RecommendationMovies>>);
   @override
-  _i14.Future<_i2.Either<_i15.NetworkExceptions, _i24.SimiliarMovies>>
+  _i15.Future<_i2.Either<_i16.NetworkExceptions, _i25.SimiliarMovies>>
       getMovieSimilars({
     required String? movieID,
     required int? page,
@@ -383,10 +396,10 @@ class MockMovieRepository extends _i1.Mock implements _i13.MovieRepository {
                 #page: page,
               },
             ),
-            returnValue: _i14.Future<
-                    _i2.Either<_i15.NetworkExceptions,
-                        _i24.SimiliarMovies>>.value(
-                _FakeEither_0<_i15.NetworkExceptions, _i24.SimiliarMovies>(
+            returnValue: _i15.Future<
+                    _i2.Either<_i16.NetworkExceptions,
+                        _i25.SimiliarMovies>>.value(
+                _FakeEither_0<_i16.NetworkExceptions, _i25.SimiliarMovies>(
               this,
               Invocation.method(
                 #getMovieSimilars,
@@ -397,11 +410,11 @@ class MockMovieRepository extends _i1.Mock implements _i13.MovieRepository {
                 },
               ),
             )),
-          ) as _i14
-              .Future<_i2.Either<_i15.NetworkExceptions, _i24.SimiliarMovies>>);
+          ) as _i15
+              .Future<_i2.Either<_i16.NetworkExceptions, _i25.SimiliarMovies>>);
   @override
-  _i14.Future<
-      _i2.Either<_i15.NetworkExceptions, _i25.MovieProvider>> getMovieProviders(
+  _i15.Future<
+      _i2.Either<_i16.NetworkExceptions, _i26.MovieProvider>> getMovieProviders(
           {required String? movieID}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -409,9 +422,9 @@ class MockMovieRepository extends _i1.Mock implements _i13.MovieRepository {
           [],
           {#movieID: movieID},
         ),
-        returnValue: _i14.Future<
-                _i2.Either<_i15.NetworkExceptions, _i25.MovieProvider>>.value(
-            _FakeEither_0<_i15.NetworkExceptions, _i25.MovieProvider>(
+        returnValue: _i15.Future<
+                _i2.Either<_i16.NetworkExceptions, _i26.MovieProvider>>.value(
+            _FakeEither_0<_i16.NetworkExceptions, _i26.MovieProvider>(
           this,
           Invocation.method(
             #getMovieProviders,
@@ -419,20 +432,20 @@ class MockMovieRepository extends _i1.Mock implements _i13.MovieRepository {
             {#movieID: movieID},
           ),
         )),
-      ) as _i14.Future<_i2.Either<_i15.NetworkExceptions, _i25.MovieProvider>>);
+      ) as _i15.Future<_i2.Either<_i16.NetworkExceptions, _i26.MovieProvider>>);
 }
 
 /// A class which mocks [MovieRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockMovieRemoteDataSource extends _i1.Mock
-    implements _i26.MovieRemoteDataSource {
+    implements _i27.MovieRemoteDataSource {
   MockMovieRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i14.Future<_i3.PopularMoviesModel> getPopularMovies({required int? page}) =>
+  _i15.Future<_i3.PopularMoviesModel> getPopularMovies({required int? page}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getPopularMovies,
@@ -440,7 +453,7 @@ class MockMovieRemoteDataSource extends _i1.Mock
           {#page: page},
         ),
         returnValue:
-            _i14.Future<_i3.PopularMoviesModel>.value(_FakePopularMoviesModel_1(
+            _i15.Future<_i3.PopularMoviesModel>.value(_FakePopularMoviesModel_1(
           this,
           Invocation.method(
             #getPopularMovies,
@@ -448,9 +461,9 @@ class MockMovieRemoteDataSource extends _i1.Mock
             {#page: page},
           ),
         )),
-      ) as _i14.Future<_i3.PopularMoviesModel>);
+      ) as _i15.Future<_i3.PopularMoviesModel>);
   @override
-  _i14.Future<_i4.NowPlayingMoviesModel> getNowPlayingMovies(
+  _i15.Future<_i4.NowPlayingMoviesModel> getNowPlayingMovies(
           {required int? page}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -458,7 +471,7 @@ class MockMovieRemoteDataSource extends _i1.Mock
           [],
           {#page: page},
         ),
-        returnValue: _i14.Future<_i4.NowPlayingMoviesModel>.value(
+        returnValue: _i15.Future<_i4.NowPlayingMoviesModel>.value(
             _FakeNowPlayingMoviesModel_2(
           this,
           Invocation.method(
@@ -467,9 +480,9 @@ class MockMovieRemoteDataSource extends _i1.Mock
             {#page: page},
           ),
         )),
-      ) as _i14.Future<_i4.NowPlayingMoviesModel>);
+      ) as _i15.Future<_i4.NowPlayingMoviesModel>);
   @override
-  _i14.Future<_i5.UpcomingMoviesModel> getUpcomingMovies(
+  _i15.Future<_i5.UpcomingMoviesModel> getUpcomingMovies(
           {required int? page}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -477,7 +490,7 @@ class MockMovieRemoteDataSource extends _i1.Mock
           [],
           {#page: page},
         ),
-        returnValue: _i14.Future<_i5.UpcomingMoviesModel>.value(
+        returnValue: _i15.Future<_i5.UpcomingMoviesModel>.value(
             _FakeUpcomingMoviesModel_3(
           this,
           Invocation.method(
@@ -486,9 +499,28 @@ class MockMovieRemoteDataSource extends _i1.Mock
             {#page: page},
           ),
         )),
-      ) as _i14.Future<_i5.UpcomingMoviesModel>);
+      ) as _i15.Future<_i5.UpcomingMoviesModel>);
   @override
-  _i14.Future<_i6.MovieDetailModel> getMovieDetails(
+  _i15.Future<_i6.TopRatedMoviesModel> getTopRatedMovies(
+          {required int? page}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getTopRatedMovies,
+          [],
+          {#page: page},
+        ),
+        returnValue: _i15.Future<_i6.TopRatedMoviesModel>.value(
+            _FakeTopRatedMoviesModel_4(
+          this,
+          Invocation.method(
+            #getTopRatedMovies,
+            [],
+            {#page: page},
+          ),
+        )),
+      ) as _i15.Future<_i6.TopRatedMoviesModel>);
+  @override
+  _i15.Future<_i7.MovieDetailModel> getMovieDetails(
           {required String? movieID}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -497,7 +529,7 @@ class MockMovieRemoteDataSource extends _i1.Mock
           {#movieID: movieID},
         ),
         returnValue:
-            _i14.Future<_i6.MovieDetailModel>.value(_FakeMovieDetailModel_4(
+            _i15.Future<_i7.MovieDetailModel>.value(_FakeMovieDetailModel_5(
           this,
           Invocation.method(
             #getMovieDetails,
@@ -505,9 +537,9 @@ class MockMovieRemoteDataSource extends _i1.Mock
             {#movieID: movieID},
           ),
         )),
-      ) as _i14.Future<_i6.MovieDetailModel>);
+      ) as _i15.Future<_i7.MovieDetailModel>);
   @override
-  _i14.Future<_i7.MovieCreditModel> getMovieCredits(
+  _i15.Future<_i8.MovieCreditModel> getMovieCredits(
           {required String? movieID}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -516,7 +548,7 @@ class MockMovieRemoteDataSource extends _i1.Mock
           {#movieID: movieID},
         ),
         returnValue:
-            _i14.Future<_i7.MovieCreditModel>.value(_FakeMovieCreditModel_5(
+            _i15.Future<_i8.MovieCreditModel>.value(_FakeMovieCreditModel_6(
           this,
           Invocation.method(
             #getMovieCredits,
@@ -524,9 +556,9 @@ class MockMovieRemoteDataSource extends _i1.Mock
             {#movieID: movieID},
           ),
         )),
-      ) as _i14.Future<_i7.MovieCreditModel>);
+      ) as _i15.Future<_i8.MovieCreditModel>);
   @override
-  _i14.Future<_i8.MovieExternalIdModel> getMovieExternalIDs(
+  _i15.Future<_i9.MovieExternalIdModel> getMovieExternalIDs(
           {required String? movieID}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -534,8 +566,8 @@ class MockMovieRemoteDataSource extends _i1.Mock
           [],
           {#movieID: movieID},
         ),
-        returnValue: _i14.Future<_i8.MovieExternalIdModel>.value(
-            _FakeMovieExternalIdModel_6(
+        returnValue: _i15.Future<_i9.MovieExternalIdModel>.value(
+            _FakeMovieExternalIdModel_7(
           this,
           Invocation.method(
             #getMovieExternalIDs,
@@ -543,9 +575,9 @@ class MockMovieRemoteDataSource extends _i1.Mock
             {#movieID: movieID},
           ),
         )),
-      ) as _i14.Future<_i8.MovieExternalIdModel>);
+      ) as _i15.Future<_i9.MovieExternalIdModel>);
   @override
-  _i14.Future<_i9.MovieProviderModel> getMovieProviders(
+  _i15.Future<_i10.MovieProviderModel> getMovieProviders(
           {required String? movieID}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -553,8 +585,8 @@ class MockMovieRemoteDataSource extends _i1.Mock
           [],
           {#movieID: movieID},
         ),
-        returnValue:
-            _i14.Future<_i9.MovieProviderModel>.value(_FakeMovieProviderModel_7(
+        returnValue: _i15.Future<_i10.MovieProviderModel>.value(
+            _FakeMovieProviderModel_8(
           this,
           Invocation.method(
             #getMovieProviders,
@@ -562,9 +594,9 @@ class MockMovieRemoteDataSource extends _i1.Mock
             {#movieID: movieID},
           ),
         )),
-      ) as _i14.Future<_i9.MovieProviderModel>);
+      ) as _i15.Future<_i10.MovieProviderModel>);
   @override
-  _i14.Future<_i10.MovieVideoModel> getMovieVideos(
+  _i15.Future<_i11.MovieVideoModel> getMovieVideos(
           {required String? movieID}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -573,7 +605,7 @@ class MockMovieRemoteDataSource extends _i1.Mock
           {#movieID: movieID},
         ),
         returnValue:
-            _i14.Future<_i10.MovieVideoModel>.value(_FakeMovieVideoModel_8(
+            _i15.Future<_i11.MovieVideoModel>.value(_FakeMovieVideoModel_9(
           this,
           Invocation.method(
             #getMovieVideos,
@@ -581,9 +613,9 @@ class MockMovieRemoteDataSource extends _i1.Mock
             {#movieID: movieID},
           ),
         )),
-      ) as _i14.Future<_i10.MovieVideoModel>);
+      ) as _i15.Future<_i11.MovieVideoModel>);
   @override
-  _i14.Future<_i11.RecommendationMoviesModel> getMovieRecommendations({
+  _i15.Future<_i12.RecommendationMoviesModel> getMovieRecommendations({
     required String? movieID,
     required int? page,
   }) =>
@@ -596,8 +628,8 @@ class MockMovieRemoteDataSource extends _i1.Mock
             #page: page,
           },
         ),
-        returnValue: _i14.Future<_i11.RecommendationMoviesModel>.value(
-            _FakeRecommendationMoviesModel_9(
+        returnValue: _i15.Future<_i12.RecommendationMoviesModel>.value(
+            _FakeRecommendationMoviesModel_10(
           this,
           Invocation.method(
             #getMovieRecommendations,
@@ -608,9 +640,9 @@ class MockMovieRemoteDataSource extends _i1.Mock
             },
           ),
         )),
-      ) as _i14.Future<_i11.RecommendationMoviesModel>);
+      ) as _i15.Future<_i12.RecommendationMoviesModel>);
   @override
-  _i14.Future<_i12.SimiliarMoviesModel> getMovieSimilars({
+  _i15.Future<_i13.SimiliarMoviesModel> getMovieSimilars({
     required String? movieID,
     required int? page,
   }) =>
@@ -623,8 +655,8 @@ class MockMovieRemoteDataSource extends _i1.Mock
             #page: page,
           },
         ),
-        returnValue: _i14.Future<_i12.SimiliarMoviesModel>.value(
-            _FakeSimiliarMoviesModel_10(
+        returnValue: _i15.Future<_i13.SimiliarMoviesModel>.value(
+            _FakeSimiliarMoviesModel_11(
           this,
           Invocation.method(
             #getMovieSimilars,
@@ -635,5 +667,5 @@ class MockMovieRemoteDataSource extends _i1.Mock
             },
           ),
         )),
-      ) as _i14.Future<_i12.SimiliarMoviesModel>);
+      ) as _i15.Future<_i13.SimiliarMoviesModel>);
 }
