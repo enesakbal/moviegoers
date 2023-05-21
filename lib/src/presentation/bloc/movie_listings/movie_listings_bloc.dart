@@ -50,6 +50,14 @@ class MovieListingsBloc extends Bloc<MovieListingsEvent, MovieListingsState> {
         case MovieListTypes.UPCOMING:
           result = await _usecase.getUpcomingMovies(page: _currentPage);
           break;
+        case MovieListTypes.RECOMMENDED:
+          assert(event.movieID != null, 'MOVIEID CANT BE NULL');
+          result = await _usecase.getMovieRecommendations(movieID: event.movieID!, page: _currentPage);
+          break;
+        case MovieListTypes.SIMILIAR:
+          assert(event.movieID != null, 'MOVIEID CANT BE NULL');
+          result = await _usecase.getMovieSimilars(movieID: event.movieID!, page: _currentPage);
+          break;
       }
 
       result.fold((failure) {

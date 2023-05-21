@@ -44,6 +44,7 @@ abstract class _$AppRouter extends RootStackRouter {
         child: MovieListingView(
           args.type,
           key: args.key,
+          movieID: args.movieID,
         ),
       );
     },
@@ -127,12 +128,14 @@ class MovieListingRoute extends PageRouteInfo<MovieListingRouteArgs> {
   MovieListingRoute({
     required MovieListTypes type,
     Key? key,
+    String? movieID,
     List<PageRouteInfo>? children,
   }) : super(
           MovieListingRoute.name,
           args: MovieListingRouteArgs(
             type: type,
             key: key,
+            movieID: movieID,
           ),
           initialChildren: children,
         );
@@ -146,15 +149,18 @@ class MovieListingRouteArgs {
   const MovieListingRouteArgs({
     required this.type,
     this.key,
+    this.movieID,
   });
 
   final MovieListTypes type;
 
   final Key? key;
 
+  final String? movieID;
+
   @override
   String toString() {
-    return 'MovieListingRouteArgs{type: $type, key: $key}';
+    return 'MovieListingRouteArgs{type: $type, key: $key, movieID: $movieID}';
   }
 }
 

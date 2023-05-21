@@ -13,8 +13,9 @@ import '../bloc/movie_listings/movie_listings_bloc.dart';
 @RoutePage()
 class MovieListingView extends HookWidget {
   final MovieListTypes type;
+  final String? movieID;
 
-  const MovieListingView(this.type, {super.key});
+  const MovieListingView(this.type, {super.key, this.movieID});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class MovieListingView extends HookWidget {
 
     Future<void> scrollListener() async {
       if (controller.position.maxScrollExtent - controller.offset == 0) {
-        context.read<MovieListingsBloc>().add(FetchMovies(type));
+        context.read<MovieListingsBloc>().add(FetchMovies(type, movieID: movieID));
       }
     }
 
@@ -30,7 +31,7 @@ class MovieListingView extends HookWidget {
       if (context.read<MovieListingsBloc>().movieList.isNotEmpty) {
         context.read<MovieListingsBloc>().resetData();
       }
-      context.read<MovieListingsBloc>().add(FetchMovies(type));
+      context.read<MovieListingsBloc>().add(FetchMovies(type, movieID: movieID));
       controller.addListener(scrollListener);
       return () {
         controller.removeListener(scrollListener);

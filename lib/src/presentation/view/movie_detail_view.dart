@@ -19,6 +19,7 @@ import '../../core/components/card/movie_card.dart';
 import '../../core/components/dialogs/base_bottom_sheet.dart';
 import '../../core/components/dialogs/base_info_dialog.dart';
 import '../../core/components/indicator/base_indicator.dart';
+import '../../core/constants/enum/movie_enum.dart';
 import '../../core/constants/imdb_image_constants.dart';
 import '../../core/constants/youtube_video_constants.dart';
 import '../../core/extensions/int_extensions.dart';
@@ -526,9 +527,13 @@ class MovieDetailView extends HookWidget {
                       'Recommended',
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 22.sp),
                     ),
-                    Text(
-                      LocaleKeys.home_view_all.tr(),
-                      style: Theme.of(context).textTheme.titleSmall,
+                    GestureDetector(
+                      onTap: () async =>
+                          router.push(MovieListingRoute(type: MovieListTypes.RECOMMENDED, movieID: movieID)),
+                      child: Text(
+                        LocaleKeys.home_view_all.tr(),
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
                     ),
                   ],
                 ),
@@ -578,9 +583,13 @@ class MovieDetailView extends HookWidget {
                       'Similiar',
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 22.sp),
                     ),
-                    Text(
-                      LocaleKeys.home_view_all.tr(),
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(),
+                    GestureDetector(
+                      onTap: () async =>
+                          router.push(MovieListingRoute(type: MovieListTypes.SIMILIAR, movieID: movieID)),
+                      child: Text(
+                        LocaleKeys.home_view_all.tr(),
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(),
+                      ),
                     ),
                   ],
                 ),

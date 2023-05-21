@@ -31,6 +31,8 @@ abstract class MovieRemoteDataSource {
 
   Future<SimiliarMoviesModel> getMovieSimilars({required String movieID, required int page});
 
+  
+
   // Future<void> rateMovie({required String movieID});
 
   // Future<void> deleteRateMovie({required String movieID});

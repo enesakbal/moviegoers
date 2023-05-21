@@ -1,4 +1,4 @@
-enum MovieListTypes { POPULAR, UPCOMING, NOWPLAYING }
+enum MovieListTypes { POPULAR, UPCOMING, NOWPLAYING, RECOMMENDED, SIMILIAR }
 
 extension Extension on MovieListTypes {
   String name() {
@@ -9,6 +9,10 @@ extension Extension on MovieListTypes {
         return 'Upcoming';
       case MovieListTypes.NOWPLAYING:
         return 'Now Playing';
+      case MovieListTypes.RECOMMENDED:
+        return 'Recommended';
+      case MovieListTypes.SIMILIAR:
+        return 'Similiar';
     }
   }
 }
