@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../config/router/app_router.dart';
+import '../../core/components/appbar/custom_app_bar.dart';
 import '../../core/components/card/movie_card.dart';
 import '../../core/components/indicator/base_indicator.dart';
 import '../../core/constants/enum/movie_enum.dart';
@@ -37,14 +38,12 @@ class MovieListingView extends HookWidget {
         controller.removeListener(scrollListener);
         // context.read<MovieListingsBloc>().resetData();
       };
-    });
+    }, []);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          '${type.name()} Movies',
-          style: Theme.of(context).appBarTheme.titleTextStyle!.copyWith(fontSize: 22.sp),
-        ),
+      appBar: BaseAppBar(
+        title: '${type.name()} Movies',
+        titleStyle: Theme.of(context).appBarTheme.titleTextStyle!.copyWith(fontSize: 22.sp),
       ),
       body: BlocBuilder<MovieListingsBloc, MovieListingsState>(
         builder: (context, state) {
