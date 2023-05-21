@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../config/gen/assets.gen.dart';
 import '../../../config/gen/colors.gen.dart';
 import '../../../config/router/app_router.dart';
+import '../search_bar/search_bar.dart';
 
 class SliverBaseAppBar extends StatelessWidget {
   const SliverBaseAppBar({super.key});
@@ -26,20 +27,30 @@ class SliverBaseAppBar extends StatelessWidget {
 }
 
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const BaseAppBar({super.key, required this.title, this.hasRadius = false});
+  const BaseAppBar({
+    super.key,
+    this.title,
+    this.hasSearch = false,
+    this.titleStyle,
+    this.searchBarController,
+  })  : assert(title != null || hasSearch, 'Title must not be empty or hasSearch must true'),
+        assert(hasSearch ? hasSearch && searchBarController != null : !hasSearch,
+            'When hasSearh is true, you must give a controller for TextField');
 
-  final String title;
-  final bool hasRadius;
+  final String? title;
+  final bool hasSearch;
+  final TextStyle? titleStyle;
+  final TextEditingController? searchBarController;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: AutoSizeText(title, maxLines: 1),
+      title: hasSearch
+          ? SearchBar(controller: searchBarController!)
+          : AutoSizeText(title!, maxLines: 1, style: titleStyle),
       elevation: 12,
       toolbarHeight: 70,
-      leading: const CustomBackLeading(),
-      actions: const [],
-      leadingWidth: 25,
+      leadingWidth: 45,
       shadowColor: MGColors.blue.shade600.withOpacity(0.3),
     );
   }
