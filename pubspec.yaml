@@ -7,6 +7,7 @@ environment:
   sdk: '>=2.19.4 <3.0.0'
 
 dependencies:
+  animated_text_kit: ^4.2.2
   auto_route: ^6.0.0+1
   auto_size_text: ^3.0.0
   cached_network_image: ^3.2.3
