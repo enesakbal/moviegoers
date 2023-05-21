@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/components/appbar/custom_app_bar.dart';
 import '../_widgets/home/home_carousel_bloc_widget.dart';
+import '../_widgets/home/home_search_bar.dart';
 import '../_widgets/home/movie_category_bloc_widget.dart';
 import '../bloc/movies/base_movie_blocs.dart';
 
@@ -18,6 +19,9 @@ class HomeView extends StatelessWidget {
           //* Appbar
           SliverBaseAppBar(),
 
+          //* Search
+          HomeSearchBar(),
+
           //* POPULAR CAROUSEL
           PopularCarouselBlocWidget(),
 
@@ -26,6 +30,9 @@ class HomeView extends StatelessWidget {
 
           //* UPCOMING
           MovieCategoryBlocWidget<UpcomingMoviesBloc>(),
+
+          //* TOP RATED
+          MovieCategoryBlocWidget<TopRatedMoviesBloc>(),
         ],
       ),
     );
