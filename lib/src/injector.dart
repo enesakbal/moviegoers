@@ -38,6 +38,7 @@ Future<void> init() async {
     ..registerFactory<UpcomingMoviesBloc>(() => UpcomingMoviesBloc(injector()))
     ..registerFactory<PopularMoviesBloc>(() => PopularMoviesBloc(injector()))
     ..registerFactory<NowPlayingMoviesBloc>(() => NowPlayingMoviesBloc(injector()))
+    ..registerFactory<TopRatedMoviesBloc>(() => TopRatedMoviesBloc(injector()))
     ..registerFactory<RecommendationMoviesBloc>(() => RecommendationMoviesBloc(injector()))
     ..registerFactory<SimiliarMoviesBloc>(() => SimiliarMoviesBloc(injector()))
     ..registerFactory<MovieDetailBloc>(() => MovieDetailBloc(injector()))
