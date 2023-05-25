@@ -5,6 +5,7 @@ import '../../core/init/network/network_exception.dart';
 import '../entities/movie/movie_credit/movie_credit.dart';
 import '../entities/movie/movie_detail/movie_detail.dart';
 import '../entities/movie/movie_external_id/movie_external_id.dart';
+import '../entities/movie/movie_keywords/movie_keywords.dart';
 import '../entities/movie/movie_list/base/movie_interface.dart';
 import '../entities/movie/movie_list/recommendation_movies.dart';
 import '../entities/movie/movie_list/similiar_movies.dart';
@@ -61,6 +62,10 @@ class MovieUsecase {
 
   Future<Either<NetworkExceptions, MovieProvider>> getMovieProviders({required String movieID}) {
     return repository.getMovieProviders(movieID: movieID);
+  }
+
+  Future<Either<NetworkExceptions, MovieKeywords>> getMovieKeywords({required String movieID}) {
+    return repository.getMovieKeywords(movieID: movieID);
   }
 
   //  Future<Either<NetworkExceptions, MovieExternalId>> rateMovie({required String movieID}) {
