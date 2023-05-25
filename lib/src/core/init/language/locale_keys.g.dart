@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-abstract class  LocaleKeys {
+abstract class LocaleKeys {
   static const splash_welcome = 'splash.welcome';
   static const splash = 'splash';
   static const home_popular = 'home.popular';
