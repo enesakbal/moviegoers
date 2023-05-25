@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../injector.dart' as di;
 import '../../bloc/blocs.dart';
+import '../../bloc/movie_keywords/movie_keywords_bloc.dart';
 import '../../bloc/movie_provider/movie_provider_bloc.dart';
 import '../../bloc/movie_video/movie_video_bloc.dart';
 import '../../view/movie_detail_view.dart';
@@ -22,6 +23,7 @@ class MovieBlocProviderWidget extends StatelessWidget {
     final movieCreditBloc = di.injector<MovieCreditBloc>();
     final movieProviderBloc = di.injector<MovieProviderBloc>();
     final movieVideoBloc = di.injector<MovieVideoBloc>();
+    final movieKeywordsBloc = di.injector<MovieKeywordsBloc>();
 
     final key = UniqueKey();
 
@@ -33,6 +35,7 @@ class MovieBlocProviderWidget extends StatelessWidget {
         BlocProvider<MovieCreditBloc>(create: (_) => movieCreditBloc),
         BlocProvider<MovieProviderBloc>(create: (_) => movieProviderBloc),
         BlocProvider<MovieVideoBloc>(create: (_) => movieVideoBloc),
+        BlocProvider<MovieKeywordsBloc>(create: (_) => movieKeywordsBloc),
       ],
       child: MovieDetailView(
         movieID: movieID,
@@ -42,6 +45,7 @@ class MovieBlocProviderWidget extends StatelessWidget {
         movieCreditBloc: movieCreditBloc,
         movieProviderBloc: movieProviderBloc,
         movieVideoBloc: movieVideoBloc,
+        movieKeywordsBloc:movieKeywordsBloc,
         key: key,
       ),
     );
