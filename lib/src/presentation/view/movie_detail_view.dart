@@ -28,8 +28,10 @@ import '../../core/utils/launch_url.dart';
 import '../../domain/entities/movie/movie_detail/movie_detail.dart';
 import '../../domain/entities/movie/movie_provider/provider_entity.dart';
 import '../_widgets/movie_detail/country_dropdown.dart';
+import '../_widgets/movie_detail/keyword_container.dart';
 import '../_widgets/tag_container.dart';
 import '../bloc/blocs.dart';
+import '../bloc/movie_keywords/movie_keywords_bloc.dart';
 import '../bloc/movie_provider/movie_provider_bloc.dart';
 import '../bloc/movie_video/movie_video_bloc.dart';
 
@@ -43,6 +45,7 @@ class MovieDetailView extends HookWidget {
     required this.movieCreditBloc,
     required this.movieProviderBloc,
     required this.movieVideoBloc,
+    required this.movieKeywordsBloc,
   });
 
   final String movieID;
@@ -52,6 +55,7 @@ class MovieDetailView extends HookWidget {
   final MovieCreditBloc movieCreditBloc;
   final MovieProviderBloc movieProviderBloc;
   final MovieVideoBloc movieVideoBloc;
+  final MovieKeywordsBloc movieKeywordsBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +66,7 @@ class MovieDetailView extends HookWidget {
       recommendationMoviesBloc.add(FetchMovies(page: 1, movieID: movieID));
       similiarMoviesBloc.add(FetchMovies(page: 1, movieID: movieID));
       movieCreditBloc.add(FetchMovieCredit(movieID));
+      movieKeywordsBloc.add(FetchMovieKeywords(movieID));
       dropdownController = DropdownController();
       return () {
         dropdownController.dispose();
@@ -105,6 +110,7 @@ class MovieDetailView extends HookWidget {
           15.verticalSpace,
           _description(data, context),
           20.verticalSpace,
+          _keywords(),
           _divider,
           20.verticalSpace,
           _recommandations(),
@@ -506,6 +512,33 @@ class MovieDetailView extends HookWidget {
       child: AutoSizeText(
         data.overview!,
         style: Theme.of(context).textTheme.bodyMedium,
+      ),
+    );
+  }
+
+  Widget _keywords() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10.w),
+      child: BlocBuilder<MovieKeywordsBloc, MovieKeywordsState>(
+        bloc: movieKeywordsBloc,
+        builder: (context, state) {
+          if (state is MovieKeywordsHasData) {
+            return Wrap(
+              spacing: 8,
+              runSpacing: 4,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: state.keywordsList
+                  .map(
+                    (e) => KeywordContainer(keyword: e!.name!),
+                  )
+                  .toList(),
+            );
+          } else {
+            return const KeywordContainer(
+              keyword: '  data.overview!,',
+            );
+          }
+        },
       ),
     );
   }
