@@ -111,6 +111,7 @@ class MovieDetailView extends HookWidget {
           _description(data, context),
           20.verticalSpace,
           _keywords(),
+          20.verticalSpace,
           _divider,
           20.verticalSpace,
           _recommandations(),
@@ -529,14 +530,12 @@ class MovieDetailView extends HookWidget {
               crossAxisAlignment: WrapCrossAlignment.center,
               children: state.keywordsList
                   .map(
-                    (e) => KeywordContainer(keyword: e!.name!),
+                    (e) => KeywordChip(keyword: e!.name!),
                   )
                   .toList(),
             );
           } else {
-            return const KeywordContainer(
-              keyword: '  data.overview!,',
-            );
+            return Container();
           }
         },
       ),
