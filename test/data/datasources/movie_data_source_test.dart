@@ -20,6 +20,7 @@ import 'package:moviegoers/src/data/models/movie/movie_lists/top_rated/top_rated
 import 'package:moviegoers/src/data/models/movie/movie_lists/upcoming/upcoming_movies_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_provider/movie_provider_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_video/movie_video_model.dart';
+import 'package:moviegoers/src/data/models/movie/movie_keywords/movie_keywords_model.dart';
 
 void main() {
   late Dio dio;
@@ -116,6 +117,11 @@ void main() {
     test('getMovieSimilar should return SimiliarMoviesModel', () async {
       final response = await dataSource.getMovieSimilars(movieID: tMovieID, page: 1);
       expect(response, isA<SimiliarMoviesModel>());
+    });
+
+    test('getMovieKeywords should return MovieKeywordModel', () async {
+      final response = await dataSource.getMovieKeywords(movieID: tMovieID);
+      expect(response, isA<MovieKeywordsModel>());
     });
   });
 }

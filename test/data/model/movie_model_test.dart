@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:moviegoers/src/data/models/movie/movie_credit/movie_credit_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_detail/movie_detail_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_external_id/movie_external_id_model.dart';
+import 'package:moviegoers/src/data/models/movie/movie_keywords/movie_keywords_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_lists/now_playing/now_playing_movies_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_lists/popular/popular_movies_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_lists/recommendation/recommendation_movies_model.dart';
@@ -10,6 +11,7 @@ import 'package:moviegoers/src/data/models/movie/movie_lists/top_rated/top_rated
 import 'package:moviegoers/src/data/models/movie/movie_lists/upcoming/upcoming_movies_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_provider/movie_provider_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_video/movie_video_model.dart';
+import 'package:moviegoers/src/domain/entities/movie/movie_keywords/movie_keywords.dart';
 
 import '../../_utils/json_reader.dart';
 
@@ -20,6 +22,7 @@ void main() {
   late dynamic movieExternalData;
   late dynamic creditData;
   late dynamic providerData;
+  late dynamic keywordData;
 
   setUp(() {
     listData = readJson('movie_list_dummy_data.json');
@@ -28,6 +31,7 @@ void main() {
     movieExternalData = readJson('movie_external_id_dummy_data.json');
     creditData = readJson('movie_credit_dummy_data.json');
     providerData = readJson('movie_provider_dummy_data.json');
+    keywordData = readJson('movie_keyword_dummy_data.json');
   });
 
   group('to Entity', () {
@@ -106,6 +110,14 @@ void main() {
     //* MovieProviderModel
     test('MovieProviderModel to MovieProvider should be successful', () {
       final model = MovieProviderModel.fromJson(providerData as Map<String, dynamic>);
+
+      final entity = model.toEntity();
+      expect(entity, isNotNull);
+    });
+
+    //* MovieKeywordsModel
+    test('MovieKeywordsModel to MovieKeyword should be successful', () {
+      final model = MovieKeywordsModel.fromJson(keywordData as Map<String, dynamic>);
 
       final entity = model.toEntity();
       expect(entity, isNotNull);
