@@ -5,6 +5,7 @@ import '../../../../core/init/network/dio_client.dart';
 import '../../../models/movie/movie_credit/movie_credit_model.dart';
 import '../../../models/movie/movie_detail/movie_detail_model.dart';
 import '../../../models/movie/movie_external_id/movie_external_id_model.dart';
+import '../../../models/movie/movie_keywords/movie_keywords_model.dart';
 import '../../../models/movie/movie_lists/now_playing/now_playing_movies_model.dart';
 import '../../../models/movie/movie_lists/popular/popular_movies_model.dart';
 import '../../../models/movie/movie_lists/recommendation/recommendation_movies_model.dart';
@@ -154,6 +155,19 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
       final movieList = SimiliarMoviesModel.fromJson(response.data as Map<String, dynamic>);
 
       return movieList;
+    } on Exception catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<MovieKeywordsModel> getMovieKeywords({required String movieID}) async {
+    try {
+      final response = await dioClient.get(UrlContants.movieKeywords.replaceAll('{movie_id}', movieID));
+
+      final keywordList = MovieKeywordsModel.fromJson(response.data as Map<String, dynamic>);
+
+      return keywordList;
     } on Exception catch (_) {
       rethrow;
     }

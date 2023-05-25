@@ -13,7 +13,12 @@ class UrlContants {
   static const movieVideos = '/movie/{movie_id}/videos';
   static const movieRecommendations = '/movie/{movie_id}/recommendations';
   static const movieSimilar = '/movie/{movie_id}/similar';
+  static const movieKeywords = '/movie/{movie_id}/keywords';
 
   //* rate
   static const movieRating = '/movie/{movie_id}/rating';
+
+  //* search
+  static const searchPerson = '/search/person';
+  static const searchMovie = '/search/movie';
 }
