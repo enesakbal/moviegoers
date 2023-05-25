@@ -5,6 +5,7 @@ import '../../core/init/network/network_exception.dart';
 import '../../domain/entities/movie/movie_credit/movie_credit.dart';
 import '../../domain/entities/movie/movie_detail/movie_detail.dart';
 import '../../domain/entities/movie/movie_external_id/movie_external_id.dart';
+import '../../domain/entities/movie/movie_keywords/movie_keywords.dart';
 import '../../domain/entities/movie/movie_list/now_playing_movies.dart';
 import '../../domain/entities/movie/movie_list/popular_movies.dart';
 import '../../domain/entities/movie/movie_list/recommendation_movies.dart';
@@ -54,6 +55,7 @@ class MovieRepositoryImpl extends MovieRepository {
       return Left(NetworkExceptions.fromDioError(e));
     }
   }
+
   @override
   Future<Either<NetworkExceptions, TopRatedMovies>> getTopRatedMovies({required int page}) async {
     try {
@@ -151,6 +153,18 @@ class MovieRepositoryImpl extends MovieRepository {
       final providers = result.toEntity();
 
       return Right(providers);
+    } on DioError catch (e) {
+      return Left(NetworkExceptions.fromDioError(e));
+    }
+  }
+
+  @override
+  Future<Either<NetworkExceptions, MovieKeywords>> getMovieKeywords({required String movieID}) async {
+    try {
+      final result = await dataSource.getMovieKeywords(movieID: movieID);
+      final keywords = result.toEntity();
+
+      return Right(keywords);
     } on DioError catch (e) {
       return Left(NetworkExceptions.fromDioError(e));
     }

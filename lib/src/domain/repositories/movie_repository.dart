@@ -4,6 +4,7 @@ import '../../core/init/network/network_exception.dart';
 import '../entities/movie/movie_credit/movie_credit.dart';
 import '../entities/movie/movie_detail/movie_detail.dart';
 import '../entities/movie/movie_external_id/movie_external_id.dart';
+import '../entities/movie/movie_keywords/movie_keywords.dart';
 import '../entities/movie/movie_list/now_playing_movies.dart';
 import '../entities/movie/movie_list/popular_movies.dart';
 import '../entities/movie/movie_list/recommendation_movies.dart';
@@ -49,6 +50,9 @@ abstract class MovieRepository {
 
   Future<Either<NetworkExceptions, MovieProvider>> getMovieProviders({required String movieID});
   //* /movie/{movie_id}/watch/providers
+
+  Future<Either<NetworkExceptions, MovieKeywords>> getMovieKeywords({required String movieID});
+  //* /movie/{movie_id}/keywords
 
   // Future<Either<NetworkExceptions,>> rateMovie({required String movieID});
   // //* need session_id or guest id
