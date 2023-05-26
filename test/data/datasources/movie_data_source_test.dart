@@ -20,6 +20,7 @@ import 'package:moviegoers/src/data/models/movie/movie_lists/top_rated/top_rated
 import 'package:moviegoers/src/data/models/movie/movie_lists/upcoming/upcoming_movies_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_provider/movie_provider_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_video/movie_video_model.dart';
+import 'package:moviegoers/src/data/models/movie/movie/movie_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_keywords/movie_keywords_model.dart';
 
 void main() {
@@ -66,22 +67,22 @@ void main() {
 
     test('getPopularMovies should return PopularMoviesModel', () async {
       final response = await dataSource.getPopularMovies(page: 1);
-      expect(response, isA<PopularMoviesModel>());
+      expect(response, isA<List<MovieModel>>());
     });
 
     test('getNowPlayingMovies should return NowPlayingMoviesModel', () async {
       final response = await dataSource.getNowPlayingMovies(page: 1);
-      expect(response, isA<NowPlayingMoviesModel>());
+      expect(response, isA<List<MovieModel>>());
     });
 
     test('getUpcomingMovies should return UpcomingMoviesModel', () async {
       final response = await dataSource.getUpcomingMovies(page: 1);
-      expect(response, isA<UpcomingMoviesModel>());
+      expect(response, isA<List<MovieModel>>());
     });
 
     test('getTopRatedMovies should return TopRatedMoviesModel', () async {
       final response = await dataSource.getTopRatedMovies(page: 1);
-      expect(response, isA<TopRatedMoviesModel>());
+      expect(response, isA<List<MovieModel>>());
     });
 
     test('getMovieDetails should return MovieDetailModel', () async {
@@ -111,12 +112,12 @@ void main() {
 
     test('getMovieRecommendations should return RecommendationMoviesModel', () async {
       final response = await dataSource.getMovieRecommendations(movieID: tMovieID, page: 1);
-      expect(response, isA<RecommendationMoviesModel>());
+      expect(response, isA<List<MovieModel>>());
     });
 
     test('getMovieSimilar should return SimiliarMoviesModel', () async {
       final response = await dataSource.getMovieSimilars(movieID: tMovieID, page: 1);
-      expect(response, isA<SimiliarMoviesModel>());
+      expect(response, isA<List<MovieModel>>());
     });
 
     test('getMovieKeywords should return MovieKeywordModel', () async {
