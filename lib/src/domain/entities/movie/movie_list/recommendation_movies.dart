@@ -1,6 +1,6 @@
-import 'base/movie_interface.dart';
+import 'base/base_movie_listings.dart';
 
-class RecommendationMovies extends MovieI {
+class RecommendationMovies extends BaseMovieListings {
   const RecommendationMovies({
     super.movies,
     super.page,

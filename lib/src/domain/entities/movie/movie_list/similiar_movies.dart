@@ -1,6 +1,6 @@
-import 'base/movie_interface.dart';
+import 'base/base_movie_listings.dart';
 
-class SimiliarMovies extends MovieI {
+class SimiliarMovies extends BaseMovieListings {
   const SimiliarMovies({
     super.movies,
     super.page,

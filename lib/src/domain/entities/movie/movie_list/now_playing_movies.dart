@@ -1,11 +1,8 @@
-import 'base/movie_interface.dart';
-import 'dates.dart';
+import 'base/base_movie_listings.dart';
 
-class NowPlayingMovies extends MovieI {
-  final Dates? dates;
-
+class NowPlayingMovies extends BaseMovieListings {
   const NowPlayingMovies({
-    this.dates,
+    super.dates,
     super.movies,
     super.page,
     super.totalPages,
