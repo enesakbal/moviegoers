@@ -9,10 +9,10 @@ part of 'now_playing_movies_model.dart';
 NowPlayingMoviesModel _$NowPlayingMoviesModelFromJson(
         Map<String, dynamic> json) =>
     NowPlayingMoviesModel(
-      page: json['page'] as int?,
       movies: (json['results'] as List<dynamic>?)
           ?.map((e) => MovieModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      page: json['page'] as int?,
       totalPages: json['total_pages'] as int?,
       totalResults: json['total_results'] as int?,
       dates: json['dates'] == null
