@@ -2,16 +2,11 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 import '../../core/init/network/network_exception.dart';
+import '../../domain/entities/movie/movie/movie.dart';
 import '../../domain/entities/movie/movie_credit/movie_credit.dart';
 import '../../domain/entities/movie/movie_detail/movie_detail.dart';
 import '../../domain/entities/movie/movie_external_id/movie_external_id.dart';
 import '../../domain/entities/movie/movie_keywords/movie_keywords.dart';
-import '../../domain/entities/movie/movie_list/now_playing_movies.dart';
-import '../../domain/entities/movie/movie_list/popular_movies.dart';
-import '../../domain/entities/movie/movie_list/recommendation_movies.dart';
-import '../../domain/entities/movie/movie_list/similiar_movies.dart';
-import '../../domain/entities/movie/movie_list/top_rated_movies.dart';
-import '../../domain/entities/movie/movie_list/upcoming_movies.dart';
 import '../../domain/entities/movie/movie_provider/movie_provider.dart';
 import '../../domain/entities/movie/movie_video/movie_video.dart';
 import '../../domain/repositories/movie_repository.dart';
@@ -21,10 +16,10 @@ class MovieRepositoryImpl extends MovieRepository {
   final MovieRemoteDataSource dataSource;
   MovieRepositoryImpl({required this.dataSource});
   @override
-  Future<Either<NetworkExceptions, PopularMovies>> getPopularMovies({required int page}) async {
+  Future<Either<NetworkExceptions, List<Movie>?>> getPopularMovies({required int page}) async {
     try {
       final result = await dataSource.getPopularMovies(page: page);
-      final movieList = result.toEntity();
+      final movieList = result!.map((e) => e.toEntity()).toList();
 
       return Right(movieList);
     } on DioError catch (e) {
@@ -33,10 +28,10 @@ class MovieRepositoryImpl extends MovieRepository {
   }
 
   @override
-  Future<Either<NetworkExceptions, NowPlayingMovies>> getNowPlayingMovies({required int page}) async {
+  Future<Either<NetworkExceptions,  List<Movie>?>> getNowPlayingMovies({required int page}) async {
     try {
       final result = await dataSource.getNowPlayingMovies(page: page);
-      final movieList = result.toEntity();
+      final movieList = result!.map((e) => e.toEntity()).toList();
 
       return Right(movieList);
     } on DioError catch (e) {
@@ -45,10 +40,10 @@ class MovieRepositoryImpl extends MovieRepository {
   }
 
   @override
-  Future<Either<NetworkExceptions, UpcomingMovies>> getUpcomingMovies({required int page}) async {
+  Future<Either<NetworkExceptions,  List<Movie>?>> getUpcomingMovies({required int page}) async {
     try {
       final result = await dataSource.getUpcomingMovies(page: page);
-      final movieList = result.toEntity();
+      final movieList = result!.map((e) => e.toEntity()).toList();
 
       return Right(movieList);
     } on DioError catch (e) {
@@ -57,10 +52,10 @@ class MovieRepositoryImpl extends MovieRepository {
   }
 
   @override
-  Future<Either<NetworkExceptions, TopRatedMovies>> getTopRatedMovies({required int page}) async {
+  Future<Either<NetworkExceptions,  List<Movie>?>> getTopRatedMovies({required int page}) async {
     try {
       final result = await dataSource.getTopRatedMovies(page: page);
-      final movieList = result.toEntity();
+      final movieList = result!.map((e) => e.toEntity()).toList();
 
       return Right(movieList);
     } on DioError catch (e) {
@@ -117,13 +112,13 @@ class MovieRepositoryImpl extends MovieRepository {
   }
 
   @override
-  Future<Either<NetworkExceptions, RecommendationMovies>> getMovieRecommendations({
+  Future<Either<NetworkExceptions,  List<Movie>?>> getMovieRecommendations({
     required String movieID,
     required int page,
   }) async {
     try {
       final result = await dataSource.getMovieRecommendations(movieID: movieID, page: page);
-      final movieList = result.toEntity();
+      final movieList = result!.map((e) => e.toEntity()).toList();
 
       return Right(movieList);
     } on DioError catch (e) {
@@ -132,13 +127,13 @@ class MovieRepositoryImpl extends MovieRepository {
   }
 
   @override
-  Future<Either<NetworkExceptions, SimiliarMovies>> getMovieSimilars({
+  Future<Either<NetworkExceptions,  List<Movie>?>> getMovieSimilars({
     required String movieID,
     required int page,
   }) async {
     try {
       final result = await dataSource.getMovieSimilars(movieID: movieID, page: page);
-      final movieList = result.toEntity();
+      final movieList = result!.map((e) => e.toEntity()).toList();
 
       return Right(movieList);
     } on DioError catch (e) {
