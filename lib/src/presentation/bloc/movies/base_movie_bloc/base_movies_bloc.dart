@@ -4,7 +4,6 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../core/init/network/network_exception.dart';
 import '../../../../domain/entities/movie/movie/movie.dart';
-import '../../../../domain/entities/movie/movie_list/base/movie_interface.dart';
 import '../../../../domain/usecases/movie_usecase.dart';
 import '../../blocs.dart';
 
@@ -23,7 +22,7 @@ abstract class BaseMoviesBloc extends Bloc<BaseMoviesEvent, BaseMoviesState> {
           return;
         }
         emit(const BaseMoviesLoading());
-        late Either<NetworkExceptions, MovieI> result;
+        late Either<NetworkExceptions, List<Movie>?> result;
         if (this is PopularMoviesBloc) {
           result = await _usecase.getPopularMovies(page: event.page);
         } else if (this is UpcomingMoviesBloc) {
@@ -47,10 +46,10 @@ abstract class BaseMoviesBloc extends Bloc<BaseMoviesEvent, BaseMoviesState> {
           (failure) => emit(BaseMoviesError(message: failure.message)),
           (data) {
             didFetch = true;
-            if (data.movies!.isEmpty) {
+            if (data!.isEmpty) {
               emit(const BaseMoviesEmpty(message: 'There is no data'));
             } else {
-              emit(BaseMoviesHasData(data.movies!.take(4).toList()));
+              emit(BaseMoviesHasData(data.take(4).toList()));
             }
           },
         );

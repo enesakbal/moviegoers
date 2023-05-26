@@ -5,7 +5,6 @@ import 'package:equatable/equatable.dart';
 import '../../../core/constants/enum/movie_enum.dart';
 import '../../../core/init/network/network_exception.dart';
 import '../../../domain/entities/movie/movie/movie.dart';
-import '../../../domain/entities/movie/movie_list/base/movie_interface.dart';
 import '../../../domain/usecases/movie_usecase.dart';
 
 part 'movie_listings_event.dart';
@@ -25,7 +24,7 @@ class MovieListingsBloc extends Bloc<MovieListingsEvent, MovieListingsState> {
 
   MovieListingsBloc(this._usecase) : super(const MovieListingsInitial()) {
     const totalPages = 500;
-    Either<NetworkExceptions, MovieI> result;
+    Either<NetworkExceptions, List<Movie>?> result;
 
     on<FetchMovies>((event, emit) async {
       emit(const MovieListingsInitial());
@@ -67,7 +66,7 @@ class MovieListingsBloc extends Bloc<MovieListingsEvent, MovieListingsState> {
         return emit(MovieListingsError(message: failure.message));
       }, (data) async {
         _currentPage++;
-        movieList.addAll(data.movies!.where((element) => !element.adult!));
+        movieList.addAll(data!.where((element) => !element.adult!));
 
         emit(MovieListingsHasData(movieList));
       });
