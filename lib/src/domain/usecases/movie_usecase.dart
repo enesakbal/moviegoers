@@ -2,11 +2,12 @@
 import 'package:dartz/dartz.dart';
 
 import '../../core/init/network/network_exception.dart';
+import '../entities/movie/movie/movie.dart';
 import '../entities/movie/movie_credit/movie_credit.dart';
 import '../entities/movie/movie_detail/movie_detail.dart';
 import '../entities/movie/movie_external_id/movie_external_id.dart';
 import '../entities/movie/movie_keywords/movie_keywords.dart';
-import '../entities/movie/movie_list/base/movie_interface.dart';
+import '../entities/movie/movie_list/base/base_movie_listings.dart';
 import '../entities/movie/movie_list/recommendation_movies.dart';
 import '../entities/movie/movie_list/similiar_movies.dart';
 import '../entities/movie/movie_provider/movie_provider.dart';
@@ -17,19 +18,19 @@ class MovieUsecase {
   final MovieRepository repository;
   MovieUsecase({required this.repository});
 
-  Future<Either<NetworkExceptions, MovieI>> getPopularMovies({required int page}) {
+  Future<Either<NetworkExceptions, List<Movie>?>> getPopularMovies({required int page}) {
     return repository.getPopularMovies(page: page);
   }
 
-  Future<Either<NetworkExceptions, MovieI>> getNowPlayingMovies({required int page}) {
+  Future<Either<NetworkExceptions, List<Movie>?>> getNowPlayingMovies({required int page}) {
     return repository.getNowPlayingMovies(page: page);
   }
 
-  Future<Either<NetworkExceptions, MovieI>> getUpcomingMovies({required int page}) {
+  Future<Either<NetworkExceptions, List<Movie>?>> getUpcomingMovies({required int page}) {
     return repository.getUpcomingMovies(page: page);
   }
 
-  Future<Either<NetworkExceptions, MovieI>> getTopRatedMovies({required int page}) {
+  Future<Either<NetworkExceptions, List<Movie>?>> getTopRatedMovies({required int page}) {
     return repository.getTopRatedMovies(page: page);
   }
 
@@ -49,14 +50,14 @@ class MovieUsecase {
     return repository.getMovieVideos(movieID: movieID);
   }
 
-  Future<Either<NetworkExceptions, RecommendationMovies>> getMovieRecommendations({
+  Future<Either<NetworkExceptions, List<Movie>?>> getMovieRecommendations({
     required String movieID,
     required int page,
   }) {
     return repository.getMovieRecommendations(movieID: movieID, page: page);
   }
 
-  Future<Either<NetworkExceptions, SimiliarMovies>> getMovieSimilars({required String movieID, required int page}) {
+  Future<Either<NetworkExceptions, List<Movie>?>> getMovieSimilars({required String movieID, required int page}) {
     return repository.getMovieSimilars(movieID: movieID, page: page);
   }
 
