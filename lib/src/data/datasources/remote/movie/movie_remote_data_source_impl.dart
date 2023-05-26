@@ -7,7 +7,6 @@ import '../../../models/movie/movie_credit/movie_credit_model.dart';
 import '../../../models/movie/movie_detail/movie_detail_model.dart';
 import '../../../models/movie/movie_external_id/movie_external_id_model.dart';
 import '../../../models/movie/movie_keywords/movie_keywords_model.dart';
-import '../../../models/movie/movie_lists/base/base_movie_listings_model.dart';
 import '../../../models/movie/movie_lists/now_playing/now_playing_movies_model.dart';
 import '../../../models/movie/movie_lists/popular/popular_movies_model.dart';
 import '../../../models/movie/movie_lists/recommendation/recommendation_movies_model.dart';

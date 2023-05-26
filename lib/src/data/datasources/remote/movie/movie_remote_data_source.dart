@@ -4,12 +4,6 @@ import '../../../models/movie/movie_credit/movie_credit_model.dart';
 import '../../../models/movie/movie_detail/movie_detail_model.dart';
 import '../../../models/movie/movie_external_id/movie_external_id_model.dart';
 import '../../../models/movie/movie_keywords/movie_keywords_model.dart';
-import '../../../models/movie/movie_lists/base/base_movie_listings_model.dart';
-import '../../../models/movie/movie_lists/popular/popular_movies_model.dart';
-import '../../../models/movie/movie_lists/recommendation/recommendation_movies_model.dart';
-import '../../../models/movie/movie_lists/similiar/similiar_movies_model.dart';
-import '../../../models/movie/movie_lists/top_rated/top_rated_movies_model.dart';
-import '../../../models/movie/movie_lists/upcoming/upcoming_movies_model.dart';
 import '../../../models/movie/movie_provider/movie_provider_model.dart';
 import '../../../models/movie/movie_video/movie_video_model.dart';
 
