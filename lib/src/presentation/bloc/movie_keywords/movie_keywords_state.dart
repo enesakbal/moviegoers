@@ -35,5 +35,3 @@ class MovieKeywordsHasData extends MovieKeywordsState {
   @override
   String toString() => 'MovieKeywordsHasData()';
 }
-
-

@@ -11,7 +11,6 @@ import 'package:moviegoers/src/data/models/movie/movie_lists/top_rated/top_rated
 import 'package:moviegoers/src/data/models/movie/movie_lists/upcoming/upcoming_movies_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_provider/movie_provider_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_video/movie_video_model.dart';
-import 'package:moviegoers/src/domain/entities/movie/movie_keywords/movie_keywords.dart';
 
 import '../../_utils/json_reader.dart';
 
