@@ -48,19 +48,4 @@ class ResultsEntity extends Equatable {
       ru,
     ];
   }
-
-  Map<String, dynamic> toJson() => <String, dynamic>{
-        'CA': ca,
-        'DE': de,
-        'US': us,
-        'ES': es,
-        'FR': fr,
-        'GB': gb,
-        'IN': ind,
-        'IT': it,
-        'JP': jp,
-        'KR': kr,
-        'TR': tr,
-        'RU': ru,
-      };
 }

@@ -1,16 +1,11 @@
-class Keyword {
-  int? id;
-  String? name;
+import 'package:equatable/equatable.dart';
 
-  Keyword({this.id, this.name});
+class Keyword extends Equatable {
+  final int? id;
+  final String? name;
 
-  factory Keyword.fromJson(Map<String, dynamic> json) => Keyword(
-        id: json['id'] as int?,
-        name: json['name'] as String?,
-      );
+  const Keyword({this.id, this.name});
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-      };
+  @override
+  List<Object?> get props => [id, name];
 }
