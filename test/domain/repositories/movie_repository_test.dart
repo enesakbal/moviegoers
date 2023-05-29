@@ -14,16 +14,13 @@ import 'package:moviegoers/src/data/models/movie/movie_lists/similiar/similiar_m
 import 'package:moviegoers/src/data/models/movie/movie_lists/upcoming/upcoming_movies_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_provider/movie_provider_model.dart';
 import 'package:moviegoers/src/data/models/movie/movie_video/movie_video_model.dart';
+import 'package:moviegoers/src/domain/entities/movie/movie/movie.dart';
 import 'package:moviegoers/src/domain/entities/movie/movie_credit/movie_credit.dart';
 import 'package:moviegoers/src/domain/entities/movie/movie_detail/movie_detail.dart';
 import 'package:moviegoers/src/domain/entities/movie/movie_external_id/movie_external_id.dart';
-import 'package:moviegoers/src/domain/entities/movie/movie_list/now_playing_movies.dart';
-import 'package:moviegoers/src/domain/entities/movie/movie_list/popular_movies.dart';
-import 'package:moviegoers/src/domain/entities/movie/movie_list/recommendation_movies.dart';
-import 'package:moviegoers/src/domain/entities/movie/movie_list/similiar_movies.dart';
-import 'package:moviegoers/src/domain/entities/movie/movie_list/upcoming_movies.dart';
+import 'package:moviegoers/src/domain/entities/movie/movie_list/base/base_movie_listings.dart';
+import 'package:moviegoers/src/domain/entities/movie/movie_provider/movie_provider.dart';
 import 'package:moviegoers/src/domain/entities/movie/movie_video/movie_video.dart';
-import 'package:moviegoers/src/domain/entities/movie_provider/movie_provider.dart';
 import 'package:moviegoers/src/domain/usecases/movie_usecase.dart';
 
 import '../../_utils/json_reader.dart';
@@ -37,11 +34,11 @@ void main() {
   late Map<String, dynamic> movieVideo;
   late Map<String, dynamic> movieProvider;
 
-  late PopularMovies tPopularMoviesEntity;
-  late NowPlayingMovies tNowPlayingMoviesEntity;
-  late UpcomingMovies tUpcomingMoviesEntity;
-  late RecommendationMovies tRecommendationMoviesEntity;
-  late SimiliarMovies tSimiliarMoviesEntity;
+  late BaseMovieListings tPopularMoviesEntity;
+  late BaseMovieListings tNowPlayingMoviesEntity;
+  late BaseMovieListings tUpcomingMoviesEntity;
+  late BaseMovieListings tRecommendationMoviesEntity;
+  late BaseMovieListings tSimiliarMoviesEntity;
 
   late MovieDetail tMovieDetailsEntity;
   late MovieCredit tMovieCreditEntity;
@@ -81,35 +78,36 @@ void main() {
 
   group('Movie Lists', () {
     test('Popular', () async {
-      when(mockMovieRepository.getPopularMovies(page: 1)).thenAnswer((_) async => Right(tPopularMoviesEntity));
+      when(mockMovieRepository.getPopularMovies(page: 1)).thenAnswer((_) async => Right(tPopularMoviesEntity.movies));
 
       final result = await usecase.getPopularMovies(page: 1);
-      expect(result, Right<dynamic, PopularMovies>(tPopularMoviesEntity));
+      expect(result, Right<dynamic, List<Movie>?>(tPopularMoviesEntity.movies));
     });
     test('Now Playing', () async {
-      when(mockMovieRepository.getNowPlayingMovies(page: 1)).thenAnswer((_) async => Right(tNowPlayingMoviesEntity));
+      when(mockMovieRepository.getNowPlayingMovies(page: 1))
+          .thenAnswer((_) async => Right(tNowPlayingMoviesEntity.movies));
 
       final result = await usecase.getNowPlayingMovies(page: 1);
-      expect(result, Right<dynamic, NowPlayingMovies>(tNowPlayingMoviesEntity));
+      expect(result, Right<dynamic, List<Movie>?>(tNowPlayingMoviesEntity.movies));
     });
     test('Upcoming', () async {
-      when(mockMovieRepository.getUpcomingMovies(page: 1)).thenAnswer((_) async => Right(tUpcomingMoviesEntity));
+      when(mockMovieRepository.getUpcomingMovies(page: 1)).thenAnswer((_) async => Right(tUpcomingMoviesEntity.movies));
       final result = await usecase.getUpcomingMovies(page: 1);
-      expect(result, Right<dynamic, UpcomingMovies>(tUpcomingMoviesEntity));
+      expect(result, Right<dynamic, List<Movie>?>(tUpcomingMoviesEntity.movies));
     });
     test('Recommendation', () async {
       when(mockMovieRepository.getMovieRecommendations(page: 1, movieID: '550'))
-          .thenAnswer((_) async => Right(tRecommendationMoviesEntity));
+          .thenAnswer((_) async => Right(tRecommendationMoviesEntity.movies));
 
       final result = await usecase.getMovieRecommendations(page: 1, movieID: '550');
-      expect(result, Right<dynamic, RecommendationMovies>(tRecommendationMoviesEntity));
+      expect(result, Right<dynamic, List<Movie>?>(tRecommendationMoviesEntity.movies));
     });
     test('Similar', () async {
       when(mockMovieRepository.getMovieSimilars(page: 1, movieID: '550'))
-          .thenAnswer((_) async => Right(tSimiliarMoviesEntity));
+          .thenAnswer((_) async => Right(tSimiliarMoviesEntity.movies));
 
       final result = await usecase.getMovieSimilars(page: 1, movieID: '550');
-      expect(result, Right<dynamic, SimiliarMovies>(tSimiliarMoviesEntity));
+      expect(result, Right<dynamic, List<Movie>?>(tSimiliarMoviesEntity.movies));
     });
   });
 
