@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../config/gen/colors.gen.dart';
-import '../../../domain/entities/movie/movie_credit/cast.dart';
+import '../../../domain/entities/cast/movie_cast/movie_cast.dart';
 import '../../constants/imdb_image_constants.dart';
 
 class ActorCard extends StatelessWidget {
   const ActorCard({
     super.key,
-    required this.cast,
+    required this.movieCast,
   });
 
-  final Cast cast;
+  final MovieCast movieCast;
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +32,9 @@ class ActorCard extends StatelessWidget {
               topLeft: Radius.circular(12.r),
               bottomLeft: Radius.circular(12.r),
             ),
-            child: cast.profilePath != null
+            child: movieCast.profilePath != null
                 ? CachedNetworkImage(
-                    imageUrl: IMDBImageConstants.original + cast.profilePath!,
+                    imageUrl: IMDBImageConstants.original + movieCast.profilePath!,
                   )
                 : null,
           ),
@@ -46,12 +46,12 @@ class ActorCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AutoSizeText(
-                    cast.name!,
+                    movieCast.name!,
                     maxLines: 2,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 18),
                   ),
                   5.verticalSpace,
-                  AutoSizeText(cast.character!,
+                  AutoSizeText(movieCast.character!,
                       maxLines: 1,
                       style: Theme.of(context)
                           .textTheme

@@ -493,10 +493,10 @@ class MovieDetailView extends HookWidget {
               padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
               scrollDirection: Axis.horizontal,
               itemBuilder: (_, index) => ActorCard(
-                cast: state.movieCredit.cast![index],
+                movieCast: state.movieCredit.movieCast![index],
               ),
               separatorBuilder: (_, index) => SizedBox(width: 30.w),
-              itemCount: state.movieCredit.cast!.length,
+              itemCount: state.movieCredit.movieCast!.length,
             ),
           );
         } else if (state is MovieCreditError) {
