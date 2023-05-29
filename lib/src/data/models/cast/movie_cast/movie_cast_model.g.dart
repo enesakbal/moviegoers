@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'cast_model.dart';
+part of 'movie_cast_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-CastModel _$CastModelFromJson(Map<String, dynamic> json) => CastModel(
+MovieCastModel _$MovieCastModelFromJson(Map<String, dynamic> json) =>
+    MovieCastModel(
       adult: json['adult'] as bool?,
       gender: json['gender'] as int?,
       id: json['id'] as int?,
@@ -21,7 +22,8 @@ CastModel _$CastModelFromJson(Map<String, dynamic> json) => CastModel(
       order: json['order'] as int?,
     );
 
-Map<String, dynamic> _$CastModelToJson(CastModel instance) => <String, dynamic>{
+Map<String, dynamic> _$MovieCastModelToJson(MovieCastModel instance) =>
+    <String, dynamic>{
       'adult': instance.adult,
       'gender': instance.gender,
       'id': instance.id,

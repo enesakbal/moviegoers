@@ -1,23 +1,12 @@
-import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../../domain/entities/movie/movie_credit/cast.dart';
+import '../../../../domain/entities/cast/movie_cast/movie_cast.dart';
+import '../../cast/cast/cast_model.dart';
 
-part 'cast_model.g.dart';
+part 'movie_cast_model.g.dart';
 
 @JsonSerializable()
-class CastModel extends Equatable {
-  final bool? adult;
-  final int? gender;
-  final int? id;
-  @JsonKey(name: 'known_for_department')
-  final String? knownForDepartment;
-  final String? name;
-  @JsonKey(name: 'original_name')
-  final String? originalName;
-  final double? popularity;
-  @JsonKey(name: 'profile_path')
-  final String? profilePath;
+class MovieCastModel extends CastModel {
   @JsonKey(name: 'cast_id')
   final int? castId;
   final String? character;
@@ -25,27 +14,26 @@ class CastModel extends Equatable {
   final String? creditId;
   final int? order;
 
-  const CastModel({
-    this.adult,
-    this.gender,
-    this.id,
-    this.knownForDepartment,
-    this.name,
-    this.originalName,
-    this.popularity,
-    this.profilePath,
+  const MovieCastModel({
+    super.adult,
+    super.gender,
+    super.id,
+    super.knownForDepartment,
+    super.name,
+    super.originalName,
+    super.popularity,
+    super.profilePath,
     this.castId,
     this.character,
     this.creditId,
     this.order,
   });
 
-  factory CastModel.fromJson(Map<String, dynamic> json) =>
-      _$CastModelFromJson(json);
+  factory MovieCastModel.fromJson(Map<String, dynamic> json) => _$MovieCastModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$CastModelToJson(this);
+  Map<String, dynamic> toJson() => _$MovieCastModelToJson(this);
 
-  Cast toEntity() => Cast(
+  MovieCast toEntity() => MovieCast(
         adult: adult,
         id: id,
         knownForDepartment: knownForDepartment,
@@ -67,7 +55,6 @@ class CastModel extends Equatable {
       id,
       knownForDepartment,
       name,
-      originalName,
       popularity,
       profilePath,
       castId,
