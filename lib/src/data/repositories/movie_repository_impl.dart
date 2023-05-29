@@ -28,7 +28,7 @@ class MovieRepositoryImpl extends MovieRepository {
   }
 
   @override
-  Future<Either<NetworkExceptions,  List<Movie>?>> getNowPlayingMovies({required int page}) async {
+  Future<Either<NetworkExceptions, List<Movie>?>> getNowPlayingMovies({required int page}) async {
     try {
       final result = await dataSource.getNowPlayingMovies(page: page);
       final movieList = result!.map((e) => e.toEntity()).toList();
@@ -40,7 +40,7 @@ class MovieRepositoryImpl extends MovieRepository {
   }
 
   @override
-  Future<Either<NetworkExceptions,  List<Movie>?>> getUpcomingMovies({required int page}) async {
+  Future<Either<NetworkExceptions, List<Movie>?>> getUpcomingMovies({required int page}) async {
     try {
       final result = await dataSource.getUpcomingMovies(page: page);
       final movieList = result!.map((e) => e.toEntity()).toList();
@@ -52,7 +52,7 @@ class MovieRepositoryImpl extends MovieRepository {
   }
 
   @override
-  Future<Either<NetworkExceptions,  List<Movie>?>> getTopRatedMovies({required int page}) async {
+  Future<Either<NetworkExceptions, List<Movie>?>> getTopRatedMovies({required int page}) async {
     try {
       final result = await dataSource.getTopRatedMovies(page: page);
       final movieList = result!.map((e) => e.toEntity()).toList();
@@ -112,7 +112,7 @@ class MovieRepositoryImpl extends MovieRepository {
   }
 
   @override
-  Future<Either<NetworkExceptions,  List<Movie>?>> getMovieRecommendations({
+  Future<Either<NetworkExceptions, List<Movie>?>> getMovieRecommendations({
     required String movieID,
     required int page,
   }) async {
@@ -127,7 +127,7 @@ class MovieRepositoryImpl extends MovieRepository {
   }
 
   @override
-  Future<Either<NetworkExceptions,  List<Movie>?>> getMovieSimilars({
+  Future<Either<NetworkExceptions, List<Movie>?>> getMovieSimilars({
     required String movieID,
     required int page,
   }) async {
