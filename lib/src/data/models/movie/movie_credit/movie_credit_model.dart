@@ -2,16 +2,17 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../domain/entities/movie/movie_credit/movie_credit.dart';
-import 'cast_model.dart';
+import '../../cast/movie_cast/movie_cast_model.dart';
 
 part 'movie_credit_model.g.dart';
 
 @JsonSerializable()
 class MovieCreditModel extends Equatable {
   final int? id;
-  final List<CastModel>? cast;
+  @JsonKey(name: 'cast')
+  final List<MovieCastModel>? movieCast;
 
-  const MovieCreditModel({this.id, this.cast});
+  const MovieCreditModel({this.id, this.movieCast});
 
   factory MovieCreditModel.fromJson(Map<String, dynamic> json) {
     return _$MovieCreditModelFromJson(json);
@@ -21,9 +22,9 @@ class MovieCreditModel extends Equatable {
 
   MovieCredit toEntity() => MovieCredit(
         id: id,
-        cast: cast!.map((e) => e.toEntity()).toList(),
+        movieCast: movieCast!.map((e) => e.toEntity()).toList(),
       );
 
   @override
-  List<Object?> get props => [id, cast];
+  List<Object?> get props => [id, movieCast];
 }
