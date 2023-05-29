@@ -4,14 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../config/gen/colors.gen.dart';
 
-class KeywordContainer extends StatelessWidget {
-  const KeywordContainer({super.key, required this.keyword});
+class KeywordChip extends StatelessWidget {
+  const KeywordChip({super.key, required this.keyword});
   final String keyword;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Chip(
+      child: RawChip(
+        onPressed: () {},
         backgroundColor: MGColors.grey,
         labelStyle: Theme.of(context).textTheme.labelMedium!.copyWith(fontSize: 12.sp, color: Colors.white),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),

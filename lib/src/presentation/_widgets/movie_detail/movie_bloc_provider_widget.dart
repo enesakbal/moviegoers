@@ -45,7 +45,7 @@ class MovieBlocProviderWidget extends StatelessWidget {
         movieCreditBloc: movieCreditBloc,
         movieProviderBloc: movieProviderBloc,
         movieVideoBloc: movieVideoBloc,
-        movieKeywordsBloc:movieKeywordsBloc,
+        movieKeywordsBloc: movieKeywordsBloc,
         key: key,
       ),
     );
