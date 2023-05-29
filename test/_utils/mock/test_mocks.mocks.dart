@@ -11,6 +11,8 @@ import 'package:moviegoers/src/core/init/network/network_exception.dart'
     as _i11;
 import 'package:moviegoers/src/data/datasources/remote/movie/movie_remote_data_source.dart'
     as _i19;
+import 'package:moviegoers/src/data/datasources/remote/search/search_remote_data_source.dart'
+    as _i22;
 import 'package:moviegoers/src/data/models/movie/movie/movie_model.dart'
     as _i20;
 import 'package:moviegoers/src/data/models/movie/movie_credit/movie_credit_model.dart'
@@ -40,6 +42,8 @@ import 'package:moviegoers/src/domain/entities/movie/movie_video/movie_video.dar
     as _i16;
 import 'package:moviegoers/src/domain/repositories/movie_repository.dart'
     as _i9;
+import 'package:moviegoers/src/domain/repositories/search_repository.dart'
+    as _i21;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -600,4 +604,112 @@ class MockMovieRemoteDataSource extends _i1.Mock
           ),
         )),
       ) as _i10.Future<_i8.MovieKeywordsModel>);
+}
+
+/// A class which mocks [SearchRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSearchRepository extends _i1.Mock implements _i21.SearchRepository {
+  MockSearchRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i10.Future<_i2.Either<_i11.NetworkExceptions, List<_i12.Movie>>>
+      searchMovie({
+    required String? query,
+    required int? page,
+  }) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #searchMovie,
+              [],
+              {
+                #query: query,
+                #page: page,
+              },
+            ),
+            returnValue: _i10.Future<
+                    _i2.Either<_i11.NetworkExceptions, List<_i12.Movie>>>.value(
+                _FakeEither_0<_i11.NetworkExceptions, List<_i12.Movie>>(
+              this,
+              Invocation.method(
+                #searchMovie,
+                [],
+                {
+                  #query: query,
+                  #page: page,
+                },
+              ),
+            )),
+          ) as _i10
+              .Future<_i2.Either<_i11.NetworkExceptions, List<_i12.Movie>>>);
+  @override
+  _i10.Future<_i2.Either<_i11.NetworkExceptions, List<_i12.Movie>>>
+      searchPerson({
+    required String? query,
+    required int? page,
+  }) =>
+          (super.noSuchMethod(
+            Invocation.method(
+              #searchPerson,
+              [],
+              {
+                #query: query,
+                #page: page,
+              },
+            ),
+            returnValue: _i10.Future<
+                    _i2.Either<_i11.NetworkExceptions, List<_i12.Movie>>>.value(
+                _FakeEither_0<_i11.NetworkExceptions, List<_i12.Movie>>(
+              this,
+              Invocation.method(
+                #searchPerson,
+                [],
+                {
+                  #query: query,
+                  #page: page,
+                },
+              ),
+            )),
+          ) as _i10
+              .Future<_i2.Either<_i11.NetworkExceptions, List<_i12.Movie>>>);
+}
+
+/// A class which mocks [SearchRemoteDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSearchRemoteDataSource extends _i1.Mock
+    implements _i22.SearchRemoteDataSource {
+  MockSearchRemoteDataSource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i10.Future<List<_i20.MovieModel>> searchMovie({
+    required String? query,
+    required int? page,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #searchMovie,
+          [],
+          {
+            #query: query,
+            #page: page,
+          },
+        ),
+        returnValue:
+            _i10.Future<List<_i20.MovieModel>>.value(<_i20.MovieModel>[]),
+      ) as _i10.Future<List<_i20.MovieModel>>);
+  @override
+  _i10.Future<List<_i20.MovieModel>> searchPerson(String? query) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #searchPerson,
+          [query],
+        ),
+        returnValue:
+            _i10.Future<List<_i20.MovieModel>>.value(<_i20.MovieModel>[]),
+      ) as _i10.Future<List<_i20.MovieModel>>);
 }
