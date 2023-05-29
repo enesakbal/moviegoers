@@ -34,4 +34,13 @@ class BaseMovieListingsModel extends Equatable {
 
   @override
   List<Object?> get props => [page, movies, totalPages, totalResults, dates];
+
+  factory BaseMovieListingsModel.fromJson(Map<String, dynamic> json) => BaseMovieListingsModel(
+        movies:
+            (json['results'] as List<dynamic>?)?.map((e) => MovieModel.fromJson(e as Map<String, dynamic>)).toList(),
+        page: json['page'] as int?,
+        totalPages: json['total_pages'] as int?,
+        totalResults: json['total_results'] as int?,
+        dates: json['dates'] == null ? null : DatesModel.fromJson(json['dates'] as Map<String, dynamic>),
+      );
 }
