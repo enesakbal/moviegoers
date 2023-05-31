@@ -8,15 +8,19 @@ class SearchBar extends StatelessWidget {
   const SearchBar({
     super.key,
     required this.controller,
+    required this.onChanged,
   });
 
   final TextEditingController controller;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 45.h,
       child: TextField(
+        onChanged: onChanged,
+        controller: controller,
         style: TextStyle(fontSize: 12.sp),
         textAlignVertical: TextAlignVertical.center,
         cursorColor: Colors.white,

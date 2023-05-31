@@ -27,13 +27,16 @@ class SliverBaseAppBar extends StatelessWidget {
 }
 
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const BaseAppBar({
-    super.key,
-    this.title,
-    this.hasSearch = false,
-    this.titleStyle,
-    this.searchBarController,
-  })  : assert(title != null || hasSearch, 'Title must not be empty or hasSearch must true'),
+  const BaseAppBar(
+      {super.key,
+      this.title,
+      this.hasSearch = false,
+      this.titleStyle,
+      this.searchBarController,
+      this.onChanged,
+      this.bottom,
+      this.flexibleSpace})
+      : assert(title != null || hasSearch, 'Title must not be empty or hasSearch must true'),
         assert(hasSearch ? hasSearch && searchBarController != null : !hasSearch,
             'When hasSearh is true, you must give a controller for TextField');
 
@@ -41,17 +44,25 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool hasSearch;
   final TextStyle? titleStyle;
   final TextEditingController? searchBarController;
+  final void Function(String)? onChanged;
+  final PreferredSizeWidget? bottom;
+  final Widget? flexibleSpace;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: hasSearch
-          ? SearchBar(controller: searchBarController!)
+          ? SearchBar(
+              controller: searchBarController!,
+              onChanged: onChanged,
+            )
           : AutoSizeText(title!, maxLines: 1, style: titleStyle),
       elevation: 12,
-      toolbarHeight: 70,
+      toolbarHeight: bottom == null ? 70 : 100,
       leadingWidth: 45,
       shadowColor: MGColors.blue.shade600.withOpacity(0.3),
+      bottom: bottom,
+      flexibleSpace: flexibleSpace,
     );
   }
 
@@ -61,6 +72,22 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class CustomBackLeading extends StatelessWidget {
   const CustomBackLeading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: router.pop,
+      child: Assets.icons.leftArrow.svg(
+        color: Colors.white,
+        width: 50,
+        height: 50,
+      ),
+    );
+  }
+}
+
+class Filter extends StatelessWidget {
+  const Filter({super.key});
 
   @override
   Widget build(BuildContext context) {
