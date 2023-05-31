@@ -14,6 +14,7 @@ import 'src/core/theme/app_theme.dart';
 import 'src/injector.dart' as di;
 import 'src/presentation/bloc/blocs.dart';
 import 'src/presentation/bloc/movie_listings/movie_listings_bloc.dart';
+import 'src/presentation/bloc/search/search_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -75,6 +76,7 @@ class MainApp extends StatelessWidget {
       BlocProvider(create: (_) => di.injector<TopRatedMoviesBloc>()),
       BlocProvider(create: (_) => di.injector<MovieCreditBloc>()),
       BlocProvider(create: (_) => di.injector<MovieListingsBloc>()),
+      BlocProvider(create: (_) => di.injector<SearchBloc>()),
     ], child: _localization(context));
   }
 
