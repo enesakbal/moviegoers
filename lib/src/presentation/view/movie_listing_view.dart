@@ -47,7 +47,7 @@ class MovieListingView extends HookWidget {
       ),
       body: BlocBuilder<MovieListingsBloc, MovieListingsState>(
         builder: (context, state) {
-          if (state is MovieListingsLoading) {
+          if (state is MovieListingsLoading || state is MovieListingsInitial || state is MovieListingsError) {
             return const Center(child: BaseIndicator());
           }
           return ListView(
