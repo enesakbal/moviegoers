@@ -2,11 +2,11 @@ import 'dart:developer';
 
 import '../../../../core/constants/url_constants.dart';
 import '../../../../core/init/network/dio_client.dart';
-import '../../../models/movie/movie/movie_model.dart';
 import '../../../models/movie/movie_credit/movie_credit_model.dart';
 import '../../../models/movie/movie_detail/movie_detail_model.dart';
 import '../../../models/movie/movie_external_id/movie_external_id_model.dart';
 import '../../../models/movie/movie_keywords/movie_keywords_model.dart';
+import '../../../models/movie/movie_lists/base/base_movie_listings_model.dart';
 import '../../../models/movie/movie_lists/now_playing/now_playing_movies_model.dart';
 import '../../../models/movie/movie_lists/popular/popular_movies_model.dart';
 import '../../../models/movie/movie_lists/recommendation/recommendation_movies_model.dart';
@@ -22,48 +22,48 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
   MovieRemoteDataSourceImpl({required this.dioClient});
 
   @override
-  Future<List<MovieModel>?> getPopularMovies({required int page}) async {
+  Future<BaseMovieListingsModel> getPopularMovies({required int page}) async {
     try {
       final response = await dioClient.get(UrlContants.popularMovies, queryParameters: {'page': page});
       final movieList = PopularMoviesModel.fromJson(response.data as Map<String, dynamic>);
 
-      return movieList.movies;
+      return movieList;
     } on Exception catch (_) {
       rethrow;
     }
   }
 
   @override
-  Future<List<MovieModel>?> getNowPlayingMovies({required int page}) async {
+  Future<BaseMovieListingsModel> getNowPlayingMovies({required int page}) async {
     try {
       final response = await dioClient.get(UrlContants.nowPlayingMovies, queryParameters: {'page': page});
       final movieList = NowPlayingMoviesModel.fromJson(response.data as Map<String, dynamic>);
 
-      return movieList.movies;
+      return movieList;
     } on Exception catch (_) {
       rethrow;
     }
   }
 
   @override
-  Future<List<MovieModel>?> getUpcomingMovies({required int page}) async {
+  Future<BaseMovieListingsModel> getUpcomingMovies({required int page}) async {
     try {
       final response = await dioClient.get(UrlContants.upcomingMovies, queryParameters: {'page': page});
       final movieList = UpcomingMoviesModel.fromJson(response.data as Map<String, dynamic>);
 
-      return movieList.movies;
+      return movieList;
     } on Exception catch (_) {
       rethrow;
     }
   }
 
   @override
-  Future<List<MovieModel>?> getTopRatedMovies({required int page}) async {
+  Future<BaseMovieListingsModel> getTopRatedMovies({required int page}) async {
     try {
       final response = await dioClient.get(UrlContants.topRatedMovies, queryParameters: {'page': page});
       final movieList = TopRatedMoviesModel.fromJson(response.data as Map<String, dynamic>);
 
-      return movieList.movies;
+      return movieList;
     } on Exception catch (_) {
       rethrow;
     }
@@ -132,7 +132,7 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
   }
 
   @override
-  Future<List<MovieModel>?> getMovieRecommendations({required String movieID, required int page}) async {
+  Future<BaseMovieListingsModel> getMovieRecommendations({required String movieID, required int page}) async {
     try {
       final response = await dioClient.get(
         UrlContants.movieRecommendations.replaceAll('{movie_id}', movieID),
@@ -140,14 +140,14 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
       );
       final movieList = RecommendationMoviesModel.fromJson(response.data as Map<String, dynamic>);
 
-      return movieList.movies;
+      return movieList;
     } on Exception catch (_) {
       rethrow;
     }
   }
 
   @override
-  Future<List<MovieModel>?> getMovieSimilars({required String movieID, required int page}) async {
+  Future<BaseMovieListingsModel> getMovieSimilars({required String movieID, required int page}) async {
     try {
       final response = await dioClient.get(
         UrlContants.movieSimilar.replaceAll('{movie_id}', movieID),
@@ -155,7 +155,7 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
       );
       final movieList = SimiliarMoviesModel.fromJson(response.data as Map<String, dynamic>);
 
-      return movieList.movies;
+      return movieList;
     } on Exception catch (_) {
       rethrow;
     }
