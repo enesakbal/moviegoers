@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -85,12 +86,12 @@ class SearchView extends HookWidget {
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             padding: EdgeInsets.symmetric(horizontal: 5.w),
-                            itemCount: context.read<SearchBloc>().movieList.length,
+                            itemCount: context.watch<SearchBloc>().movieList.length,
                             itemBuilder: (context, index) {
                               return MovieCard(
-                                movie: context.read<SearchBloc>().movieList[index],
+                                movie: context.watch<SearchBloc>().movieList[index],
                                 onTap: () async => router.push(MovieBlocProviderRoute(
-                                    movieID: context.read<SearchBloc>().movieList[index].id!.toString())),
+                                    movieID: context.watch<SearchBloc>().movieList[index].id!.toString())),
                               );
                             },
                             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -100,7 +101,7 @@ class SearchView extends HookWidget {
                               mainAxisSpacing: 30,
                             ),
                           ),
-                          if (context.read<SearchBloc>().loadMore) ...[
+                          if (context.watch<SearchBloc>().loadMore) ...[
                             30.verticalSpace,
                             const BaseIndicator(),
                             30.verticalSpace,
@@ -111,35 +112,54 @@ class SearchView extends HookWidget {
                     return const Center(child: BaseIndicator());
                   },
                 ),
-                BlocBuilder<SearchBloc, SearchState>(
-                  builder: (context, state) {
-                    if (state is SearchError) {
-                      return Center(child: Text(state.message));
-                    } else if (state is SearchLoading) {
-                      return const Center(child: BaseIndicator());
-                    } else if (state is SearchEmpty) {
-                      return const Center(child: Text('There is no data'));
-                    } else if (state is SearchHasDataMovie) {
-                      return GridView.builder(
-                        shrinkWrap: true,
-                        padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
-                        itemCount: state.movieList.length,
-                        itemBuilder: (context, index) => MovieCard(
-                          movie: state.movieList[index],
-                          onTap: () async =>
-                              router.push(MovieBlocProviderRoute(movieID: state.movieList[index].id!.toString())),
+                Center(
+                  child: AnimatedTextKit(
+                    animatedTexts: [
+                      TypewriterAnimatedText(
+                        'Coming Soon..',
+                        textStyle: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
                         ),
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 20,
-                          childAspectRatio: 9 / 16,
-                          mainAxisSpacing: 30,
-                        ),
-                      );
-                    }
-                    return const Center(child: BaseIndicator());
-                  },
+                        speed: const Duration(milliseconds: 100),
+                        cursor: '',
+                      ),
+                    ],
+                    repeatForever: true,
+                    displayFullTextOnTap: true,
+                    stopPauseOnTap: true,
+                    onTap: () async => router.push(const SearchRoute()),
+                  ),
                 ),
+                // BlocBuilder<SearchBloc, SearchState>(
+                //   builder: (context, state) {
+                //     if (state is SearchError) {
+                //       return Center(child: Text(state.message));
+                //     } else if (state is SearchLoading) {
+                //       return const Center(child: BaseIndicator());
+                //     } else if (state is SearchEmpty) {
+                //       return const Center(child: Text('There is no data'));
+                //     } else if (state is SearchHasDataMovie) {
+                //       return GridView.builder(
+                //         shrinkWrap: true,
+                //         padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
+                //         itemCount: state.movieList.length,
+                //         itemBuilder: (context, index) => MovieCard(
+                //           movie: state.movieList[index],
+                //           onTap: () async =>
+                //               router.push(MovieBlocProviderRoute(movieID: state.movieList[index].id!.toString())),
+                //         ),
+                //         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                //           crossAxisCount: 2,
+                //           crossAxisSpacing: 20,
+                //           childAspectRatio: 9 / 16,
+                //           mainAxisSpacing: 30,
+                //         ),
+                //       );
+                //     }
+                //     return const Center(child: BaseIndicator());
+                //   },
+                // ),
               ],
             ),
           ),
