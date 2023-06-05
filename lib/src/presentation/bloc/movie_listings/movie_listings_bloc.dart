@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import '../../../core/constants/enum/movie_enum.dart';
 import '../../../core/init/network/network_exception.dart';
 import '../../../domain/entities/movie/movie/movie.dart';
+import '../../../domain/entities/movie/movie_list/base/base_movie_listings.dart';
 import '../../../domain/usecases/movie_usecase.dart';
 
 part 'movie_listings_event.dart';
@@ -14,24 +15,27 @@ class MovieListingsBloc extends Bloc<MovieListingsEvent, MovieListingsState> {
   final MovieUsecase _usecase;
   bool loadMore = true;
   final List<Movie> movieList = [];
-  int _currentPage = 1;
+  int _currentPage = 0;
+  int _totalPages = -1;
 
   void resetData() {
     loadMore = true;
     movieList.clear();
-    _currentPage = 1;
+    _currentPage = 0;
+    _totalPages = -1;
   }
 
   MovieListingsBloc(this._usecase) : super(const MovieListingsInitial()) {
-    const totalPages = 500;
-    Either<NetworkExceptions, List<Movie>?> result;
+    Either<NetworkExceptions, BaseMovieListings> result;
 
     on<FetchMovies>((event, emit) async {
       emit(const MovieListingsInitial());
-      if (totalPages == _currentPage) {
+      if (_totalPages == _currentPage) {
         loadMore = false;
         return;
       }
+
+      _currentPage++;
 
       if (movieList.isEmpty) {
         emit(const MovieListingsLoading());
@@ -65,8 +69,15 @@ class MovieListingsBloc extends Bloc<MovieListingsEvent, MovieListingsState> {
       result.fold((failure) {
         return emit(MovieListingsError(message: failure.message));
       }, (data) async {
-        _currentPage++;
-        movieList.addAll(data!.where((element) => !element.adult!));
+        if (_totalPages == -1) {
+          if (data.totalPages! > 500) {
+            _totalPages = 500;
+          } else {
+            _totalPages = data.totalPages!;
+          }
+        }
+
+        movieList.addAll(data.movies!.where((element) => !element.adult! && !movieList.contains(element)));
 
         emit(MovieListingsHasData(movieList));
       });
