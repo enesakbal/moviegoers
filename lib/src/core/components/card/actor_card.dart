@@ -17,9 +17,7 @@ class ActorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 90.h,
-      width: 225.w,
+    return DecoratedBox(
       decoration: BoxDecoration(
         color: MGColors.grey,
         borderRadius: BorderRadius.circular(12.r),
