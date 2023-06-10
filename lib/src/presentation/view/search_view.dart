@@ -71,10 +71,10 @@ class SearchView extends HookWidget {
               children: [
                 BlocBuilder<SearchBloc, SearchState>(
                   builder: (context, state) {
-                    if (state is SearchError) {
-                      return Center(child: Text(state.message));
-                    } else if (state is SearchLoading) {
+                    if (state is SearchLoading) {
                       return const Center(child: BaseIndicator());
+                    } else if (state is SearchError) {
+                      return Center(child: Text(state.message));
                     } else if (state is SearchEmpty) {
                       return const Center(child: Text('There is no data'));
                     } else {
@@ -109,7 +109,6 @@ class SearchView extends HookWidget {
                         ],
                       );
                     }
-                    return const Center(child: BaseIndicator());
                   },
                 ),
                 Center(
@@ -131,35 +130,6 @@ class SearchView extends HookWidget {
                     onTap: () async => router.push(const SearchRoute()),
                   ),
                 ),
-                // BlocBuilder<SearchBloc, SearchState>(
-                //   builder: (context, state) {
-                //     if (state is SearchError) {
-                //       return Center(child: Text(state.message));
-                //     } else if (state is SearchLoading) {
-                //       return const Center(child: BaseIndicator());
-                //     } else if (state is SearchEmpty) {
-                //       return const Center(child: Text('There is no data'));
-                //     } else if (state is SearchHasDataMovie) {
-                //       return GridView.builder(
-                //         shrinkWrap: true,
-                //         padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
-                //         itemCount: state.movieList.length,
-                //         itemBuilder: (context, index) => MovieCard(
-                //           movie: state.movieList[index],
-                //           onTap: () async =>
-                //               router.push(MovieBlocProviderRoute(movieID: state.movieList[index].id!.toString())),
-                //         ),
-                //         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                //           crossAxisCount: 2,
-                //           crossAxisSpacing: 20,
-                //           childAspectRatio: 9 / 16,
-                //           mainAxisSpacing: 30,
-                //         ),
-                //       );
-                //     }
-                //     return const Center(child: BaseIndicator());
-                //   },
-                // ),
               ],
             ),
           ),

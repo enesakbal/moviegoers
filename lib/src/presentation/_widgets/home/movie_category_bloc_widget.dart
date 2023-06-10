@@ -48,10 +48,10 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
       builder: (context, state) {
         if (state is BaseMoviesError) {
           return SliverToBoxAdapter(child: SizedBox(height: 325.h, child: Center(child: Text(state.message))));
-        } else if (state is BaseMoviesHasData) {
-          return _hasDataBody(title, context, state, type.value);
         } else if (state is BaseMoviesEmpty) {
           return SliverToBoxAdapter(child: Container());
+        } else if (state is BaseMoviesHasData) {
+          return _hasDataBody(title, context, state, type.value);
         } else {
           return SliverToBoxAdapter(
             child: SizedBox(height: 325.h, child: const Center(child: BaseIndicator())),
@@ -105,7 +105,9 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
       itemCount: state.movieList.length,
       itemBuilder: (context, index) => MovieCard(
         movie: state.movieList[index],
-        onTap: () async => router.push(MovieBlocProviderRoute(movieID: state.movieList[index].id!.toString())),
+        onTap: () async => router.push(
+          MovieBlocProviderRoute(movieID: state.movieList[index].id?.toString() ?? ''),
+        ),
       ),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,

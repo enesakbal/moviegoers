@@ -16,46 +16,43 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 45.h,
-      child: TextField(
-        onChanged: onChanged,
-        controller: controller,
-        style: TextStyle(fontSize: 12.sp),
-        textAlignVertical: TextAlignVertical.center,
-        cursorColor: Colors.white,
-        cursorWidth: 1.5,
-        decoration: InputDecoration(
-          hintText: 'Search',
-          prefixIcon: Padding(
-            padding: EdgeInsets.all(10.r),
-            child: Assets.icons.search.svg(color: Colors.black),
-          ),
-          prefixIconConstraints: BoxConstraints.loose(const Size.fromHeight(45)),
-          contentPadding: const EdgeInsets.all(14),
-          fillColor: MGColors.blue.shade500.withOpacity(1),
-          filled: true,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
-            borderSide: const BorderSide(
-              color: Colors.white,
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
-            borderSide: const BorderSide(
-              color: Colors.white,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.r),
-            borderSide: const BorderSide(
-              color: Colors.white,
-            ),
-          ),
-          errorBorder: InputBorder.none,
-          focusedErrorBorder: InputBorder.none,
+    return TextField(
+      onChanged: onChanged,
+      controller: controller,
+      style: TextStyle(fontSize: 12.sp),
+      textAlignVertical: TextAlignVertical.center,
+      cursorColor: Colors.white,
+      cursorWidth: 1.5,
+      decoration: InputDecoration(
+        hintText: 'Search',
+        prefixIcon: Padding(
+          padding: EdgeInsets.all(10.r),
+          child: Assets.icons.search.svg(color: Colors.black),
         ),
+        prefixIconConstraints: BoxConstraints.loose(const Size.fromHeight(45)),
+        contentPadding: const EdgeInsets.all(14),
+        fillColor: MGColors.blue.shade500.withOpacity(1),
+        filled: true,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: const BorderSide(
+            color: Colors.white,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: const BorderSide(
+            color: Colors.white,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: const BorderSide(
+            color: Colors.white,
+          ),
+        ),
+        errorBorder: InputBorder.none,
+        focusedErrorBorder: InputBorder.none,
       ),
     );
   }

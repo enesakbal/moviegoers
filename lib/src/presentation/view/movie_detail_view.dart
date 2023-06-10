@@ -25,6 +25,7 @@ import '../../core/constants/youtube_video_constants.dart';
 import '../../core/extensions/int_extensions.dart';
 import '../../core/init/language/locale_keys.g.dart';
 import '../../core/utils/launch_url.dart';
+import '../../domain/entities/cast/movie_cast/movie_cast.dart';
 import '../../domain/entities/movie/movie_detail/movie_detail.dart';
 import '../../domain/entities/movie/movie_provider/provider_entity.dart';
 import '../_widgets/movie_detail/country_dropdown.dart';
@@ -193,31 +194,32 @@ class MovieDetailView extends HookWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(data.title!, style: Theme.of(context).textTheme.titleMedium),
+          Text(data.title ?? '', style: Theme.of(context).textTheme.titleMedium),
           10.verticalSpace,
           SizedBox(
             width: 0.5.sw,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(data.voteAverage!.toString().substring(0, 3),
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 16)),
+                Text(
+                  data.voteAverage?.toString().substring(0, 3) ?? '',
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 16),
+                ),
                 const Icon(Icons.star, color: MGColors.grey, size: 15),
                 5.horizontalSpace,
                 Text('·', style: Theme.of(context).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w900)),
                 5.horizontalSpace,
                 Text(
-                  '${Duration(minutes: data.runtime!).inHours}h ${Duration(minutes: data.runtime!).inMinutes.remainder(60)} min',
+                  '${Duration(minutes: data.runtime ?? 0).inHours}h ${Duration(minutes: data.runtime ?? 0).inMinutes.remainder(60)} min',
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 16),
                 ),
                 5.horizontalSpace,
                 Text('·', style: Theme.of(context).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.w900)),
                 5.horizontalSpace,
-                if (DateTime.tryParse(data.releaseDate!) != null)
-                  Text(DateFormat('yyyy').format(DateTime.tryParse(data.releaseDate!)!),
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 16))
-                else
-                  Text('?', style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 16)),
+                Text(
+                  DateFormat('yyyy').format(DateTime.tryParse(data.releaseDate ?? '') ?? DateTime.now()),
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(fontSize: 16),
+                )
               ],
             ),
           ),
@@ -234,9 +236,7 @@ class MovieDetailView extends HookWidget {
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
         scrollDirection: Axis.horizontal,
-        itemBuilder: (_, index) => TagContainer(
-          tag: data.genres![index].id!.getGenreFromNumber(),
-        ),
+        itemBuilder: (_, index) => TagContainer(tag: data.genres?[index].id?.getGenreFromNumber() ?? ''),
         separatorBuilder: (_, index) => const SizedBox(width: 15),
         itemCount: data.genres!.length,
       ),
@@ -330,7 +330,7 @@ class MovieDetailView extends HookWidget {
                             children: [
                               CachedNetworkImage(
                                 imageUrl: YoutubeVideoConstants.videoImage
-                                    .replaceAll('{key}', state.movieVideoList[index]!.key!),
+                                    .replaceAll('{key}', state.movieVideoList[index]?.key ?? ''),
                                 fit: BoxFit.fill,
                               ),
                               PhysicalModel(
@@ -349,14 +349,14 @@ class MovieDetailView extends HookWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              state.movieVideoList[index]!.name!,
+                              state.movieVideoList[index]?.name ?? '',
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall!
                                   .copyWith(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.white),
                             ),
                             Text(
-                              DateFormat.yMd().format(state.movieVideoList[index]!.publishedAt!),
+                              DateFormat.yMd().format(state.movieVideoList[index]?.publishedAt ?? DateTime.now()),
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall!
@@ -471,7 +471,7 @@ class MovieDetailView extends HookWidget {
               return ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: CachedNetworkImage(
-                  imageUrl: IMDBImageConstants.original + data[index].logoPath!,
+                  imageUrl: IMDBImageConstants.original + (data[index].logoPath ?? ''),
                 ),
               );
             },
@@ -492,11 +492,15 @@ class MovieDetailView extends HookWidget {
             child: ListView.separated(
               padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
               scrollDirection: Axis.horizontal,
-              itemBuilder: (_, index) => ActorCard(
-                movieCast: state.movieCredit.movieCast![index],
+              itemBuilder: (_, index) => SizedBox(
+                height: 90.h,
+                width: 225.w,
+                child: ActorCard(
+                  movieCast: state.movieCredit.movieCast?.elementAt(index) ?? const MovieCast(),
+                ),
               ),
               separatorBuilder: (_, index) => SizedBox(width: 30.w),
-              itemCount: state.movieCredit.movieCast!.length,
+              itemCount: state.movieCredit.movieCast?.length ?? 0,
             ),
           );
         } else if (state is MovieCreditError) {
@@ -511,7 +515,7 @@ class MovieDetailView extends HookWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       child: AutoSizeText(
-        data.overview!,
+        data.overview ?? '',
         style: Theme.of(context).textTheme.bodyMedium,
       ),
     );
@@ -530,7 +534,7 @@ class MovieDetailView extends HookWidget {
               crossAxisAlignment: WrapCrossAlignment.center,
               children: state.keywordsList
                   .map(
-                    (e) => KeywordChip(keyword: e!.name!),
+                    (e) => KeywordChip(keyword: e?.name ?? ''),
                   )
                   .toList(),
             );
@@ -580,7 +584,9 @@ class MovieDetailView extends HookWidget {
                   itemBuilder: (context, index) => MovieCard(
                     movie: state.movieList[index],
                     onTap: () async {
-                      return router.push(MovieBlocProviderRoute(movieID: state.movieList[index].id!.toString()));
+                      return router.push(
+                        MovieBlocProviderRoute(movieID: state.movieList[index].id?.toString() ?? ''),
+                      );
                     },
                   ),
                   separatorBuilder: (context, index) => const SizedBox(
@@ -635,8 +641,9 @@ class MovieDetailView extends HookWidget {
                   padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                   itemBuilder: (context, index) => MovieCard(
                     movie: state.movieList[index],
-                    onTap: () async =>
-                        router.push(MovieBlocProviderRoute(movieID: state.movieList[index].id!.toString())),
+                    onTap: () async => router.push(
+                      MovieBlocProviderRoute(movieID: state.movieList[index].id?.toString() ?? ''),
+                    ),
                   ),
                   separatorBuilder: (context, index) => const SizedBox(
                     width: 10,

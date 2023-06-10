@@ -85,7 +85,7 @@ class MovieCard extends StatelessWidget {
                                         children: [
                                           Expanded(
                                             child: Text(
-                                              movie.title!,
+                                              movie.title ?? '',
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
@@ -126,10 +126,10 @@ class MovieCard extends StatelessWidget {
                                     padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                                     scrollDirection: Axis.horizontal,
                                     itemBuilder: (_, index) => TagContainer(
-                                      tag: movie.genreIds![index].getGenreFromNumber(),
+                                      tag: movie.genreIds?.elementAt(index).getGenreFromNumber() ?? '',
                                     ),
                                     separatorBuilder: (_, index) => const SizedBox(width: 15),
-                                    itemCount: movie.genreIds!.length,
+                                    itemCount: movie.genreIds?.length ?? 0,
                                   ),
                                 ),
                               ],
