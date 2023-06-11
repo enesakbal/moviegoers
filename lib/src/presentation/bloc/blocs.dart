@@ -1,4 +1,9 @@
-export './movie_credit/movie_credit_bloc.dart';
-export './movie_detail/movie_detail_bloc.dart';
+export 'movie_credit/movie_credit_bloc.dart';
+export 'movie_detail/movie_detail_bloc.dart';
+export 'movie_keywords/movie_keywords_bloc.dart';
+export 'movie_listings/movie_listings_bloc.dart';
+export 'movie_provider/movie_provider_bloc.dart';
+export 'movie_video/movie_video_bloc.dart';
 export 'movies/base_movie_bloc/base_movies_bloc.dart';
 export 'movies/base_movie_blocs.dart';
+export 'search/search_bloc.dart';

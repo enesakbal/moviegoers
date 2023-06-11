@@ -18,7 +18,7 @@ class PopularCarouselBlocWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
     useEffect(() {
-      context.read<PopularMoviesBloc>().add(const FetchMovies(page: 1));
+      context.read<PopularMoviesBloc>().add(const FetchBaseMovies(page: 1));
       return () {};
     }, []);
 

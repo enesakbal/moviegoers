@@ -32,9 +32,6 @@ import '../_widgets/movie_detail/country_dropdown.dart';
 import '../_widgets/movie_detail/keyword_container.dart';
 import '../_widgets/tag_container.dart';
 import '../bloc/blocs.dart';
-import '../bloc/movie_keywords/movie_keywords_bloc.dart';
-import '../bloc/movie_provider/movie_provider_bloc.dart';
-import '../bloc/movie_video/movie_video_bloc.dart';
 
 class MovieDetailView extends HookWidget {
   const MovieDetailView({
@@ -64,8 +61,8 @@ class MovieDetailView extends HookWidget {
 
     useEffect(() {
       movieDetailBloc.add(FetchMovieDetail(movieID));
-      recommendationMoviesBloc.add(FetchMovies(page: 1, movieID: movieID));
-      similiarMoviesBloc.add(FetchMovies(page: 1, movieID: movieID));
+      recommendationMoviesBloc.add(FetchBaseMovies(page: 1, movieID: movieID));
+      similiarMoviesBloc.add(FetchBaseMovies(page: 1, movieID: movieID));
       movieCreditBloc.add(FetchMovieCredit(movieID));
       movieKeywordsBloc.add(FetchMovieKeywords(movieID));
       dropdownController = DropdownController();

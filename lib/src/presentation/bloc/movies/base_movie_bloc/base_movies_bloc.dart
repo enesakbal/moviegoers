@@ -17,7 +17,7 @@ abstract class BaseMoviesBloc extends Bloc<BaseMoviesEvent, BaseMoviesState> {
   BaseMoviesBloc(this._usecase) : super(const BaseMoviesInitial()) {
     bool didFetch = false;
 
-    on<FetchMovies>(
+    on<FetchBaseMovies>(
       (event, emit) async {
         if (didFetch) {
           return;

@@ -39,7 +39,7 @@ class MovieCategoryBlocWidget<T extends BaseMoviesBloc> extends HookWidget {
         default:
       }
 
-      context.read<T>().add(const FetchMovies(page: 1));
+      context.read<T>().add(const FetchBaseMovies(page: 1));
 
       return () {};
     }, []);
