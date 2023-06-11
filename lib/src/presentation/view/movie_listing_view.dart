@@ -62,8 +62,10 @@ class MovieListingView extends HookWidget {
                 itemBuilder: (context, index) {
                   return MovieCard(
                     movie: context.read<MovieListingsBloc>().movieList[index],
-                    onTap: () async => router.push(MovieBlocProviderRoute(
-                        movieID: context.read<MovieListingsBloc>().movieList[index].id!.toString())),
+                    onTap: () async => router.push(
+                      MovieBlocProviderRoute(
+                          movieID: context.read<MovieListingsBloc>().movieList[index].id?.toString() ?? ''),
+                    ),
                   );
                 },
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

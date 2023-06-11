@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -25,13 +27,17 @@ class SearchView extends HookWidget {
     Future<void> scrollListener() async {
       if (scrollController.position.maxScrollExtent - scrollController.offset == 0) {
         context.read<SearchBloc>().add(
-            FetchSearchMovies(searchBarController.text.isEmpty ? 'a' : searchBarController.text, resetData: false));
+              FetchSearchMovies(
+                searchBarController.text.isEmpty ? _getRandomLetter() : searchBarController.text,
+                resetData: false,
+              ),
+            );
       }
     }
 
     useEffect(() {
       scrollController.addListener(scrollListener);
-      context.read<SearchBloc>().add(const FetchSearchMovies('a', resetData: true));
+      context.read<SearchBloc>().add(FetchSearchMovies(_getRandomLetter(), resetData: true));
 
       return () {};
     }, []);
@@ -90,8 +96,10 @@ class SearchView extends HookWidget {
                             itemBuilder: (context, index) {
                               return MovieCard(
                                 movie: context.watch<SearchBloc>().movieList[index],
-                                onTap: () async => router.push(MovieBlocProviderRoute(
-                                    movieID: context.watch<SearchBloc>().movieList[index].id!.toString())),
+                                onTap: () async {
+                                  return router.push(MovieBlocProviderRoute(
+                                      movieID: context.read<SearchBloc>().movieList[index].id?.toString() ?? ''));
+                                },
                               );
                             },
                             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -136,5 +144,12 @@ class SearchView extends HookWidget {
         ],
       ),
     );
+  }
+
+  String _getRandomLetter() {
+    final random = Random();
+    const letters = 'abcdefghijklmnopqrstuvwxyz';
+    final randomIndex = random.nextInt(letters.length);
+    return letters[randomIndex];
   }
 }
