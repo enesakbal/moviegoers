@@ -47,7 +47,7 @@ class MovieListingView extends HookWidget {
       ),
       body: BlocBuilder<MovieListingsBloc, MovieListingsState>(
         builder: (context, state) {
-          if (state is MovieListingsLoading || state is MovieListingsInitial || state is MovieListingsError) {
+          if (state is MovieListingsLoading  || state is MovieListingsError) {
             return const Center(child: BaseIndicator());
           }
           return ListView(
@@ -58,10 +58,10 @@ class MovieListingView extends HookWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 padding: EdgeInsets.symmetric(horizontal: 5.w),
-                itemCount: context.read<MovieListingsBloc>().movieList.length,
+                itemCount: context.watch<MovieListingsBloc>().movieList.length,
                 itemBuilder: (context, index) {
                   return MovieCard(
-                    movie: context.read<MovieListingsBloc>().movieList[index],
+                    movie: context.watch<MovieListingsBloc>().movieList[index],
                     onTap: () async => router.push(
                       MovieBlocProviderRoute(
                           movieID: context.read<MovieListingsBloc>().movieList[index].id?.toString() ?? ''),
@@ -75,7 +75,7 @@ class MovieListingView extends HookWidget {
                   mainAxisSpacing: 30,
                 ),
               ),
-              if (context.read<MovieListingsBloc>().loadMore) ...[
+              if (context.watch<MovieListingsBloc>().loadMore) ...[
                 30.verticalSpace,
                 const BaseIndicator(),
                 30.verticalSpace,
