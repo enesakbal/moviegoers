@@ -27,6 +27,7 @@ Moviegoers application, where you can access the trailers, subjects, details and
 
 ## Detail View
 <img src="https://github.com/enesakbal/moviegoers/assets/60822023/7350558f-c731-48cc-b6a9-625eed8e3493" width=35%>
+<img src=https://github.com/enesakbal/moviegoers/assets/60822023/c80093d9-66dd-4879-86a4-2b8efded6607 width=35%>
 <img src="https://github.com/enesakbal/moviegoers/assets/60822023/8bcf88ce-fc67-4b6e-9fe3-b06555f04803" width=35%>
 <img src="https://github.com/enesakbal/moviegoers/assets/60822023/f5ef2b98-a0b9-475b-bbd2-b26476c8f763" width=35%>
-<img src=https://github.com/enesakbal/moviegoers/assets/60822023/c80093d9-66dd-4879-86a4-2b8efded6607 width=35%>
+
